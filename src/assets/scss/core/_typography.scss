@@ -1,0 +1,44 @@
+@use '@style/abstracts/variables' as *;
+
+@font-face {
+  font-family: 'Fieldwork Black';
+  src: url('@font/fieldwork-black.woff2') format('woff2'),
+  url('@font/fieldwork-black.woff') format('woff');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Fieldwork Bold';
+  src: url('@font/fieldwork-bold.woff2') format('woff2'),
+  url('@font/fieldwork-bold.woff') format('woff');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Jetbrains Mono';
+  src: url('@font/jetbrainsmono-regular.woff2') format('woff2'),
+  url('@font/jetbrainsmono-regular.woff') format('woff');
+  font-weight: 400;
+}
+
+h1 {
+  color: pink;
+  font-family: $h1;
+  font-weight: 900;
+  font-size: 96px !important;
+  text-transform: uppercase;
+}
+h2 {
+  color: purple;
+  font-family: $body;
+  font-size: 28px;
+}
+h3 {
+  font-family: $body;
+  font-size: 24px;
+  color: $clr-200;
+}
+i[class^="fa-"] {
+  font-size: 24px;
+  color: $clr-blue;
+}

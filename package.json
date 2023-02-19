@@ -1,0 +1,26 @@
+{
+  "name": "site-files",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vueuse/core": "^9.13.0",
+    "animate.css": "^4.1.1",
+    "gsap": "^3.11.4",
+    "pinia": "^2.0.30",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "sass": "^1.58.3",
+    "sass-loader": "^13.2.0",
+    "tailwindcss": "^3.2.7",
+    "vite": "^4.1.0"
+  }
+}
