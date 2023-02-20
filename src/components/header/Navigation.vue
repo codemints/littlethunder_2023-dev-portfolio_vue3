@@ -5,11 +5,11 @@
     @click="isCollapsed = !isCollapsed"
     >
       <i
-      class="fa-sharp fa-solid fa-arrow-up-from-line text-clr-blue hover:text-clr-600"
+      class="fa-sharp fa-solid fa-arrow-up-to-line text-clr-blue hover:text-clr-600"
       v-if="!isCollapsed"
       ></i>
       <i
-      class="fa-sharp fa-solid fa-arrow-down-from-line text-clr-blue hover:text-clr-600"
+      class="fa-sharp fa-solid fa-arrow-down-to-line text-clr-blue hover:text-clr-600"
       v-else
       ></i>
     </div>
@@ -25,7 +25,7 @@
           :href="`#${link.scrollTo}`"
           class="nav-links__link text-clr-200 hover:text-white hover:bg-clr-600 border-b-2 border-transparent hover:border-b-2 hover:border-clr-blue"
           :class="{'nav-links__link--active': link.isActive}"
-          ><span hover:color->//</span>{{ link.name }}</a>
+          ><span class="link-before">//</span>{{ link.name }}</a>
         </li>
       </ul>
     </nav>
@@ -108,6 +108,10 @@ const resumeUrl = '@/assets/docs/resume.pdf'
             font-size: 1.1rem;
             font-weight: 800
           }
+
+          .link-before {
+            margin-right: 0.2rem;
+          }
         }
       }
     }
@@ -120,13 +124,30 @@ const resumeUrl = '@/assets/docs/resume.pdf'
   }
 }
 
-.dark .nav-links__link--active {
-  color: white;
-  background-color: $clr-600;
-  border-color: $clr-blue;
+.dark {
+  .nav-links__link--active {
+    color: white;
+    background-color: $clr-600;
+    border-color: $clr-blue;
 
-  &::before {
-    color: $clr-blue;
+    &::before {
+      color: $clr-blue;
+    }
+
+    .link-before {
+      color: $clr-blue;
+    }
+  }
+
+  .nav-links__link {
+    &:hover {
+      &::before {
+        color: $clr-blue;
+      }
+      .link-before {
+        color: $clr-blue;
+      }
+    }
   }
 }
 </style>

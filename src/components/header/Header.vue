@@ -1,10 +1,10 @@
 <template>
-  <header>
+  <header class="header__main">
     <section class="header__progress-bar">
       <ProgressBar />
     </section>
 
-    <section class="header__main-content">
+    <section class="header__main-content bg-clr-600">
       <div>
         <SocialMedia />
       </div>
@@ -12,7 +12,7 @@
       <div>
         <a href="/">
           <img id="site-logo" class="text-center" src="@img/logo_light-header.png" alt="website logo">
-          <h4 id="site-title" class="text-center uppercase"><span class="text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
+          <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
         </a>
       </div>
   
@@ -21,7 +21,7 @@
       </div>
     </section>
 
-    <section class="header__navigation">
+    <section class="header__navigation bg-clr-400">
       <Navigation />
     </section>
   </header>
@@ -36,31 +36,38 @@ import Navigation from '@comps/header/Navigation.vue'
 
 <style lang="scss" scoped>
 @use '@style/abstracts/_variables.scss' as *;
-.header__main-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: $clr-600;
-  padding-inline: 5rem;
-  padding-block: 2rem;
 
-  > div {
-    flex: 1 1 33.3333%;
+.header__main {
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+
+  .header__main-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 5rem;
+    padding-block: 2rem;
+
+    > div {
+      flex: 1 1 33.3333%;
+    }
   }
-}
-.header__navigation {
-  background-color: $clr-400;
-  padding-inline: 5rem;
-}
-#site-logo {
-  width: auto;
-  height: 6rem;
-  margin-inline: auto;
-}
-#site-title {
-  color: $clr-orange;
-  font-family: $title;
-  font-size: 2.4rem;
-  margin-top: 1rem;
+
+  .header__navigation {
+    padding-inline: 5rem;
+  }
+
+  #site-logo {
+    width: auto;
+    height: 6rem;
+    margin-inline: auto;
+  }
+
+  #site-title {
+    font-family: $title;
+    font-size: 2.4rem;
+    margin-top: 1rem;
+  }
 }
 </style>
