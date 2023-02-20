@@ -6,6 +6,7 @@ module.exports = {
   content: [
     './src/assets/**/*.{html,js,jsx,tx,tsx}',
     './src/components/**/*.{vue,js}',
+    './src/composables/**/*.{vue,js}',
     './src/App.vue',
   ],
   theme: {

@@ -9,9 +9,12 @@ $clr-orange: #FF5850;
 
 
 //FONTS
-$h1: 'Fieldwork Black', sans-serif;
-$hf: 'Fieldwork Bold', sans-serif;
+$title: 'Fieldwork Black', sans-serif;
+$heading: 'Fieldwork Bold', sans-serif;
 $body: 'Jetbrains Mono', monospace;
+
+$base-font-size: 10px;
+$start-font-size: 48px;
 
 //TRANSITIONS
 $bounce: all 0.3s cubic-bezier(.65,-0.17,0,1.73);
