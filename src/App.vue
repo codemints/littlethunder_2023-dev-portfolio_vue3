@@ -1,7 +1,7 @@
 <template>
   <Floaters />
   <Header ref="headerRef" />
-  <main class="page-content bg-clr-800">
+  <main ref="contentRef" class="page-content bg-clr-800">
     <SectionIntro />
     <SectionAbout />
     <SectionExpertise />
@@ -13,7 +13,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useHeaderStore } from '@store/header.js'
 
 import Floaters from '@comps/page/Floaters.vue'
 import Header from '@comps/header/Header.vue'
@@ -25,31 +26,59 @@ import SectionExperience from '@comps/home/SectionExperience.vue'
 import SectionContact from '@comps/home/SectionContact.vue'
 import Footer from '@comps/footer/Footer.vue'
 
+const headerStore = useHeaderStore()
 const headerRef = ref(null)
+const contentRef = ref(null)
 
-const getHeaderHeight = computed(() => {
-  return headerRef.value.$el.offsetHeight
-})
+const calculateHeights = () => {
+  const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
+  const headerHeight = headerRef.value.$el.offsetHeight
+  const windowHeight = window.innerHeight
+  const sectionHeight = windowHeight - headerHeight
 
-const getWindowHeight = computed(() => {
-  return window.innerHeight
-})
-
-const heightData = () => {
   return {
-    headerHeight: getHeaderHeight.value,
-    windowHeight: getWindowHeight.value
+    headerInnerHeight,
+    headerHeight,
+    windowHeight,
+    sectionHeight
   }
 }
 
+const setCSSProperties = (rootEl) => {
+  for (const [key, value] of Object.entries(convertHeightToVh.value)) {
+    rootEl.style.setProperty(`--${key}`, `${value}vh`)
+  }
+}
+
+const setHeaderState = () => {
+  const { headerInnerVh, headerVh, windowVh, sectionVh } = convertHeightToVh.value
+  headerStore.headerVhMin = headerVh - headerInnerVh
+  headerStore.headerVhMax = headerVh
+  headerStore.sectionVh = sectionVh
+  headerStore.windowVh = windowVh
+  headerStore.headerElement = headerRef.value.$el
+}
+
+const convertHeightToVh = computed(() => {
+  const { headerInnerHeight, headerHeight, windowHeight, sectionHeight } = calculateHeights()
+  const headerInnerVh = 100*headerInnerHeight/windowHeight
+  const headerVh = 100*headerHeight/windowHeight
+  const windowVh = 100*windowHeight/windowHeight
+  const sectionVh = 100*sectionHeight/windowHeight
+
+  return {
+    headerInnerVh,
+    headerVh,
+    windowVh,
+    sectionVh,
+  }
+})
+
 onMounted(() => {
-  const doc = document.documentElement
-  doc.classList.add('dark');
-  const [headerHeight, windowHeight] = Object.values(heightData())
-  const headerVerticalHeight = 100*headerHeight/windowHeight
-  const windowVerticalHeight = 100*windowHeight/windowHeight
-  doc.style.setProperty('--header-height', `${headerVerticalHeight}vh`)
-  doc.style.setProperty('--canvas-height', `${windowVerticalHeight - headerVerticalHeight}vh`)
+  const rootEl = document.documentElement
+  rootEl.classList.add('dark')
+  setCSSProperties(rootEl)
+  setHeaderState()
 })
 </script>
 

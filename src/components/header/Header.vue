@@ -4,20 +4,25 @@
       <ProgressBar />
     </section>
 
-    <section class="header__main-content bg-clr-600">
-      <div>
-        <SocialMedia />
-      </div>
-  
-      <div>
-        <a href="/">
-          <img id="site-logo" class="text-center" src="@img/logo_light-header.png" alt="website logo">
-          <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
-        </a>
-      </div>
-  
-      <div>
-        <ThemeSwitcher />
+    <section
+      class="header__main-content bg-clr-600"
+      :class="{ 'is-collapsed': headerStore.isCollapsed }"
+    >
+      <div class="header__main-content--inner">
+        <div>
+          <SocialMedia />
+        </div>
+    
+        <div>
+          <a href="/">
+            <img id="site-logo" class="text-center" src="@img/logo_light-header.png" alt="website logo">
+            <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
+          </a>
+        </div>
+    
+        <div>
+          <ThemeSwitcher />
+        </div>
       </div>
     </section>
 
@@ -28,10 +33,29 @@
 </template>
 
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
+import { useHeaderStore } from '@store/header.js'
 import SocialMedia from '@comps/header/SocialMedia.vue'
 import ThemeSwitcher from '@comps/header/ThemeSwitcher.vue'
 import ProgressBar from '@comps/header/ProgressBar.vue'
 import Navigation from '@comps/header/Navigation.vue'
+
+const headerStore = useHeaderStore()
+
+const handleScroll = (isCollapsed) => {
+  const scrollPosition = window.scrollY
+  scrollPosition >= 100
+    ? (headerStore.isCollapsed = true)
+    : (headerStore.isCollapsed = false)
+
+  if ( scrollPosition === 0 ) {
+    headerStore.isCollapsed = null
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -43,6 +67,14 @@ import Navigation from '@comps/header/Navigation.vue'
   z-index: 100;
 
   .header__main-content {
+    max-height: 300rem;
+    transition: all 0.4s ease-in-out;
+
+    &.is-collapsed {
+      max-height: 0;
+      overflow: hidden;
+    }
+    &--inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,6 +84,7 @@ import Navigation from '@comps/header/Navigation.vue'
     > div {
       flex: 1 1 33.3333%;
     }
+  }
   }
 
   .header__navigation {

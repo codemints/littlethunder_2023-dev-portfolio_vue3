@@ -2,15 +2,15 @@
   <div class="nav-content__wrapper">
     <div
     class="nav-content__toggle"
-    @click="isCollapsed = !isCollapsed"
+    @click="handleResize"
     >
       <i
-      class="fa-sharp fa-solid fa-arrow-up-to-line text-clr-blue hover:text-clr-600"
-      v-if="!isCollapsed"
+        v-if="!headerStore.isCollapsed && headerStore.isCollapsed !== null"
+        class="fa-sharp fa-solid fa-arrow-up-to-line text-clr-blue hover:text-clr-600"
       ></i>
       <i
-      class="fa-sharp fa-solid fa-arrow-down-to-line text-clr-blue hover:text-clr-600"
-      v-else
+        v-if="headerStore.isCollapsed"
+        class="fa-sharp fa-solid fa-arrow-down-to-line text-clr-blue hover:text-clr-600"
       ></i>
     </div>
 
@@ -44,10 +44,16 @@
 <script setup>
 import { ref } from 'vue'
 import { navLinks } from '../../composables/links.js'
+import { useHeaderStore } from '@store/header.js'
 
-const isCollapsed = ref(false)
+const headerStore = useHeaderStore()
 const resumeUrl = '@/assets/docs/resume.pdf'
 
+const handleResize = () => {
+  console.log(headerStore.isCollapsed)
+  headerStore.isCollapsed = !headerStore.isCollapsed
+  console.log(headerStore.isCollapsed)
+}
 </script>
 
 <style lang="scss" scoped>
