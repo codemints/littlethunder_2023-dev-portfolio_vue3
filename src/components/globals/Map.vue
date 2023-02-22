@@ -5,6 +5,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Loader } from '@googlemaps/js-api-loader'
+import mapStylesArray from '@lib/map-styles.js'
 
 const mapRef = ref(null)
 let map = null
@@ -19,6 +20,7 @@ onMounted(() => {
     map = new google.maps.Map(mapRef.value, {
       center: { lat: 40.7128, lng: -74.0060 },
       zoom: 8,
+      styles: mapStylesArray,
     })
   })
 })

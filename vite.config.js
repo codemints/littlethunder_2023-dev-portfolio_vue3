@@ -11,22 +11,9 @@ export default defineConfig({
       '@comps': path.resolve(__dirname, './src/components'),
       '@font': path.resolve(__dirname, './src/assets/fonts'),
       '@ico': path.resolve(__dirname, './src/assets/icons/fontawesome/scss'),
-      '@img': path.resolve(__dirname, './src/assets/img'),
+      '@img': path.resolve(__dirname, './src/assets/img'), 
+      '@lib': path.resolve(__dirname, './src/libs'), 
       '@style': path.resolve(__dirname, './src/assets/scss'),
     },
   },
-  // css: {
-  //   preprocessorOptions: {
-  //     scss: {
-  //       additionalData: `
-  //         @import "@ico/fontawesome.scss";
-  //         @import "@ico/brands.scss";
-  //         @import "@ico/sharp-regular.scss";
-  //         @import "@ico/sharp-solid.scss";
-  //         @import "@style/main.scss";
-  //         @import "@style/core/_typography.scss";
-  //         `
-  //     }
-  //   }
-  // },
 })
