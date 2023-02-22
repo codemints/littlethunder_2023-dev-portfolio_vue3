@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 
 // Font Awesome loaded
@@ -9,4 +10,8 @@ import '@ico/sharp-solid.scss'
 
 import '@style/main.scss'
 
-createApp(App).mount('#app')
+const pinia = createPinia()
+const app = createApp(App)
+
+app.use(pinia)
+app.mount('#app')
