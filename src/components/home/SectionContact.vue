@@ -19,9 +19,10 @@
           hovText="Contact Me Today"/>
         </div>
       </div>
-      <div class="section-col section-col--6">
+      <div class="section-col section-col--6 map-col">
         <div class="section-content">
-          <img src="@img/map-placeholder.png" alt="">
+          <Map />
+          <!-- <img src="@img/map-placeholder.png" alt=""> -->
         </div>
       </div>
     </div>
@@ -31,6 +32,7 @@
 <script setup>
 import SectionTitle from '@comps/globals/SectionTitle.vue'
 import Button from '@comps/globals/Button.vue'
+import Map from '@comps/globals/Map.vue'
 
 const scrollTo = () => {
   console.log('I have been clicked')
@@ -38,4 +40,31 @@ const scrollTo = () => {
 </script>
 
 <style lang="scss" scoped>
+.page-section {
+  overflow: hidden;
+
+  .section-col {
+
+    &:last-of-type {
+      height: 100%;
+      width: 100%;
+      
+      &.map-col {
+        padding: 0;
+      }
+
+      .section-content {
+        height: 100%;
+        width: 100%;
+      }
+  
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
 </style>

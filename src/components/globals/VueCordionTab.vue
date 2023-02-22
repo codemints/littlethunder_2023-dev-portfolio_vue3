@@ -68,6 +68,7 @@ watch(() => props.data.isOpen, (cur, prev) => {
         max-height: 100vh;
         opacity: 1;
         margin-bottom: 3.2rem;
+        transition: all 0.2s linear;
       }
     }
 
