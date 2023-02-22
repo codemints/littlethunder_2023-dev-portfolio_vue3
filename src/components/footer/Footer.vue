@@ -5,7 +5,7 @@
         <img class="text-center mx-auto" src="@img/logo_light-header.png" alt="website logo">
         <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
       </a>
-      <p class="text-white text-center">designed and built with care by me.</p>
+      <p class="text-white text-center">designed and built from scratch by me.</p>
     </div>
     <div class="footer-icons bg-clr-400">
       <h4 class="text-center uppercase text-clr-200">This site is proudly built with these technologies:</h4>

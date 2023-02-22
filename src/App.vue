@@ -1,7 +1,7 @@
 <template>
   <Floaters />
   <Header ref="headerRef" />
-  <main class="content-wrapper bg-clr-800">
+  <main class="page-content bg-clr-800">
     <SectionIntro />
     <SectionAbout />
     <SectionExpertise />

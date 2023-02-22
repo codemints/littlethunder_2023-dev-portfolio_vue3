@@ -4,7 +4,7 @@
       <div class="section-col section-col--12">
         <div class="section-content">
           <SectionTitle title="My Expertise" />
-          <div class="skillcard-wrapper">
+          <div class="skillcard-wrapper content-wrapper">
             <div class="skillcard-container">
               <SkillCard
               title="Graphic Design"
@@ -96,7 +96,6 @@ const propData = {
   .skillcard-container {
     display: flex;
     flex-flow: row wrap;
-    margin-top: 3.6rem;
 
     > div {
       flex: 1 1 33%;

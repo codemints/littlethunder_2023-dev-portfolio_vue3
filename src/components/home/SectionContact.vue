@@ -31,6 +31,10 @@
 <script setup>
 import SectionTitle from '@comps/globals/SectionTitle.vue'
 import Button from '@comps/globals/Button.vue'
+
+const scrollTo = () => {
+  console.log('I have been clicked')
+}
 </script>
 
 <style lang="scss" scoped>
