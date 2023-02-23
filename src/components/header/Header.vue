@@ -5,7 +5,7 @@
     </section>
 
     <section
-      class="header__main-content bg-clr-600"
+      class="header__main-content bg-clr-100 dark:bg-clr-600"
       :class="{ 'is-collapsed': headerStore.isCollapsed }"
     >
       <div class="header__main-content--inner">
@@ -18,7 +18,7 @@
             <img
               id="site-logo"
               class="text-center"
-              :src="darkModeStore.isDark ? './src/assets/img/logo_light-header.png' : './src/assets/img/logo_dark-header.png'"
+              :src="logoSource"
               alt="website logo"
             >
             <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-clr-400 dark:text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useDarkModeStore } from '@store/darkmode.js'
 import SocialMedia from '@comps/header/SocialMedia.vue'
@@ -59,6 +59,12 @@ const handleScroll = () => {
     headerStore.isCollapsed = null
   }
 }
+
+const logoSource = computed(() => {
+  return darkModeStore.isDark
+    ? './src/assets/img/logo_light-header.png'
+    : './src/assets/img/logo_dark-header.png'
+})
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)

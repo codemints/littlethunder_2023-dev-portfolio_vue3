@@ -2,22 +2,19 @@
   <div class="switcher-container">
     <p :class="Colors.themeSwitcher.false">isDark(false)</p>
     <div
-      class="switcher-toggle__wrapper"
-      :class="[Colors.themeSwitcher.background]"
+      class="switcher-toggle__wrapper bg-clr-400 dark:bg-clr-800"
       @click="handleDarkMode"
     >
       <div
-        class="switcher-toggle switcher-static"
-        :class="Colors.themeSwitcher.static"></div>
+        class="switcher-toggle switcher-static bg-clr-200 dark:bg-clr-400"></div>
       <div
-        class="switcher-toggle switcher-static"
-        :class="Colors.themeSwitcher.static"></div>
+        class="switcher-toggle switcher-static bg-clr-200 dark:bg-clr-400"></div>
       <div
         class="switcher-toggle switcher-toggle__main bg-clr-orange dark:bg-clr-blue"
-        :class="[Colors.themeSwitcher.main, { 'dark-mode' : darkModeStore.isDark}]"></div>
+        :class="{ 'dark-mode' : darkModeStore.isDark }"></div>
       <div
-        class="switcher-toggle switcher-toggle__overlap"
-        :class="[Colors.themeSwitcher.background, { 'dark-mode' : darkModeStore.isDark }]"></div>
+        class="switcher-toggle switcher-toggle__overlap bg-clr-400 dark:bg-clr-800"
+        :class="{ 'dark-mode' : darkModeStore.isDark }"></div>
     </div>
     <p :class="Colors.themeSwitcher.true">isDark(true)</p>
   </div>
@@ -95,9 +92,10 @@ $gap: 1.2rem;
         &.switcher-toggle__overlap {
           top: -0.1rem;
           left: -1.5rem;
-          transition: all 0.25s ease-in-out;
-
+          transition: none;
+          
           &.dark-mode {
+            transition: all 0.25s ease-in-out;
             left: calc(100% - ($dimensions + $padding) - 0.75rem);
           }
         }

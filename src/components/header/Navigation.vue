@@ -1,6 +1,6 @@
 <template>
   <div class="nav-content__wrapper">
-    <div ref="navShuttleRef" class="nav-shuttle border-b-2 border-clr-blue bg-clr-600"></div>
+    <div ref="navShuttleRef" class="nav-shuttle border-b-2 border-clr-orange bg-clr-100 dark:border-clr-blue dark:bg-clr-600"></div>
     <div
     @click="handleResize"
     class="nav-content__toggle"
@@ -27,7 +27,7 @@
             @mouseover="handleShuttle"
             @mouseout="handleShuttle"
             :href="`#${item.scrollTo}`"
-            class="nav-links__link text-clr-200 hover:text-white"
+            class="nav-links__link text-clr-200 hover:text-clr-600 dark:hover:text-white"
             :class="{'nav-links__link--active': item.isActive}"
           >
             <span class="link-before">//</span>
@@ -192,6 +192,27 @@ onUnmounted(() => {
           padding-top: 1rem;
           transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 
+          &.nav-links__link--active {
+            color: $clr-600;
+
+            &::before {
+              color: $clr-orange;
+            }
+
+            .link-before {
+              color: $clr-orange;
+            }
+          }
+          
+          &:hover {
+            &::before {
+              color: $clr-orange;
+            }
+            .link-before {
+              color: $clr-orange;
+            }
+          }
+
           &::before {
             content: "0" counter(number);
             display: inline-block;
@@ -222,24 +243,24 @@ onUnmounted(() => {
 
 .dark {
   .nav-links__link--active {
-    color: white;
+    color: white !important;
 
     &::before {
-      color: $clr-blue;
+      color: $clr-blue !important;
     }
 
     .link-before {
-      color: $clr-blue;
+      color: $clr-blue !important;
     }
   }
 
   .nav-links__link {
     &:hover {
       &::before {
-        color: $clr-blue;
+        color: $clr-blue !important;
       }
       .link-before {
-        color: $clr-blue;
+        color: $clr-blue !important;
       }
     }
   }
