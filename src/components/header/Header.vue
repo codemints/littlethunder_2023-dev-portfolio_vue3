@@ -15,8 +15,13 @@
     
         <div>
           <a href="/">
-            <img id="site-logo" class="text-center" src="@img/logo_light-header.png" alt="website logo">
-            <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
+            <img
+              id="site-logo"
+              class="text-center"
+              :src="darkModeStore.isDark ? './src/assets/img/logo_light-header.png' : './src/assets/img/logo_dark-header.png'"
+              alt="website logo"
+            >
+            <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-clr-400 dark:text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
           </a>
         </div>
     
@@ -35,12 +40,14 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import { useHeaderStore } from '@store/header.js'
+import { useDarkModeStore } from '@store/darkmode.js'
 import SocialMedia from '@comps/header/SocialMedia.vue'
 import ThemeSwitcher from '@comps/header/ThemeSwitcher.vue'
 import ProgressBar from '@comps/header/ProgressBar.vue'
 import Navigation from '@comps/header/Navigation.vue'
 
 const headerStore = useHeaderStore()
+const darkModeStore = useDarkModeStore()
 
 const handleScroll = () => {
   const scrollPosition = window.scrollY

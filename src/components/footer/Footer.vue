@@ -19,7 +19,8 @@
         <a
         v-for="(val, key) in iconTitles"
         :key="key"
-        :href="val">
+        :href="val"
+        target="_blank">
           <img :src="`./src/assets/img/brand_${key}-${isDark ? 'light' : 'dark'}.png`" :alt="key"/>
         </a>
       </div>

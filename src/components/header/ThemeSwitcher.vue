@@ -2,23 +2,44 @@
   <div class="switcher-container">
     <p :class="Colors.themeSwitcher.false">isDark(false)</p>
     <div
-    class="switcher-toggle__wrapper"
-    :class="[Colors.themeSwitcher.background]"
-    @click="isDark = !isDark">
-      <div class="switcher-toggle switcher-static" :class="Colors.themeSwitcher.static"></div>
-      <div class="switcher-toggle switcher-static" :class="Colors.themeSwitcher.static"></div>
-      <div class="switcher-toggle switcher-toggle__main" :class="[Colors.themeSwitcher.main, { 'dark-mode' : isDark}]"></div>
-      <div class="switcher-toggle switcher-toggle__overlap" :class="[Colors.themeSwitcher.background, { 'dark-mode' : isDark }]"></div>
+      class="switcher-toggle__wrapper"
+      :class="[Colors.themeSwitcher.background]"
+      @click="handleDarkMode"
+    >
+      <div
+        class="switcher-toggle switcher-static"
+        :class="Colors.themeSwitcher.static"></div>
+      <div
+        class="switcher-toggle switcher-static"
+        :class="Colors.themeSwitcher.static"></div>
+      <div
+        class="switcher-toggle switcher-toggle__main bg-clr-orange dark:bg-clr-blue"
+        :class="[Colors.themeSwitcher.main, { 'dark-mode' : darkModeStore.isDark}]"></div>
+      <div
+        class="switcher-toggle switcher-toggle__overlap"
+        :class="[Colors.themeSwitcher.background, { 'dark-mode' : darkModeStore.isDark }]"></div>
     </div>
     <p :class="Colors.themeSwitcher.true">isDark(true)</p>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-  import { themeColors as Colors } from '../../composables/colors.js'
+import { ref, onMounted } from 'vue'
+import { themeColors as Colors } from '../../composables/colors.js'
+import { useDarkModeStore } from '@store/darkmode.js'
 
-  const isDark = ref(true)
+const darkModeStore = useDarkModeStore()
+
+const handleDarkMode = () => {
+  const rootEl = document.documentElement
+  darkModeStore.toggleDarkMode()
+  darkModeStore.isDark ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
+}
+
+onMounted(() => {
+  const rootEl = document.documentElement
+  darkModeStore.isDark ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
+})
 </script>
 
 <style lang="scss" scoped>

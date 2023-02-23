@@ -16,6 +16,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
+import { useDarkModeStore } from '@store/darkmode.js'
 
 import Floaters from '@comps/page/Floaters.vue'
 import Header from '@comps/header/Header.vue'
@@ -29,6 +30,7 @@ import Footer from '@comps/footer/Footer.vue'
 
 const headerStore = useHeaderStore()
 const navStore = useNavStore()
+const darkModeStore = useDarkModeStore()
 const headerRef = ref(null)
 const contentRef = ref(null)
 
@@ -87,7 +89,6 @@ const convertHeightToVh = computed(() => {
 
 onMounted(() => {
   const rootEl = document.documentElement
-  rootEl.classList.add('dark')
   setCSSProperties(rootEl)
   setHeaderState()
   getSectionTops()
