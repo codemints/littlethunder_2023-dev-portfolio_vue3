@@ -42,10 +42,11 @@ export const useNavStore = defineStore('navigation', {
         },
       ],
       sections: null,
-      prevIndex: null,
-      currentIndex: 0,
-      nextIndex: 1,
+      links: null,
+      prevSection: null,
+      currentSection: 0,
+      nextSection: 1,
       scrolled: 0,
     }
-  }
+  },
 })

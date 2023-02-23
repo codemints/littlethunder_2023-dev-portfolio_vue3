@@ -11,11 +11,17 @@
     ref="floaterNavRef"
     class="floater__page-nav"
   >
-    <div class="page-prev text-center text-clr-200 hover:text-clr-orange">
+    <div
+    @click="handleNavigation"
+      class="page-prev text-center text-clr-200 hover:text-clr-orange"
+    >
       <i class="fa-sharp fa-solid fa-arrow-up-from-line"></i>
       <p>page.scroll(prev)</p>
     </div>
-    <div class="page-next text-center text-clr-200 hover:text-clr-orange">
+    <div
+    @click="handleNavigation"
+      class="page-next text-center text-clr-200 hover:text-clr-orange"
+    >
       <i class="fa-sharp fa-solid fa-arrow-down-from-line"></i>
       <p>page.scroll(next)</p>
     </div>
@@ -25,14 +31,32 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useHeaderStore } from '@store/header.js'
+import { useNavStore } from '@store/navigation.js'
 const headerStore = useHeaderStore()
+const navStore = useNavStore()
 
+let { prevSection, currentSection, nextSection } = navStore
 const emailLinkRef = ref(null)
 const floaterNavRef = ref(null)
 
 const getEmailLinkWidth = computed(() => {
   return emailLinkRef.value.offsetWidth
 })
+
+const handleNavigation = (e) => {
+  if ( e.currentTarget.classList.contains('page-prev') ) {
+    if ( navStore.prevSection < 0 || navStore.prevSection === null ) return
+    const top = navStore.navItems[navStore.prevSection].top
+    console.log(top)
+    window.scrollTo(0, top)
+  }
+  if ( e.currentTarget.classList.contains('page-next') ) {
+    if ( navStore.nextSection > navStore.navItems.length - 1) return
+    const top = navStore.navItems[navStore.nextSection].top
+    console.log(top)
+    window.scrollTo(0, top)
+  }
+}
 
 const handleScroll = () => {
   const scrollPosition = window.scrollY

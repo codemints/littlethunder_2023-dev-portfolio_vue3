@@ -3,10 +3,8 @@
     <canvas class="animation-canvas"></canvas>
     <div class="intro-title text-center text-white">
       <h2 class="font-body">hello<span class="text-clr-orange">.</span><span class="text-clr-blue">_</span></h2>
-      <h1 class="animate__animated"
-      @mouseover="handleMouseover"
-      @mouseout="handleMouseover"
-      ref="introTitle"
+      <h1
+      :text="sectionTitle"
       >My Name Is Daniel<span class="text-clr-orange">.</span></h1>
       <h3 class="font-body">i'm a creative frontend developer with roots in design<span class="text-clr-orange">.</span></h3>
     </div>
@@ -28,11 +26,7 @@
 import { ref, onMounted } from 'vue'
 import Button from '@/components/globals/Button.vue'
 
-const introTitle = ref(null)
-
-const handleMouseover = (e) => {
-  (e.type === 'mouseover') ? introTitle.value.classList.add('animate__pulse') : introTitle.value.classList.remove('animate__pulse')
-}
+const sectionTitle = ref('My Name Is Daniel.')
 
 const scrollTo = () => {
   console.log('I have been clicked')

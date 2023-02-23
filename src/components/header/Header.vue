@@ -80,22 +80,17 @@ onUnmounted(() => {
       transition: max-height 0.3s cubic-bezier(1,.03,.3,.93);
     }
     &--inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-inline: 5rem;
-    padding-block: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-inline: 5rem;
+      padding-block: 2rem;
 
-    > div {
-      flex: 1 1 33.3333%;
+      > div {
+        flex: 1 1 33.3333%;
+      }
     }
   }
-  }
-
-  .header__navigation {
-    padding-inline: 5rem;
-  }
-
   #site-logo {
     width: auto;
     height: 6rem;
