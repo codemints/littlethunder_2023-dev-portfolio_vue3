@@ -15,6 +15,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
+import { useNavStore } from '@store/navigation.js'
 
 import Floaters from '@comps/page/Floaters.vue'
 import Header from '@comps/header/Header.vue'
@@ -27,6 +28,7 @@ import SectionContact from '@comps/home/SectionContact.vue'
 import Footer from '@comps/footer/Footer.vue'
 
 const headerStore = useHeaderStore()
+const navStore = useNavStore()
 const headerRef = ref(null)
 const contentRef = ref(null)
 
@@ -59,6 +61,15 @@ const setHeaderState = () => {
   headerStore.headerElement = headerRef.value.$el
 }
 
+const getSectionTops = () => {
+  const sections = Array.from(contentRef.value.children)
+  const sectionTops = sections.map(section => section.offsetTop)
+  
+  sectionTops.forEach((top, index) => {
+    navStore.navItems[index].top = top
+  })
+}
+
 const convertHeightToVh = computed(() => {
   const { headerInnerHeight, headerHeight, windowHeight, sectionHeight } = calculateHeights()
   const headerInnerVh = 100*headerInnerHeight/windowHeight
@@ -79,6 +90,8 @@ onMounted(() => {
   rootEl.classList.add('dark')
   setCSSProperties(rootEl)
   setHeaderState()
+  getSectionTops()
+  navStore.sections = contentRef.value.children
 })
 </script>
 

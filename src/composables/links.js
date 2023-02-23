@@ -22,36 +22,3 @@ export const socialLinks = reactive([
     url: 'https://www.linkedin.com/in/codemints'
   },
 ])
-
-export const navLinks = reactive([
-  {
-    name: 'intro',
-    scrollTo: 'section__intro',
-    isActive: true,
-  },
-  {
-    name: 'about',
-    scrollTo: 'section__about',
-    isActive: null,
-  },
-  {
-    name: 'expertise',
-    scrollTo: 'section__expertise',
-    isActive: null,
-  },
-  {
-    name: 'work',
-    scrollTo: 'section__work',
-    isActive: null,
-  },
-  {
-    name: 'experience',
-    scrollTo: 'section__experience',
-    isActive: null,
-  },
-  {
-    name: 'contact',
-    scrollTo: 'section__contact',
-    isActive: null,
-  },
-])

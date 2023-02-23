@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-clr-800">
+  <footer class="bg-clr-800 footer__main">
     <div class="footer-logo">
       <a href="/">
         <img class="text-center mx-auto" src="@img/logo_light-header.png" alt="website logo">

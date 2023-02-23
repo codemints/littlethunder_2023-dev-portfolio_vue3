@@ -42,9 +42,9 @@ import Navigation from '@comps/header/Navigation.vue'
 
 const headerStore = useHeaderStore()
 
-const handleScroll = (isCollapsed) => {
+const handleScroll = () => {
   const scrollPosition = window.scrollY
-  scrollPosition >= 100
+  scrollPosition >= 50
     ? (headerStore.isCollapsed = true)
     : (headerStore.isCollapsed = false)
 
@@ -55,6 +55,10 @@ const handleScroll = (isCollapsed) => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -68,11 +72,12 @@ onMounted(() => {
 
   .header__main-content {
     max-height: 300rem;
-    transition: all 0.4s ease-in-out;
-
+    transition: max-height 0.3s cubic-bezier(1,.03,.3,.93);
+    
     &.is-collapsed {
       max-height: 0;
       overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(1,.03,.3,.93);
     }
     &--inner {
     display: flex;

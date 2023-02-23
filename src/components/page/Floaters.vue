@@ -1,12 +1,16 @@
 <template>
   <div
-  class="floater__email-link"
-  ref="emailLinkRef"
+    ref="emailLinkRef"
+    :class="{ 'is-collapsed': headerStore.isCollapsed }"
+    class="floater__email-link"
   >
     <div class="bg-clr-200"></div>
     <a href="mailto:hello@codemints.io" class="text-clr-200 hover:text-clr-blue">hello@codemints.io</a>
   </div>
-  <div class="floater__page-nav">
+  <div
+    ref="floaterNavRef"
+    class="floater__page-nav"
+  >
     <div class="page-prev text-center text-clr-200 hover:text-clr-orange">
       <i class="fa-sharp fa-solid fa-arrow-up-from-line"></i>
       <p>page.scroll(prev)</p>
@@ -19,15 +23,42 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useHeaderStore } from '@store/header.js'
+const headerStore = useHeaderStore()
+
 const emailLinkRef = ref(null)
+const floaterNavRef = ref(null)
+
 const getEmailLinkWidth = computed(() => {
   return emailLinkRef.value.offsetWidth
 })
 
+const handleScroll = () => {
+  const scrollPosition = window.scrollY
+  const windowHeight = window.innerHeight
+  const documentHeight = document.body.offsetHeight
+  const footer = document.querySelector('.footer__main')
+
+  const start = documentHeight - (scrollPosition + windowHeight)
+
+  if (scrollPosition + windowHeight >= documentHeight - footer.offsetHeight) {
+    floaterNavRef.value.style.bottom = `${375 - start}px`
+  } else {
+    floaterNavRef.value.style.bottom = '5rem'
+  }
+}
+
 onMounted(() => {
-  const doc = document.documentElement
-  doc.style.setProperty('--email-link-width', `${getEmailLinkWidth.value}px`)
+  const root = document.documentElement
+
+  root.style.setProperty('--email-link-width', `${getEmailLinkWidth.value}px`)
+
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -45,10 +76,15 @@ $padding: 5rem;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  top: var(--header-height);
+  top: var(--headerVh);
   right: $padding;
   transform-origin: top left;
   transform: rotate(90deg) translateY(calc(var(--email-link-width) * -1));
+  transition: top 0.3s cubic-bezier(1,.03,.3,.93);
+
+  &.is-collapsed {
+    top: calc(var(--headerVh) - var(--headerInnerVh));
+  }
 
   > div {
     height: 0.1rem;

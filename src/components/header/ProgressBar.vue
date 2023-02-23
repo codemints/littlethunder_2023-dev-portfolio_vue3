@@ -1,22 +1,38 @@
 <template>
   <div class="progress-bar__outer bg-clr-800">
-    <div class="progress-bar__inner bg-clr-orange" :style="{ width: `${scrollPercentage}vw`}"></div>
-    <p class="text-white" :style="{ left: updateTextPosition }">document.scroll({{ scrollPercentage }}%)</p>
+    <div class="progress-bar__inner bg-clr-orange" :style="{ width: `${scrolled + 2}vw`}"></div>
+    <p
+      class="text-white"
+      :style="{ left: `${scrolled / 1.1}vw` }"
+    >
+        document.scroll({{ parseInt(scrolled) }}%)
+    </p>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useNavStore } from '@store/navigation.js'
 
-const scrollPercentage = ref(18)
+const navStore = useNavStore()
+const scrolled = ref(0)
 
-const updateScrollPercentage = () => {
-  const docElement = document.documentElement.scrollTop
-  scrollPercentage.value = docElement.scrollTop / (docElement.scrollHeight - document.documentElement.clientHeight) * 100
+const handleScroll = () => {
+  const scrollPosition = window.scrollY
+  const windowHeight = window.innerHeight
+  const documentHeight = document.body.scrollHeight
+  const scrollPercentage = (scrollPosition / (documentHeight - windowHeight)) * 100
+
+  scrolled.value = scrollPercentage
+  navStore.scrolled = window.scrollY
 }
 
-const updateTextPosition = computed(() => {
-  return `${scrollPercentage.value}vw`
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -37,6 +53,7 @@ const updateTextPosition = computed(() => {
   p {
     position: relative;
     font-size: 1.2rem;
+    margin-left: 2.4rem;
     z-index: 2;
   }
 }
