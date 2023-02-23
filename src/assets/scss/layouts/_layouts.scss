@@ -6,7 +6,7 @@ main {
 
 .page-section {
   height: 100vh;
-  background: linear-gradient(180deg, $clr-800 0%, $clr-600 100%);
+  // background: linear-gradient(180deg, $clr-800 0%, $clr-600 100%);
   counter-increment: section;
 
   &:nth-child(odd) {

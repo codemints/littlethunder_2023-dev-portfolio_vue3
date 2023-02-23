@@ -13,14 +13,14 @@
   >
     <div
     @click="handleNavigation"
-      class="page-prev text-center text-clr-200 hover:text-clr-orange"
+      class="page-prev text-center text-clr-200 hover:text-clr-blue dark:hover:text-clr-orange"
     >
       <i class="fa-sharp fa-solid fa-arrow-up-from-line"></i>
       <p>page.scroll(prev)</p>
     </div>
     <div
     @click="handleNavigation"
-      class="page-next text-center text-clr-200 hover:text-clr-orange"
+      class="page-next text-center text-clr-200 hover:text-clr-blue dark:hover:text-clr-orange"
     >
       <i class="fa-sharp fa-solid fa-arrow-down-from-line"></i>
       <p>page.scroll(next)</p>

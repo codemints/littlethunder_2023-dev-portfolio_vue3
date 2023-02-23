@@ -1,14 +1,14 @@
 <template>
-  <footer class="bg-clr-800 footer__main">
+  <footer class="dark:bg-clr-600 footer__main">
     <div class="footer-logo">
       <a href="/">
-        <img class="text-center mx-auto" src="@img/logo_light-header.png" alt="website logo">
-        <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
+        <img class="text-center mx-auto" :src="darkModeStore.logoSource" alt="website logo">
+        <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-clr-400 dark:text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
       </a>
-      <p class="text-white text-center">designed and built from scratch by me.</p>
+      <p class="text-clr-400 dark:text-white text-center">designed and built from scratch by me.</p>
     </div>
-    <div class="footer-icons bg-clr-400">
-      <h4 class="text-center uppercase text-clr-200">This site is proudly built with these technologies:</h4>
+    <div class="footer-icons bg-clr-100 dark:bg-clr-400">
+      <h4 class="text-center uppercase text-clr-400 dark:text-clr-200">This site is proudly built with these technologies:</h4>
       <div class="github-link">
         <a href="https://github.com/codemints/littlethunder_2023-dev-portfolio_vue3" target="_blank">
           <p class="text-center text-clr-blue">the code for this site can be viewed here:</p>
@@ -21,7 +21,7 @@
         :key="key"
         :href="val"
         target="_blank">
-          <img :src="`./src/assets/img/brand_${key}-${isDark ? 'light' : 'dark'}.png`" :alt="key"/>
+          <img :src="`./src/assets/img/brand_${key}-${darkModeStore.isDark ? 'light' : 'dark'}.png`" :alt="key"/>
         </a>
       </div>
     </div>
@@ -29,8 +29,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const isDark = ref(true)
+import { ref, computed } from 'vue'
+import { useDarkModeStore } from '@store/darkmode.js'
+
+const darkModeStore = useDarkModeStore()
+
 const iconTitles = {
   vue: 'https://vuejs.org/',
   pinia: 'https://pinia.vuejs.org/',
@@ -42,7 +45,6 @@ const iconTitles = {
   supabase: 'https://supabase.com/',
   netlify: 'https://www.netlify.com/'
 }
-
 </script>
 
 <style lang="scss" scoped>

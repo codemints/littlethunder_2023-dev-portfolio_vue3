@@ -18,7 +18,7 @@
             <img
               id="site-logo"
               class="text-center"
-              :src="logoSource"
+              :src="darkModeStore.logoSource"
               alt="website logo"
             >
             <h4 id="site-title" class="text-center uppercase text-clr-orange"><span class="text-clr-400 dark:text-white">Little</span>Thunder.<span class="text-clr-blue">_</span></h4>
@@ -60,14 +60,9 @@ const handleScroll = () => {
   }
 }
 
-const logoSource = computed(() => {
-  return darkModeStore.isDark
-    ? './src/assets/img/logo_light-header.png'
-    : './src/assets/img/logo_dark-header.png'
-})
-
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  console.log(darkModeStore.logoSource)
 })
 
 onUnmounted(() => {

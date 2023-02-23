@@ -2,12 +2,12 @@
   <Floaters />
   <Header ref="headerRef" />
   <main ref="contentRef" class="page-content bg-clr-800">
-    <SectionIntro />
-    <SectionAbout />
-    <SectionExpertise />
-    <SectionWork />
-    <SectionExperience />
-    <SectionContact />
+    <SectionIntro class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
+    <SectionAbout class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
+    <SectionExpertise class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
+    <SectionWork class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
+    <SectionExperience class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
+    <SectionContact class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
   </main>
   <Footer />
 </template>

@@ -1,16 +1,16 @@
 <template>
   <section id="section__intro" class="page-section">
     <canvas class="animation-canvas"></canvas>
-    <div class="intro-title text-center text-white">
+    <div class="intro-title text-center text-clr-400 dark:text-white">
       <h2 class="font-body">hello<span class="text-clr-orange">.</span><span class="text-clr-blue">_</span></h2>
       <h1
-      :text="sectionTitle"
+      :introText="sectionTitle"
       >My Name Is Daniel<span class="text-clr-orange">.</span></h1>
       <h3 class="font-body">i'm a creative frontend developer with roots in design<span class="text-clr-orange">.</span></h3>
     </div>
     <Button
         :onClick="scrollTo"
-        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-200', 'text-white', 'hover:text-clr-600']"
+        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600']"
         :cssProps="{
           'font-size': '1.5rem',
           'width': '30rem',

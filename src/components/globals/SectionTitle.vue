@@ -1,5 +1,5 @@
 <template>
-  <h2 class="text-white section-title"><span class="text-clr-400">//</span>{{  title }}</h2>
+  <h2 class="text-clr-400 dark:text-white section-title"><span class="text-clr-100 dark:text-clr-400">//</span>{{  title }}</h2>
 </template>
 
 <script setup>
