@@ -37,6 +37,9 @@ const toggleOpen = (index) => {
 }
 
 onMounted(() => {
+  const initialAccordionHeight = vueCordion.value.offsetHeight
+  vueCordion.value.style.height = `${initialAccordionHeight + 25}px`
+
   const accordionTabs = Array.from(vueCordion.value.children)
   tabHeights.value = accordionTabs.map(tab => {
     return tab.offsetHeight
@@ -45,5 +48,9 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-
+  .vuecordion-wrapper {
+    position: relative;
+    height: 100%;
+    z-index: 10;
+  }
 </style>

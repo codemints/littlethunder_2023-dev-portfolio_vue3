@@ -96,6 +96,11 @@ footer {
       img {
         width: auto;
         height: 3.2rem;
+        transition: filter 0.4s ease;
+
+        &:hover {
+          filter: brightness(2);
+        }
       }
     }
   }
