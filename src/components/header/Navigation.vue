@@ -27,7 +27,7 @@
             @mouseover="handleShuttle"
             @mouseout="handleShuttle"
             :href="`#${item.scrollTo}`"
-            class="nav-links__link text-clr-200 hover:text-clr-600 dark:hover:text-white"
+            class="nav-links__link text-clr-200 hover:text-clr-400 dark:hover:text-white"
             :class="{'nav-links__link--active': item.isActive}"
           >
             <span class="link-before">//</span>
@@ -81,13 +81,32 @@ const setShuttlePosition = (offset = 0) => {
 
 const handleShuttle = (e) => {
   const shuttle = navShuttleRef.value
+  const items = navStore.navItems
+  const links = navLinksRef.value.children
+
   if ( e.type === 'mouseover' ) {
     const position = e.target.getBoundingClientRect().left 
     const width = e.target.getBoundingClientRect().width
     shuttle.style.left = `${position}px`
     shuttle.style.width = `${width}px`
+
+    items.forEach((item, index) => {
+      if ( item.isActive ) {
+        const activeLink = links[index].firstElementChild
+        const hoveredLink = e.currentTarget
+        
+        if ( activeLink.href !== hoveredLink.href ) {
+          activeLink.style.color = '#9EA7B3'
+        }
+      }
+    })
   } else {
     setShuttlePosition()
+    items.forEach((item, index) => {
+      if ( item.isActive ) {
+        links[index].firstElementChild.style.color = ''
+      }
+    })
   }
 }
 
@@ -108,10 +127,6 @@ const scrollSpy = () => {
     }
 
   })
-
-  //I need to set the prevIndex, currIndex, and nextIndex here so scroll buttons work
-  //Try setting the index valuse of navStore inside of a click event rather than a scroll event
-  //I need to set an out mouseover and mouseout event and attempt to get the background to shuttle
 }
 
 onMounted(() => {
@@ -120,7 +135,7 @@ onMounted(() => {
   const scrollBarOffset = window.innerWidth - document.documentElement.clientWidth
   setTimeout(() => {
     setShuttlePosition(scrollBarOffset)
-  }, 50)
+  }, 100)
 })
 
 onUnmounted(() => {
@@ -193,7 +208,7 @@ onUnmounted(() => {
           transition: color 0.2s ease-in-out;
 
           &.nav-links__link--active {
-            color: $clr-600;
+            color: $clr-400;
 
             &::before {
               color: $clr-orange;

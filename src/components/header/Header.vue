@@ -62,7 +62,6 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-  console.log(darkModeStore.logoSource)
 })
 
 onUnmounted(() => {
