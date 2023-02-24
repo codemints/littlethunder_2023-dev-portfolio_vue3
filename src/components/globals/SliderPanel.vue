@@ -5,20 +5,20 @@
     </div>
     <div class="panel-details">
       <div class="panel-title">
-        <h3 class="text-white">{{ title }}</h3>
+        <h3 class="text-clr-400 dark:text-white">{{ title }}</h3>
       </div>
       <div class="panel-icons">
         <a :href="links.repo" target="_blank">
-          <i class="fa-brands fa-github text-clr-200 hover:text-clr-400"></i>
+          <i class="fa-brands fa-github text-clr-400 hover:text-clr-200 dark:text-clr-200 dark:hover:text-clr-400"></i>
         </a>
         <a :href="links.site" target="_blank">
-          <i class="fa-sharp fa-solid fa-arrow-up-right-from-square text-clr-blue hover:text-clr-400"></i>
+          <i class="fa-sharp fa-solid fa-arrow-up-right-from-square text-clr-orange hover:text-clr-blue dark:text-clr-blue dark:hover:text-clr-400"></i>
         </a>
       </div>
     </div>
     <div class="panel-body">
       <img :src="img" alt="" draggable="false">
-      <div class="panel-description bg-clr-400">
+      <div class="panel-description bg-clr-100 dark:bg-clr-400">
         <slot />
       </div>
     </div>
@@ -90,6 +90,10 @@ const props = defineProps({
       // cursor: grabbing;
     }
 
+    img, .panel-description {
+      box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+    }
+
     .panel-description {
       position: relative;
       width: 85%;
@@ -99,7 +103,6 @@ const props = defineProps({
       padding: 1.5rem;
       margin-inline: auto;
       margin-top: -4rem;
-      box-shadow: 0.5rem 0.5rem 0.8rem rgba(0, 0, 0, 0.35);
     }
   }
 

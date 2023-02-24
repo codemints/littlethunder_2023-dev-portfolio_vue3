@@ -12,7 +12,7 @@
               :tools="propData.tools.design"
               icon="fa-sharp fa-solid fa-pen-nib"
               >
-                <p class="text-clr-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="text-clr-400 dark:text-clr-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               </SkillCard>
               <SkillCard
               title="Frontend Dev"
@@ -20,7 +20,7 @@
               :tools="propData.tools.dev"
               icon="fa-sharp fa-solid fa-code"
               >
-                <p class="text-clr-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="text-clr-400 dark:text-clr-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               </SkillCard>
               <SkillCard
               title="Photography"
@@ -28,7 +28,7 @@
               :tools="propData.tools.photo"
               icon="fa-sharp fa-solid fa-aperture"
               >
-                <p class="text-clr-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="text-clr-400 dark:text-clr-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               </SkillCard>
             </div>
           </div>

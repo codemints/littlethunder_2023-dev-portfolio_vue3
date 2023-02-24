@@ -2,7 +2,7 @@
   <div class="switcher-container">
     <p :class="Colors.themeSwitcher.false">isDark(false)</p>
     <div
-      class="switcher-toggle__wrapper bg-clr-400 dark:bg-clr-800"
+      class="switcher-toggle__wrapper bg-clr-100 dark:bg-clr-800"
       @click="handleDarkMode"
     >
       <div
@@ -13,7 +13,7 @@
         class="switcher-toggle switcher-toggle__main bg-clr-orange dark:bg-clr-blue"
         :class="{ 'dark-mode' : darkModeStore.isDark }"></div>
       <div
-        class="switcher-toggle switcher-toggle__overlap bg-clr-400 dark:bg-clr-800"
+        class="switcher-toggle switcher-toggle__overlap bg-clr-100 dark:bg-clr-800"
         :class="{ 'dark-mode' : darkModeStore.isDark }"></div>
     </div>
     <p :class="Colors.themeSwitcher.true">isDark(true)</p>
@@ -95,7 +95,7 @@ $gap: 1.2rem;
           transition: none;
           
           &.dark-mode {
-            transition: all 0.25s ease-in-out;
+            transition: left 0.25s ease-in-out;
             left: calc(100% - ($dimensions + $padding) - 0.75rem);
           }
         }

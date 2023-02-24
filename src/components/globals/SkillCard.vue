@@ -2,7 +2,7 @@
   <div class="skillcard-card text-white">
     <div class="skillcard-header">
       <i class="skillcard-icon text-clr-blue" :class="icon"></i>
-      <h3 class="skillcard-title">{{ title }}</h3>
+      <h3 class="skillcard-title text-clr-400 dark:text-white">{{ title }}</h3>
       <ul class="text-clr-orange">
         <li
         v-for="skill in skills"
@@ -16,11 +16,12 @@
       <slot />
     </div>
     <div class="skillcard-footer">
-      <h4>Tools & Softward</h4>
+      <h4 class="text-clr-400 dark:text-white">Tools & Softward</h4>
       <ul class="text-clr-200">
         <li
         v-for="tool in tools"
         :key="tool"
+        class="text-clr-400 dark:text-clr-100"
         >
           {{ tool }}
         </li>
@@ -55,7 +56,7 @@ const props = defineProps({
 <style lang="scss" scoped>
 @use '@style/abstracts/variables' as *;
 .skillcard-card {
-  border: 2px solid white;
+  border: 2px solid $clr-400;
   padding-inline: 3.2rem;
   padding-block: 2rem;
 
@@ -89,7 +90,7 @@ const props = defineProps({
 
   .skillcard-body {
     position: relative;
-    border-left: 1px solid $clr-400;
+    border-left: 0.175rem solid $clr-200;
     padding-left: 1.6rem;
     margin-left: 0.6rem;
     margin-top: 3.6rem;
@@ -97,7 +98,7 @@ const props = defineProps({
     &:before, &:after {
       position: absolute;
       left: -1.8rem;
-      color: $clr-400;
+      color: $clr-200;
       font-size: 1.5rem;
       font-family: $body;
     }
@@ -127,6 +128,19 @@ const props = defineProps({
       font-size: 1.5rem;
       list-style-type: disc;
       margin-top: 1rem;
+    }
+  }
+}
+
+.dark {
+  .skillcard-card {
+    border-color: $clr-100;
+  }
+  .skillcard-body {
+    border-color: $clr-400;
+    
+    &:before, &:after {
+      color: $clr-400;
     }
   }
 }

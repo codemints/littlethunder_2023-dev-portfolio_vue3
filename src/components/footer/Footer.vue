@@ -1,5 +1,5 @@
 <template>
-  <footer class="dark:bg-clr-600 footer__main">
+  <footer class="dark:bg-clr-800 footer__main">
     <div class="footer-logo">
       <a href="/">
         <img class="text-center mx-auto" :src="darkModeStore.logoSource" alt="website logo">
@@ -51,7 +51,7 @@ const iconTitles = {
 footer {
   .footer-logo {
     padding-inline: 5rem;
-    padding-block: 2rem;
+    padding-block: 3.5rem;
 
     img {
       width: auto;

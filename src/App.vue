@@ -1,13 +1,13 @@
 <template>
   <Floaters />
   <Header ref="headerRef" />
-  <main ref="contentRef" class="page-content bg-clr-800">
-    <SectionIntro class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
-    <SectionAbout class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
-    <SectionExpertise class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
-    <SectionWork class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
-    <SectionExperience class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
-    <SectionContact class="bg-gradient-to-b from-white to-clr-100 dark:from-clr-800 dark:to-clr-600"/>
+  <main ref="contentRef" class="page-content bg-white dark:bg-clr-800">
+    <SectionIntro class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
+    <SectionAbout class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
+    <SectionExpertise class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
+    <SectionWork class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
+    <SectionExperience class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
+    <SectionContact class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
   </main>
   <Footer />
 </template>

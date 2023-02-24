@@ -11,7 +11,7 @@
               :links="propData.links.devFinder"
               :skills="propData.skills.devFinder"
             >
-              <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="text-clr-400 dark:text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </SliderPanel>
             
             <SliderPanel
@@ -20,7 +20,7 @@
               :links="propData.links.pokeDex"
               :skills="propData.skills.pokeDex"
             >
-              <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="text-clr-400 dark:text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </SliderPanel>
             
             <SliderPanel
@@ -29,7 +29,7 @@
               :links="propData.links.vueDrop"
               :skills="propData.skills.vueDrop"
             >
-              <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="text-clr-400 dark:text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </SliderPanel>
           </div>
         </div>

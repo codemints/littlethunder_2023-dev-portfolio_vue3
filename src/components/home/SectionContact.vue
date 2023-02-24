@@ -5,10 +5,10 @@
         <div class="section-content">
           <SectionTitle title="Contact Me" />
           <h3 class="text-clr-blue">Available For Hire</h3>
-          <p class="text-clr-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a. Ut placerat orci nulla pellentesque dignissim enim.</p>
+          <p class="text-clr-400 dark:text-clr-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a. Ut placerat orci nulla pellentesque dignissim enim.</p>
           <Button
           :onClick="scrollTo"
-          :classNames="[ 'bg-clr-orange', 'hover:bg-clr-200', 'text-white', 'hover:text-clr-600']"
+          :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600']"
           :cssProps="{
             'font-size': '1.5rem',
             'width': '30rem',

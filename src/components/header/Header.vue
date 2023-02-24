@@ -5,7 +5,7 @@
     </section>
 
     <section
-      class="header__main-content bg-clr-100 dark:bg-clr-600"
+      class="header__main-content bg-white dark:bg-clr-600"
       :class="{ 'is-collapsed': headerStore.isCollapsed }"
     >
       <div class="header__main-content--inner">

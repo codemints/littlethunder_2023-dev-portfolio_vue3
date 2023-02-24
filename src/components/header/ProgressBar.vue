@@ -1,8 +1,8 @@
 <template>
-  <div class="progress-bar__outer bg-clr-200 dark:bg-clr-800">
+  <div class="progress-bar__outer bg-clr-100 dark:bg-clr-800">
     <div class="progress-bar__inner bg-clr-orange" :style="{ width: `${scrolled + 2}vw`}"></div>
     <p
-      class="text-white"
+      class="text-clr-600 dark:text-white"
       :style="{ left: `${scrolled / 1.1}vw` }"
     >
         document.scroll({{ parseInt(scrolled) }}%)

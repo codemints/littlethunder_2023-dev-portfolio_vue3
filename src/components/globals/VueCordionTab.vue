@@ -18,18 +18,18 @@
         class="fa-sharp fa-solid fa-plus text-clr-400"
       ></i>
     </div>
-    <div class="vuecordion-body bg-clr-600">
+    <div class="vuecordion-body dark:bg-clr-600">
       <div class="vuecordion-body--inner">
         <div class="location">
           <i class="fa-sharp fa-regular fa-map-marker-alt text-clr-orange"></i>
-          <h4 class="text-white">{{ data.location }}</h4>
+          <h4 class="text-clr-400 dark:text-white">{{ data.location }}</h4>
         </div>
         <p class="description text-clr-200">{{ data.description }}</p>
         <div class="skills">
           <div
             v-for="skill in data.skills"
             :key="skill"
-            class="text-white bg-clr-400"
+            class="text-white bg-clr-200 dark:bg-clr-400"
           >
             <p class="text-center">{{ skill }}</p>
           </div>
@@ -102,12 +102,21 @@ watch(() => props.data.isOpen, (cur, prev) => {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
-      box-shadow: 0.2rem 0.2rem 8rem rgba(0, 0, 0, 0.2);
+      box-shadow: 0.2rem 0.2rem 0.8rem rgba(0, 0, 0, 0.2);
       transition: all 0.4s linear;
 
       &--inner {
         padding-inline: 2rem;
         padding-block: 1.5rem;
+      }
+
+      .location {
+        display: flex;
+        align-items: center;
+
+        i {
+          margin-right: 1rem;
+        }
       }
 
       .description {

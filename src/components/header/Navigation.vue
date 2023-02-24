@@ -149,7 +149,7 @@ onUnmounted(() => {
     height: 100%;
 
     &.is-positioned {
-      transition: all 0.3s cubic-bezier(.89,-0.48,.59,1.5);
+      transition: left 0.3s cubic-bezier(.89,-0.48,.59,1.5);
     }
   }
   
@@ -190,7 +190,7 @@ onUnmounted(() => {
           letter-spacing: 0.1rem;
           padding-inline: 1.6rem;
           padding-top: 1rem;
-          transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+          transition: color 0.2s ease-in-out;
 
           &.nav-links__link--active {
             color: $clr-600;
