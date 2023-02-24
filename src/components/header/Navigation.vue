@@ -133,9 +133,7 @@ onMounted(() => {
   navStore.links = Array.from(navLinksRef.value.children)
   window.addEventListener('scroll', scrollSpy)
   const scrollBarOffset = window.innerWidth - document.documentElement.clientWidth
-  setTimeout(() => {
-    setShuttlePosition(scrollBarOffset)
-  }, 100)
+  setShuttlePosition(scrollBarOffset)
 })
 
 onUnmounted(() => {

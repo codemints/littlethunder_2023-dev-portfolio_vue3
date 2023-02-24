@@ -2,10 +2,21 @@
   <section id="section__intro" class="page-section">
     <canvas class="animation-canvas"></canvas>
     <div class="intro-title text-center text-clr-400 dark:text-white">
-      <h2 class="font-body">hello<span class="text-clr-orange">.</span><span class="text-clr-blue">_</span></h2>
-      <h1
-      :introText="sectionTitle"
-      >My Name Is Daniel<span class="text-clr-orange">.</span></h1>
+      <h2
+      @mouseover="(e) => e.target.classList.add('animate__animated', 'animate__bounce')"
+      @animationend="(e) => e.target.classList.remove('animate__animated', 'animate__bounce')"
+        class="font-body">hello<span class="text-clr-orange">.</span><span class="text-clr-blue">_</span></h2>
+      <h1 class="text-clr-400 dark:text-clr-100">
+        <Splitting
+        :textContent="sectionTitle"
+        :specialChars="['.']"
+        wordClass="word"
+        charClass="char"
+        :specialCharClasses="['dark:text-clr-orange', 'dark:hover:text-clr-blue']"
+        :extraClassNames="['animate__animated', 'animate__bounce']"
+        @charHover="handleCharAnimation($event, ['animate__animated', 'animate__bounce'])"
+        />
+      </h1>
       <h3 class="font-body">i'm a creative frontend developer with roots in design<span class="text-clr-orange">.</span></h3>
     </div>
     <Button
@@ -24,7 +35,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import Splitting from '@comps/globals/Splitting.vue'
 import Button from '@/components/globals/Button.vue'
+import { handleCharAnimation, handleIntroAnimation } from '@lib/animation-utils.js'
 
 const sectionTitle = ref('My Name Is Daniel.')
 
@@ -63,6 +76,10 @@ const scrollTo = () => {
 
   .intro-title {
     margin-top: 10rem;
+
+    h1 {
+      cursor: pointer;
+    }
 
     h3 {
       font-size: 2.4rem;
