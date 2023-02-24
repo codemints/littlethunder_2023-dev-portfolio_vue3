@@ -13,7 +13,10 @@
         specialChars.includes(char) ? specialCharClasses : '',
         extraClassNames ? extraClassNames : ''
       ]"
-      @mouseover="(e) => e.target.classList.add(...extraClassNames)"
+      @mouseover="$emit('charHover', {
+        event: $event,
+        item: charArray[indexSequence(charIndex, item.startIndex)]
+      })"
     >
       {{ char }}
     </span>
@@ -101,7 +104,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-  .word--space {
+  .word--space,
+  .char {
     display: inline-block;
   }
 </style>
