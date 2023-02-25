@@ -27,19 +27,19 @@
         i'm a creative frontend developer with roots in design
         <span class="text-clr-orange">.</span>
       </h3>
+      <Button
+        ref="introButtonRef"
+        :onClick="scrollTo"
+        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600']"
+        :cssProps="{
+          'font-size': '1.5rem',
+          'width': '30rem',
+        }"
+        id="hero__button"
+        text="Let's Work Together"
+        hovText="Contact Me Today"
+      />
     </div>
-    <Button
-      ref="introButtonRef"
-      :onClick="scrollTo"
-      :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600']"
-      :cssProps="{
-        'font-size': '1.5rem',
-        'width': '30rem',
-      }"
-      id="hero__button"
-      text="Let's Work Together"
-      hovText="Contact Me Today"
-    />
   </section>
 </template>
 
@@ -120,6 +120,7 @@ onMounted(() => {
 
   .intro-title {
     margin-top: 5rem;
+    opacity: 0;
 
     h1 {
       cursor: pointer;
@@ -132,6 +133,7 @@ onMounted(() => {
 
   #hero__button {
     margin-top: 7.5rem;
+    margin-inline: auto;
   }
 }
 </style>

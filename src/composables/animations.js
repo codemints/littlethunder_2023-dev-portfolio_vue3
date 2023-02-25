@@ -11,7 +11,11 @@ export const useAnimateChars = (payload, animationClassNames) => {
 
 export const useAnimateIntro = (elements, animateClassNames) => {
   const [ title, heading, subtitle, button ] = elements
-  const tl = gsap.timeline()
+  const tl = gsap.timeline({
+    onStart() {
+      title.parentElement.style.opacity = 1
+    }
+  })
 
   tl.from(title, {
     y: -275,
