@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import SectionTitle from '@comps/globals/SectionTitle.vue'
+import SectionTitle from '@component/globals/SectionTitle.vue'
 import { useDarkModeStore } from '@store/darkmode.js'
 
 const darkModeStore = useDarkModeStore()

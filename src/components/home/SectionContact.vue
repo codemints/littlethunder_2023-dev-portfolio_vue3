@@ -30,9 +30,9 @@
 </template>
 
 <script setup>
-import SectionTitle from '@comps/globals/SectionTitle.vue'
-import Button from '@comps/globals/Button.vue'
-import Map from '@comps/globals/Map.vue'
+import SectionTitle from '@component/globals/SectionTitle.vue'
+import Button from '@component/globals/Button.vue'
+import Map from '@component/globals/Map.vue'
 
 const scrollTo = () => {
   console.log('I have been clicked')

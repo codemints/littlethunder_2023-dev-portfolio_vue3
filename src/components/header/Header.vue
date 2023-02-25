@@ -41,10 +41,10 @@
 import { computed, onMounted, onUnmounted } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useDarkModeStore } from '@store/darkmode.js'
-import SocialMedia from '@comps/header/SocialMedia.vue'
-import ThemeSwitcher from '@comps/header/ThemeSwitcher.vue'
-import ProgressBar from '@comps/header/ProgressBar.vue'
-import Navigation from '@comps/header/Navigation.vue'
+import SocialMedia from '@component/header/SocialMedia.vue'
+import ThemeSwitcher from '@component/header/ThemeSwitcher.vue'
+import ProgressBar from '@component/header/ProgressBar.vue'
+import Navigation from '@component/header/Navigation.vue'
 
 const headerStore = useHeaderStore()
 const darkModeStore = useDarkModeStore()

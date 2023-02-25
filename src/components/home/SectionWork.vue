@@ -40,8 +40,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import SectionTitle from '@comps/globals/SectionTitle.vue'
-import SliderPanel from '@comps/globals/SliderPanel.vue'
+import SectionTitle from '@component/globals/SectionTitle.vue'
+import SliderPanel from '@component/globals/SliderPanel.vue'
 
 const propData = {
   skills: {

@@ -17,8 +17,8 @@
 
 <script setup>
 import { reactive } from 'vue'
-import SectionTitle from '@comps/globals/SectionTitle.vue'
-import VueCordion from '@comps/globals/VueCordion.vue'
+import SectionTitle from '@component/globals/SectionTitle.vue'
+import VueCordion from '@component/globals/VueCordion.vue'
 
 
 

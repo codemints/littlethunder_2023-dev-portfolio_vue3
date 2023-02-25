@@ -2,45 +2,92 @@
   <section id="section__intro" class="page-section">
     <canvas class="animation-canvas"></canvas>
     <div class="intro-title text-center text-clr-400 dark:text-white">
-      <h2 class="font-body">hello<span class="text-clr-orange">.</span><span class="text-clr-blue">_</span></h2>
-      <h1 class="text-clr-400 dark:text-clr-100">
+      <h2
+      ref="introTitleRef"
+        class="font-body">hello<span class="text-clr-orange">.</span>
+          <span class="text-clr-blue">_</span>
+      </h2>
+      <h1
+      ref="introHeadingRef"
+        class="text-clr-400 dark:text-clr-100">
         <Splitting
         :textContent="sectionTitle"
         :specialChars="['.']"
         wordClass="word"
         charClass="char"
-        :specialCharClasses="['text-clr-blue', 'hover:text-clr-orange','dark:text-clr-orange', 'dark:hover:text-clr-blue']"
+        :specialCharClasses="['text-clr-blue', 'hover:text-clr-orange','dark:text-clr-orange', 'dark:hover:text-clr-blue', 'char-special']"
         :extraClassNames="[]"
-        @charHover="handleCharAnimation($event, ['animate__animated', 'animate__bounce', 'text-clr-100', 'dark:text-clr-400'])"
+        @charHover="useAnimateChars($event, ['animate__animated', 'animate__bounce', 'text-clr-100', 'dark:text-clr-400'])"
         />
       </h1>
-      <h3 class="font-body">i'm a creative frontend developer with roots in design<span class="text-clr-orange">.</span></h3>
+      <h3
+        ref="introSubTitleRef"
+        class="font-body"
+      >
+        i'm a creative frontend developer with roots in design
+        <span class="text-clr-orange">.</span>
+      </h3>
     </div>
     <Button
-        :onClick="scrollTo"
-        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600']"
-        :cssProps="{
-          'font-size': '1.5rem',
-          'width': '30rem',
-        }"
-        id="hero__button"
-        text="Let's Work Together"
-        hovText="Contact Me Today"
-      />
+      ref="introButtonRef"
+      :onClick="scrollTo"
+      :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600']"
+      :cssProps="{
+        'font-size': '1.5rem',
+        'width': '30rem',
+      }"
+      id="hero__button"
+      text="Let's Work Together"
+      hovText="Contact Me Today"
+    />
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import Splitting from '@comps/globals/Splitting.vue'
+import { ref, onMounted, computed } from 'vue'
+import Splitting from '@component/globals/Splitting.vue'
 import Button from '@/components/globals/Button.vue'
-import { handleCharAnimation, handleIntroAnimation } from '@lib/animation-utils.js'
+import { useAnimateChars, useAnimateIntro } from '@compose/animations.js'
 
 const sectionTitle = ref('My Name Is Daniel.')
+const introTitleRef = ref(null)
+const introHeadingRef = ref(null)
+const introSubTitleRef = ref(null)
+const introButtonRef = ref(null)
 
 const scrollTo = () => {
   console.log('I have been clicked')
 }
+
+const getHeadingChars = computed(() => {
+  return Array.from(introHeadingRef.value.children)
+  .reduce((acc, curr, index) => {
+    const chars =
+      Array.from(curr.children)
+      .filter(char => char.classList.contains('char'))
+
+    return [...acc, ...chars]
+  }, [])
+})
+
+onMounted(() => {
+  const animateElements = [
+    introTitleRef.value,
+    getHeadingChars.value,
+    introSubTitleRef.value,
+    introButtonRef.value.$el,
+  ]
+  const animateClassNames = [
+    'text-clr-blue',
+    'dark:text-clr-orange',
+    'animate__animated',
+    'animate__bounce',
+  ]
+
+  setTimeout(() => {
+    useAnimateIntro(animateElements, animateClassNames)
+  }, 250)
+})
 </script>
 
 <style lang="scss" scoped>

@@ -13,7 +13,7 @@
 
 <script setup>
 import { ref, toRef, defineProps, onMounted } from 'vue'
-import VueCordionTab from '@comps/globals/VueCordionTab.vue'
+import VueCordionTab from '@component/globals/VueCordionTab.vue'
 const props = defineProps({
   data: {
     type: Array,
