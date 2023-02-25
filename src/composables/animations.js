@@ -14,9 +14,9 @@ export const useAnimateIntro = (elements, animateClassNames) => {
   const tl = gsap.timeline()
 
   tl.from(title, {
-    y: -500,
+    y: -275,
     opacity: 0,
-    duration: 1.5,
+    duration: 0.6,
     ease: 'bounce.out',
   })
   
@@ -49,11 +49,11 @@ export const useAnimateIntro = (elements, animateClassNames) => {
   })
 
   tl.from(subtitle, {
-    y: 500,
+    y: 300,
     opacity: 0,
-    duration: 1.5,
+    duration: 1.1,
     ease: 'bounce.out',
-  }, '-=0.5')
+  }, '-=0.75')
 
   tl.from(button, {
     delay: 0.25,

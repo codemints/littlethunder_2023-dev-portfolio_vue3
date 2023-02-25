@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watchEffect } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
 import { useDarkModeStore } from '@store/darkmode.js'
@@ -35,7 +35,7 @@ const darkModeStore = useDarkModeStore()
 const headerRef = ref(null)
 const contentRef = ref(null)
 const isDark = ref(darkModeStore.isDark)
-const { updateColorScheme, getColorScheme, setColorScheme } = useColorScheme()
+const { setColorScheme, mountDarkModeListener, unmountDarkModeListener } = useColorScheme()
 
 const calculateHeights = () => {
   const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
@@ -90,17 +90,18 @@ const convertHeightToVh = computed(() => {
   }
 })
 
-watchEffect(() => {
-
-})
-
 onMounted(() => {
-  console.log(setColorScheme())
+  setColorScheme()
+  mountDarkModeListener()
   const rootEl = document.documentElement
   setCSSProperties(rootEl)
   setHeaderState()
   getSectionTops()
   navStore.sections = contentRef.value.children
+})
+
+onUnmounted(() => {
+  unmountDarkModeListener()
 })
 </script>
 

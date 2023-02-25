@@ -23,13 +23,24 @@
 <script setup>
 import { themeColors as Colors } from '../../composables/colors.js'
 import { useDarkModeStore } from '@store/darkmode.js'
+import { useColorScheme } from '@compose/colorscheme.js'
 
 const darkModeStore = useDarkModeStore()
 
 const handleDarkMode = () => {
   const rootEl = document.documentElement
+
   darkModeStore.toggleDarkMode()
-  darkModeStore.isDark ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
+  const colorScheme =
+    darkModeStore.isDark
+      ? 'dark'
+      : 'light'
+
+  darkModeStore.isDark
+  ? rootEl.classList.add('dark')
+  : rootEl.classList.remove('dark')
+
+  localStorage.setItem('colorScheme', colorScheme)
 }
 </script>
 
