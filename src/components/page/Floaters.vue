@@ -13,14 +13,16 @@
   >
     <div
     @click="handleNavigation"
-      class="page-prev text-center text-clr-200 hover:text-clr-blue dark:hover:text-clr-orange"
+    :class="{ 'is-hidden': navStore.prevSection < 0 || navStore.prevSection === null }"
+    class="page-prev text-center text-clr-200 hover:text-clr-blue dark:hover:text-clr-orange"
     >
-      <i class="fa-sharp fa-solid fa-arrow-up-from-line"></i>
-      <p>page.scroll(prev)</p>
-    </div>
-    <div
+    <i class="fa-sharp fa-solid fa-arrow-up-from-line"></i>
+    <p>page.scroll(prev)</p>
+  </div>
+  <div
     @click="handleNavigation"
-      class="page-next text-center text-clr-200 hover:text-clr-blue dark:hover:text-clr-orange"
+    :class="{ 'is-hidden': navStore.nextSection > navStore.navItems.length - 1 }"
+    class="page-next text-center text-clr-200 hover:text-clr-blue dark:hover:text-clr-orange"
     >
       <i class="fa-sharp fa-solid fa-arrow-down-from-line"></i>
       <p>page.scroll(next)</p>
@@ -51,9 +53,8 @@ const handleNavigation = (e) => {
     window.scrollTo(0, top)
   }
   if ( e.currentTarget.classList.contains('page-next') ) {
-    if ( navStore.nextSection > navStore.navItems.length - 1) return
+    if ( navStore.nextSection > navStore.navItems.length - 1 ) return
     const top = navStore.navItems[navStore.nextSection].top
-    console.log(top)
     window.scrollTo(0, top)
   }
 }
@@ -131,6 +132,10 @@ $padding: 5rem;
 
   > div {
     cursor: pointer;
+
+    &.is-hidden {
+      // opacity: 0;
+    }
     
     &:last-of-type {
       margin-right: calc($padding / 2);

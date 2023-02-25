@@ -12,7 +12,6 @@ export const useAnimateChars = (payload, animationClassNames) => {
 export const useAnimateIntro = (elements, animateClassNames) => {
   const [ title, heading, subtitle, button ] = elements
   const tl = gsap.timeline()
-  console.log(tl.data)
 
   tl.from(title, {
     y: -500,
@@ -57,8 +56,8 @@ export const useAnimateIntro = (elements, animateClassNames) => {
   }, '-=0.5')
 
   tl.from(button, {
-    delay: 0.5,
-    duration: 0.5,
+    delay: 0.25,
+    duration: 0.35,
     ease: "bounce.out",
     transformOrigin: '0% 0%',
     y: 50,

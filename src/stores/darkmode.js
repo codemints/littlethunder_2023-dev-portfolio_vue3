@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useDarkModeStore = defineStore('toggle',{
   state: () => ({
-    isDark: true,
+    isDark: null,
   }),
   getters: {
     logoSource: (state) => {

@@ -119,7 +119,7 @@ onMounted(() => {
   // }
 
   .intro-title {
-    margin-top: 10rem;
+    margin-top: 5rem;
 
     h1 {
       cursor: pointer;

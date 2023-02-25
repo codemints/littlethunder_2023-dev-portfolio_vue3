@@ -18,8 +18,8 @@ onMounted(() => {
 
   loader.load().then(() => {
     map = new google.maps.Map(mapRef.value, {
-      center: { lat: 40.7128, lng: -74.0060 },
-      zoom: 8,
+      center: { lat: 40.5853, lng: -105.0844 },
+      zoom: 13,
       styles: mapStylesArray,
     })
   })

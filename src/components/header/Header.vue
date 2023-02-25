@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useDarkModeStore } from '@store/darkmode.js'
 import SocialMedia from '@component/header/SocialMedia.vue'

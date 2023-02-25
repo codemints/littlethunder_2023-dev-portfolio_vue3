@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import { themeColors as Colors } from '../../composables/colors.js'
 import { useDarkModeStore } from '@store/darkmode.js'
 
@@ -32,11 +31,6 @@ const handleDarkMode = () => {
   darkModeStore.toggleDarkMode()
   darkModeStore.isDark ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
 }
-
-onMounted(() => {
-  const rootEl = document.documentElement
-  darkModeStore.isDark ? rootEl.classList.add('dark') : rootEl.classList.remove('dark')
-})
 </script>
 
 <style lang="scss" scoped>
