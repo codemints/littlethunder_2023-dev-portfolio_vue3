@@ -5,8 +5,8 @@
     @click="handleResize"
     class="nav-content__toggle"
     >
-    <i
-        v-if="!headerStore.isCollapsed && headerStore.isCollapsed !== null"
+      <i
+        v-if="!headerStore.isCollapsed"
         class="fa-sharp fa-solid fa-arrow-up-to-line text-clr-blue hover:text-clr-600"
       ></i>
       <i

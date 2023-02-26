@@ -37,7 +37,6 @@ import { useNavStore } from '@store/navigation.js'
 const headerStore = useHeaderStore()
 const navStore = useNavStore()
 
-let { prevSection, currentSection, nextSection } = navStore
 const emailLinkRef = ref(null)
 const floaterNavRef = ref(null)
 
@@ -49,7 +48,6 @@ const handleNavigation = (e) => {
   if ( e.currentTarget.classList.contains('page-prev') ) {
     if ( navStore.prevSection < 0 || navStore.prevSection === null ) return
     const top = navStore.navItems[navStore.prevSection].top
-    console.log(top)
     window.scrollTo(0, top)
   }
   if ( e.currentTarget.classList.contains('page-next') ) {

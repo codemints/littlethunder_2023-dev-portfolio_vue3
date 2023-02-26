@@ -1,6 +1,5 @@
 <template>
   <section id="section__intro" class="page-section">
-    <canvas class="animation-canvas"></canvas>
     <div class="intro-title text-center text-clr-400 dark:text-white">
       <h2
       ref="introTitleRef"
@@ -40,13 +39,15 @@
         hovText="Contact Me Today"
       />
     </div>
+    <CircleCanvas />
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import Splitting from '@component/globals/Splitting.vue'
-import Button from '@/components/globals/Button.vue'
+import Button from '@component/globals/Button.vue'
+import CircleCanvas from '@component/globals/CircleCanvas.vue'
 import { useAnimateChars, useAnimateIntro } from '@compose/animations.js'
 
 const sectionTitle = ref('My Name Is Daniel.')
@@ -109,17 +110,8 @@ onMounted(() => {
     z-index: -1;
   }
 
-  // .animation-canvas {
-  //   position: absolute;
-  //   left: 0;
-  //   top: var(--header-height);
-  //   width: 100vw;
-  //   height: var(--canvas-height);
-  //   z-index: -1;
-  // }
-
   .intro-title {
-    margin-top: 5rem;
+    margin-top: 15rem;
     opacity: 0;
 
     h1 {
