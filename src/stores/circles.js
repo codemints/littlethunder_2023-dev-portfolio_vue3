@@ -130,11 +130,16 @@ export const useCirclesStore = defineStore('circles', {
     },
 
     spawnNewCircle(e) {
-      const rad = this.getRandomNumber(this.circleData.minCircleSize, this.circleData.maxCircleSize)
       const x = e.offsetX
       const y = (e.offsetY - this.circleData.offset) + window.scrollY
+      const rad = this.getRandomNumber(this.circleData.minCircleSize, this.circleData.maxCircleSize)
       const color = this.getRandomColor(this.circleColors.clickColors)
-      this.circleData.circleArray.push(new Circle(x, y, rad, color))
+      this.circleData.circleArray.push(new Circle(
+        x, y, rad, color,
+        this.circleData.initialVelocity,
+        this.circleData.ctx,
+        this.circleData.canvas
+        ))
     },
 
     changeVelocity(e) {

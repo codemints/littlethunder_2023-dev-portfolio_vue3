@@ -1,6 +1,10 @@
 <template>
   <section id="section__intro" class="page-section">
-    <div class="intro-title text-center text-clr-400 dark:text-white">
+    <div
+      ref="introWrapperRef"
+      class="intro-title text-center text-clr-400 dark:text-white"
+      :class="{ 'is-hidden': controlsStore.titleHidden }"
+    >
       <h2
       ref="introTitleRef"
         class="font-body">hello<span class="text-clr-orange">.</span>
@@ -23,8 +27,7 @@
         ref="introSubTitleRef"
         class="font-body"
       >
-        i'm a creative frontend developer with roots in design
-        <span class="text-clr-orange">.</span>
+        i'm a creative frontend developer with roots in design<span class="text-clr-orange">.</span>
       </h3>
       <Button
         ref="introButtonRef"
@@ -49,8 +52,11 @@ import Splitting from '@component/globals/Splitting.vue'
 import Button from '@component/globals/Button.vue'
 import CircleCanvas from '@component/globals/CircleCanvas.vue'
 import { useAnimateChars, useAnimateIntro } from '@compose/animations.js'
+import { useControlsStore } from '@store/controls.js'
 
+const controlsStore = useControlsStore()
 const sectionTitle = ref('My Name Is Daniel.')
+const introWrapperRef = ref(null)
 const introTitleRef = ref(null)
 const introHeadingRef = ref(null)
 const introSubTitleRef = ref(null)
@@ -72,6 +78,8 @@ const getHeadingChars = computed(() => {
 })
 
 onMounted(() => {
+  controlsStore.titleWrapperHeight = introWrapperRef.value.clientHeight
+  document.documentElement.style.setProperty(`--title-wrapper-height`, `${controlsStore.titleWrapperHeight}px`)
   const animateElements = [
     introTitleRef.value,
     getHeadingChars.value,
@@ -101,18 +109,18 @@ onMounted(() => {
   position: relative;
   z-index: 0;
 
-  canvas[data-engine="three.js r140"] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-  }
-
   .intro-title {
+    max-height: var(--title-wrapper-height);
     margin-top: 15rem;
+    overflow: hidden;
     opacity: 0;
+    transition: max-height 0.2s ease-in-out;
+
+    &.is-hidden {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
 
     h1 {
       cursor: pointer;

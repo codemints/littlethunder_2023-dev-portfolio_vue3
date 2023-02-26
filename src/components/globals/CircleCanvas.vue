@@ -1,10 +1,18 @@
 <template>
   <canvas
+    @click="spawnNewCircle"
+    @mousedown="controlsStore.panelOpen = false"
     ref="canvasRef"
     class="bg-white dark:bg-clr-800"
+  ></canvas>
+  <ControlPanel
+    :changeVelocity="changeVelocity"
+    :clearCanvas="clearCanvas"
+    :toggleSuspend="toggleSuspend"
+    :redrawCanvas="redrawCanvas"
   >
+  </ControlPanel>
 
-  </canvas>
 </template>
 
 <script setup>
@@ -12,10 +20,28 @@ import { ref, onMounted, watch } from 'vue'
 import { useCirclesStore } from '@store/circles.js'
 import { useHeaderStore } from '@store/header.js'
 import { useDarkModeStore } from '@store/darkMode.js'
+import { useControlsStore } from '@store/controls.js'
+import ControlPanel from '@component/globals/ControlPanel.vue'
 
 const circleStore = useCirclesStore()
 const headerStore = useHeaderStore()
+const {
+  isCollapsed,
+  headerVhMax,
+  headerVhMin
+} = headerStore
 const darkModeStore = useDarkModeStore()
+const {
+  setCircleData,
+  drawToCanvas,
+  updateCircleColor,
+  spawnNewCircle,
+  changeVelocity,
+  clearCanvas,
+  toggleSuspend,
+  redrawCanvas
+} = circleStore
+const controlsStore = useControlsStore()
 
 const canvasRef = ref(null)
 
@@ -24,7 +50,7 @@ watch(() => headerStore.headerVhMax, (val) => {
   canvasRef.value.width = window.innerWidth
   canvasRef.value.style.top = `${val}vh`
 
-  circleStore.setCircleData({
+  setCircleData({
     canvas: canvasRef.value,
     ctx: canvasRef.value.getContext('2d'),
     minCircleSize: 10,
@@ -32,28 +58,27 @@ watch(() => headerStore.headerVhMax, (val) => {
     minCirclePopulation: 8,
     maxCirclePopulation: 12,
     initialVelocity: 0.125,
-    offset: headerStore.headerVhMax,
+    offset: headerVhMax,
   })
 
-  circleStore.drawToCanvas()
+  drawToCanvas()
 })
 
-watch(() => headerStore.isCollapsed, (val) => {
+watch(() => isCollapsed, (val) => {
   if ( val ) {
-    canvasRef.value.height = window.innerHeight - (window.innerHeight * headerStore.headerVhMin / 100)
-    canvasRef.value.style.top = `${headerStore.headerVhMin}vh`
+    canvasRef.value.height = window.innerHeight - (window.innerHeight * headerVhMin / 100)
+    canvasRef.value.style.top = `${headerVhMin}vh`
   } else {
-    canvasRef.value.height = window.innerHeight - (window.innerHeight * headerStore.headerVhMax / 100)
-    canvasRef.value.style.top = `${headerStore.headerVhMax}vh`
+    canvasRef.value.height = window.innerHeight - (window.innerHeight * headerVhMax / 100)
+    canvasRef.value.style.top = `${headerVhMax}vh`
   }
 })
 
 watch(() => darkModeStore.isDark, (val) => {
-  circleStore.updateCircleColor()
+  updateCircleColor()
 })
 
 onMounted(() => {
-
 })
 </script>
 
