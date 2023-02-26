@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive } from 'vue'
-import { useDarkModeStore } from '@store/darkmode.js'
+import { useDarkModeStore} from '@store/darkmode.js'
 import siteColors from '@lib/site-colors'
 
 const { clr600, clr400, clr200, clr100, clrBlue, clrOrange } = siteColors
@@ -45,11 +44,10 @@ class Circle {
   }
 }
 
+
 export const useCirclesStore = defineStore('circles', {
   state: () => {
-    const darkModeStore = useDarkModeStore()
     const storedColorScheme = localStorage.getItem('colorScheme')
-    console.log('storedColorScheme', storedColorScheme)
     return {
       circleColors: {
         darkColors: [clr600, clr400],
@@ -216,14 +214,15 @@ export const useCirclesStore = defineStore('circles', {
     },
 
     updateCircleColor() {
+      const darkModeStore = useDarkModeStore()
+
       this.circleData.circleArray.forEach((circle) => {
         const newCircleColor =
-        this.darkModeStore.isDark
-          ? this.circleColors.darkColors[this.circleColors.lightColors.indexOf(circle.color)]
-          : this.circleColors.lightColors[this.circleColors.darkColors.indexOf(circle.color)]
-
-          if ( !newCircleColor ) return false
-          else circle.color = newCircleColor
+        darkModeStore.isDark
+          ? this.circleColors.darkColors[this.circleColors.lightColors.indexOf(circle.c)]
+          : this.circleColors.lightColors[this.circleColors.darkColors.indexOf(circle.c)]
+        if ( !newCircleColor ) return false
+        else circle.c = newCircleColor
       })
     }
   }

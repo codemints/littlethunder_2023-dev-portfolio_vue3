@@ -13,10 +13,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
-import { useDarkModeStore } from '@store/darkmode.js'
 import { useColorScheme } from '@compose/colorscheme.js'
 
 import Floaters from '@component/page/Floaters.vue'
@@ -31,11 +30,9 @@ import Footer from '@component/footer/Footer.vue'
 
 const headerStore = useHeaderStore()
 const navStore = useNavStore()
-const darkModeStore = useDarkModeStore()
 const headerRef = ref(null)
 const contentRef = ref(null)
-const isDark = ref(darkModeStore.isDark)
-const { setColorScheme, mountDarkModeListener, unmountDarkModeListener } = useColorScheme()
+const { setColorScheme } = useColorScheme()
 
 const calculateHeights = () => {
   const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
@@ -92,16 +89,11 @@ const convertHeightToVh = computed(() => {
 
 onMounted(() => {
   setColorScheme()
-  mountDarkModeListener()
   const rootEl = document.documentElement
   setCSSProperties(rootEl)
   setHeaderState()
   getSectionTops()
   navStore.sections = contentRef.value.children
-})
-
-onUnmounted(() => {
-  unmountDarkModeListener()
 })
 </script>
 

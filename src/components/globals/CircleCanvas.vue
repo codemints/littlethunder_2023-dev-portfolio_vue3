@@ -48,6 +48,10 @@ watch(() => headerStore.isCollapsed, (val) => {
   }
 })
 
+watch(() => darkModeStore.isDark, (val) => {
+  circleStore.updateCircleColor()
+})
+
 onMounted(() => {
 
 })

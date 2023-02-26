@@ -23,7 +23,6 @@
 <script setup>
 import { themeColors as Colors } from '../../composables/colors.js'
 import { useDarkModeStore } from '@store/darkmode.js'
-import { useColorScheme } from '@compose/colorscheme.js'
 
 const darkModeStore = useDarkModeStore()
 
