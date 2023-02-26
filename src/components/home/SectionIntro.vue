@@ -80,6 +80,7 @@ const getHeadingChars = computed(() => {
 onMounted(() => {
   controlsStore.titleWrapperHeight = introWrapperRef.value.clientHeight
   document.documentElement.style.setProperty(`--title-wrapper-height`, `${controlsStore.titleWrapperHeight}px`)
+  controlsStore.titleWrapperNode = introWrapperRef.value
   const animateElements = [
     introTitleRef.value,
     getHeadingChars.value,
@@ -112,7 +113,7 @@ onMounted(() => {
   .intro-title {
     max-height: var(--title-wrapper-height);
     margin-top: 15rem;
-    overflow: hidden;
+    overflow: visible;
     opacity: 0;
     transition: max-height 0.2s ease-in-out;
 

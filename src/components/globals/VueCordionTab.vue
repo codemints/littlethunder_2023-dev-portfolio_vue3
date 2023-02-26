@@ -65,7 +65,7 @@ watch(() => props.data.isOpen, (cur, prev) => {
 
     &.tab-active {
       .vuecordion-body {
-        max-height: 100vh;
+        max-height: 50vh;
         opacity: 1;
         margin-bottom: 3.2rem;
         transition: all 0.2s linear;

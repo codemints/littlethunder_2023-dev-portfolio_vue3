@@ -6,6 +6,7 @@ export const useControlsStore = defineStore('controls', {
       panelOpen: false,
       titleHidden: false,
       titleWrapperHeight: null,
+      titleWrapperNode: null
     }
   },
   actions: {

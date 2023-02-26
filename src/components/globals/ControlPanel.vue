@@ -97,6 +97,10 @@ watch(() => headerStore.isCollapsed, (val) => {
   }
 })
 
+watch(() => controlsStore.titleHidden, (val) => {
+  controlsStore.titleWrapperNode.style.overflow = 'hidden'
+})
+
 onMounted(() => {
   panelBodyWidth.value = panelBodyRef.value.clientWidth
   panelBodyRef.value.classList.add('is-closed')
