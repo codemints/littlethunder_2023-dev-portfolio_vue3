@@ -1,9 +1,0 @@
-@use 'sass:color';
-@use '@style/abstracts' as *;
-
-:root {
-  @each $name, $value in $colors {
-    --#{$name}: #{$value};
-  }
-}
-
