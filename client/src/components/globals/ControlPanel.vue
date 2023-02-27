@@ -14,28 +14,34 @@
         <div class="content-controls">
           <button
             @click="controlsStore.toggleTitleHidden"
-            class="bg-clr-orange hover:-translate-y-1 hover:brightness-105"
+            class="bg-clr-orange hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >toggleTitle()</button>
           <button
-            @click=""
-            class="bg-clr-200 dark:bg-clr-400 hover:-translate-y-1 hover:brightness-105"
+            @click="changeVelocity"
+            data-function="increase"
+            class="bg-clr-200 dark:bg-clr-200 hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >velocity(increase)</button>
           <button
-            @click=""
-            class="bg-clr-400 dark:bg-clr-800 hover:-translate-y-1 hover:brightness-105"
+            @click="changeVelocity"
+            data-function="decrease"
+            class="bg-clr-400 dark:bg-clr-400 hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >velocity(decrease)</button>
           <button
-            @click=""
-            class="bg-clr-blue hover:-translate-y-1 hover:brightness-105"
+            @click="scatterCircles"
+            class="bg-clr-600 dark:bg-clr-800 hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
+          >scatter()</button>
+          <button
+            @click="handleClear"
+            class="bg-clr-blue hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >canvas.clear()</button>
           <button
-            @click=""
-            class="bg-clr-blue hover:-translate-y-1 hover:brightness-105"
+            @click="handleSuspend"
+            class="bg-clr-blue hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >canvase.stop()</button>
           <button
-            @click=""
-            class="bg-clr-blue hover:-translate-y-1 hover:brightness-105"
-          >canvase.redraw()</button>
+            @click="handleRedraw"
+            class="bg-clr-blue hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
+          >canvas.redraw()</button>
         </div>
       </div>
     </div>
@@ -57,34 +63,40 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useControlsStore } from '@store/controls.js'
-
-const props = defineProps({
-  changeVelocity: {
-    type: Function,
-    required: true,
-  },
-  clearCanvas: {
-    type: Function,
-    required: true,
-  },
-  toggleSuspend: {
-    type: Function,
-    required: true,
-  },
-  redrawCanvas: {
-    type: Function,
-    required: true,
-  },
-})
+import { useCirclesStore } from '@store/circles.js'
 
 const headerStore = useHeaderStore()
 const controlsStore = useControlsStore()
+const circlesStore = useCirclesStore()
+const {
+  changeVelocity,
+  clearCanvas,
+  toggleSuspend,
+  redrawCanvas,
+  scatterCircles
+} = circlesStore
 const controlPanelRef = ref(null)
 const panelBodyRef = ref(null)
 const panelBodyWidth = ref(0)
+const suspend = ref(false)
+
+const handleClear = () => {
+  clearCanvas()
+  if ( suspend.value === true ) suspend.value = false
+}
+
+const handleSuspend = () => {
+  suspend.value = !suspend.value
+  toggleSuspend(suspend.value)
+}
+
+const handleRedraw = () => {
+  redrawCanvas()
+  if ( suspend.value === true ) suspend.value = false
+}
 
 watch(() => headerStore.isCollapsed, (val) => {
   const panel = controlPanelRef.value

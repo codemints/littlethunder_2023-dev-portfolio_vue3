@@ -65,14 +65,14 @@ const handleResize = () => {
   headerStore.isCollapsed = !headerStore.isCollapsed
 }
 
-const setShuttlePosition = (offset = 0) => {
+const setShuttlePosition = () => {
   const shuttle = navShuttleRef.value
   navStore.navItems.forEach((item, index) => {
     const el = navStore.links[index]
     const position = el.getBoundingClientRect().left
     const width = el.getBoundingClientRect().width
     if (item.isActive) {
-      shuttle.style.left = `${position - offset}px`
+      shuttle.style.left = `${position}px`
       shuttle.style.width = `${width}px`
     }
   })
@@ -131,9 +131,12 @@ const scrollSpy = () => {
 
 onMounted(() => {
   navStore.links = Array.from(navLinksRef.value.children)
+  navStore.links[0].firstElementChild.style.color = '#9EA7B3'
   window.addEventListener('scroll', scrollSpy)
-  const scrollBarOffset = window.innerWidth - document.documentElement.clientWidth
-  setShuttlePosition(scrollBarOffset)
+  window.addEventListener('load', () => {
+    setShuttlePosition()
+    navStore.links[0].firstElementChild.style.color = ''
+  })
 })
 
 onUnmounted(() => {
@@ -160,8 +163,10 @@ onUnmounted(() => {
     left: 0;
     width:5rem;
     height: 100%;
+    opacity: 0;
 
     &.is-positioned {
+      opacity: 1;
       transition: left 0.3s cubic-bezier(.89,-0.48,.59,1.5);
     }
   }

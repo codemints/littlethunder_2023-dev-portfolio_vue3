@@ -5,13 +5,7 @@
     ref="canvasRef"
     class="bg-white dark:bg-clr-800"
   ></canvas>
-  <ControlPanel
-    :changeVelocity="changeVelocity"
-    :clearCanvas="clearCanvas"
-    :toggleSuspend="toggleSuspend"
-    :redrawCanvas="redrawCanvas"
-  >
-  </ControlPanel>
+  <ControlPanel />
 
 </template>
 
@@ -36,10 +30,6 @@ const {
   drawToCanvas,
   updateCircleColor,
   spawnNewCircle,
-  changeVelocity,
-  clearCanvas,
-  toggleSuspend,
-  redrawCanvas
 } = circleStore
 const controlsStore = useControlsStore()
 
@@ -64,13 +54,13 @@ watch(() => headerStore.headerVhMax, (val) => {
   drawToCanvas()
 })
 
-watch(() => isCollapsed, (val) => {
-  if ( val ) {
+watch(() => headerStore.isCollapsed, (val) => {
+  if ( val === true ) {
     canvasRef.value.height = window.innerHeight - (window.innerHeight * headerVhMin / 100)
-    canvasRef.value.style.top = `${headerVhMin}vh`
+    canvasRef.value.style.top = `${headerStore.headerVhMin}vh`
   } else {
     canvasRef.value.height = window.innerHeight - (window.innerHeight * headerVhMax / 100)
-    canvasRef.value.style.top = `${headerVhMax}vh`
+    canvasRef.value.style.top = `${headerStore.headerVhMax}vh`
   }
 })
 
@@ -86,6 +76,7 @@ onMounted(() => {
 @use '@style/abstracts/variables' as *;
 
 canvas {
+  background-color: pink;
   position: absolute;
   left: 0;
   z-index: -1;

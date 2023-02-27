@@ -113,7 +113,7 @@ export const useCirclesStore = defineStore('circles', {
         const color = this.getRandomColor(this.circleColors.seedColors)
         circles.push(new Circle(
           x, y, rad, color,
-          this.circleData.initialVelocity,
+          this.circleData.currentVelocity,
           this.circleData.ctx,
           this.circleData.canvas
           ))
@@ -136,48 +136,60 @@ export const useCirclesStore = defineStore('circles', {
       const color = this.getRandomColor(this.circleColors.clickColors)
       this.circleData.circleArray.push(new Circle(
         x, y, rad, color,
-        this.circleData.initialVelocity,
+        this.circleData.currentVelocity,
         this.circleData.ctx,
         this.circleData.canvas
         ))
     },
 
     changeVelocity(e) {
-      if (e.target.dataset.function === 'increase') {
-        this.circleData.currentVelocity += 0.375
-      } else if (e.target.id === 'decrease') {
-        this.circleData.currentVelocity -= 0.375
-      }
-      this.circleData.circleArray.forEach((circle) => {
+      e.target.dataset.function === 'increase'
+      ? this.circleData.currentVelocity += 0.375
+      : this.circleData.currentVelocity -= 0.375
+
+      this.circleData.circleArray.forEach(circle => {
         if (e.target.dataset.function === 'increase') {
-          circle.dx += 1.25
-          circle.dy += 1.25
-        } else if (e.target.id === 'decrease') {
-          circle.dx -= 1.25
-          circle.dy -= 1.25
+          circle.dx *= 1.25
+          circle.dy *= 1.25
+        } else if (e.target.dataset.function === 'decrease') {
+          circle.dx *= 0.75
+          circle.dy *= 0.75
         }
+      })
+    },
+
+    scatterCircles() {
+      this.circleData.circleArray.forEach(circle => {
+        const num = this.getRandomNumber(-1.25, 3)
+        circle.dx += num
+        circle.dy -= num
       })
     },
 
     clearCanvas() {
       this.circleData.suspended = true
-      this.circleData.stopped = true
+      this.circleData.stopped = false
 
       cancelAnimationFrame(this.circleData.animationFrame)
+
       this.circleData.ctx.clearRect(0, 0, this.circleData.canvas.width, this.circleData.canvas.height)
+      
       this.circleData.currentVelocity = this.circleData.initialVelocity
+
       this.circleData.circleArray = this.populateCirclesArray(
         this.circleData.minCirclePopulation,
         this.circleData.maxCirclePopulation,
         this.circleData.minCircleSize,
         this.circleData.maxCircleSize
       )
+      
       this.circleData.previousFunction = 'clear'
     },
 
     toggleSuspend(state) {
       if ( this.circleData.previousFunction === 'clear' ) return false
       if ( state ) {
+        console.log(state)
         cancelAnimationFrame(this.circleData.animationFrame)
         this.circleData.suspended = true
         this.circleData.stopped = true
