@@ -9,7 +9,7 @@
       <div class="control-panel--content-inner">
         <div class="content-body text-center">
           <h4 class="text-clr-400 dark:text-white">Canvas Controls</h4>
-          <p class="text-clr-400 dark:text-clr-200">use these controls to control the circles. Stop movement, clear the canvas, redraw the canvas, and hide the intro title text. click around and have some fun!</p>
+          <p class="text-clr-400 dark:text-clr-200">manipulate the canvas animation. click around. have some fun.</p>
         </div>
         <div class="content-controls">
           <button
@@ -141,15 +141,18 @@ onMounted(() => {
   &--content {
     display: flex;
     max-width: 30rem;
-    overflow: visible;
+    overflow: hidden;
     align-items: center;
     height: 100%;
     box-shadow: 0.3rem 0 0.5rem rgba(0, 0, 0, 0.3);
-    transition: all 0.15s linear;
+    transition: max-width 0.15s linear;
 
     &.is-closed {
       max-width: 0;
-      overflow: hidden;
+
+      .control-panel--content-inner {
+        opacity: 0;
+      }
     }
 
     &-inner {

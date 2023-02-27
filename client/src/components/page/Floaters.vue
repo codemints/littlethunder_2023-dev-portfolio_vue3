@@ -66,7 +66,7 @@ const handleScroll = () => {
   const start = documentHeight - (scrollPosition + windowHeight)
 
   if (scrollPosition + windowHeight >= documentHeight - footer.offsetHeight) {
-    floaterNavRef.value.style.bottom = `${375 - start}px`
+    floaterNavRef.value.style.bottom = `${400 - start}px`
   } else {
     floaterNavRef.value.style.bottom = '5rem'
   }

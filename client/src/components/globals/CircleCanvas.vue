@@ -76,7 +76,6 @@ onMounted(() => {
 @use '@style/abstracts/variables' as *;
 
 canvas {
-  background-color: pink;
   position: absolute;
   left: 0;
   z-index: -1;
