@@ -1,0 +1,60 @@
+@use '@style/abstracts/variables' as *;
+
+@font-face {
+  font-family: 'Fieldwork Black';
+  src: url('@font/fieldwork-black.woff2') format('woff2'),
+  url('@font/fieldwork-black.woff') format('woff');
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: 'Fieldwork Bold';
+  src: url('@font/fieldwork-bold.woff2') format('woff2'),
+  url('@font/fieldwork-bold.woff') format('woff');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: 'Jetbrains Mono';
+  src: url('@font/jetbrainsmono-regular.woff2') format('woff2'),
+  url('@font/jetbrainsmono-regular.woff') format('woff');
+  font-weight: 400;
+}
+
+@for $i from 2 through 6 {
+  h#{$i} {
+    font-family: $heading;
+  }
+}
+
+@for $i from 2 through 4 {
+  h#{$i} {
+    font-size: $start-font-size - (0.33 * ($i - 2)) * $start-font-size;
+  }
+}
+
+@for $i from 5 through 6 {
+  h#{$i} {
+    font-size: 1.2rem - (($i - 5) * 0.2rem);
+  }
+}
+
+h1 {
+  font-family: $title;
+  font-size: 96px;
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+p,
+li,
+a,
+blockquote {
+  font-family: $body;
+}
+
+p, a {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
