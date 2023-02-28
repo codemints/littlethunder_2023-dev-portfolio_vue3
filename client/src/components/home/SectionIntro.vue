@@ -65,10 +65,6 @@ const introHeadingRef = ref(null)
 const introSubTitleRef = ref(null)
 const introButtonRef = ref(null)
 
-const scrollTo = () => {
-  console.log('I have been clicked')
-}
-
 const getHeadingChars = computed(() => {
   return Array.from(introHeadingRef.value.children)
   .reduce((acc, curr, index) => {
