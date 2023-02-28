@@ -59,7 +59,8 @@ watch(() => headerStore.isCollapsed, (val) => {
     canvasRef.value.height = window.innerHeight - (window.innerHeight * headerVhMin / 100)
     canvasRef.value.style.top = `${headerStore.headerVhMin}vh`
   } else {
-    canvasRef.value.height = window.innerHeight - (window.innerHeight * headerVhMax / 100)
+    console.log('expanded')
+    canvasRef.value.height = window.innerHeight - (window.innerHeight * headerStore.headerVhMax / 100)
     canvasRef.value.style.top = `${headerStore.headerVhMax}vh`
   }
 })
