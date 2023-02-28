@@ -38,12 +38,24 @@
     </nav>
 
     <div class="nav-content__button">
-      <a
+      <Button
+        ref="contactButtonRef"
+        @buttonClicked=""
         :href="resumeUrl"
-        class="button bg-clr-blue text-white hover:bg-clr-600"
-        data-button="alt"
-        download
-      >resumé</a>
+        download="dLittleThunder_resume.pdf"
+        id="resume__button"
+        text="resumé"
+        hovText="resumé"
+        :classNames="[ 'bg-clr-blue', 'hover:bg-clr-600', 'text-white', 'hover:text-white', 'font-hf', 'uppercase']"
+        :cssProps="{
+          fontSize: '1.5rem',
+          letterSpacing: '0.1rem',
+          paddingInline: '1.2rem',
+          paddingBlock: '0.6rem',
+          transition: 'all 0.2s ease-in-out',
+        }"
+        borderColor="clrBlue"
+      />
     </div>
   </div>
 </template>
@@ -52,6 +64,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useNavStore } from '@store/navigation.js'
 import { useHeaderStore } from '@store/header.js'
+import Button from '@component/globals/Button.vue'
 
 const navStore = useNavStore()
 const headerStore = useHeaderStore()

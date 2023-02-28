@@ -31,15 +31,18 @@
       </h3>
       <Button
         ref="introButtonRef"
-        :onClick="scrollTo"
-        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600']"
-        :cssProps="{
-          'font-size': '1.5rem',
-          'width': '30rem',
-        }"
+        @buttonClicked=""
+        href="#section__contact"
         id="hero__button"
         text="Let's Work Together"
         hovText="Contact Me Today"
+        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600', 'font-hf', 'uppercase']"
+        :cssProps="{
+          fontSize: '1.5rem',
+          letterSpacing: '0.1rem',
+          width: '30rem',
+        }"
+        borderColor="clrOrange"
       />
     </div>
     <CircleCanvas />
