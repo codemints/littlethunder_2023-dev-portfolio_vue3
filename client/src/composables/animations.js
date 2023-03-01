@@ -1,4 +1,3 @@
-import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 
 export const useAnimateChars = (payload, animationClassNames) => {

@@ -72,6 +72,7 @@ const setHeaderState = () => {
 const getSectionTops = () => {
   const sections = Array.from(contentRef.value.children)
   const sectionTops = sections.map(section => section.offsetTop)
+  console.log(sectionTops)
   
   sectionTops.forEach((top, index) => {
     navStore.navItems[index].top = top
@@ -94,12 +95,14 @@ const convertHeightToVh = computed(() => {
 })
 
 onMounted(() => {
-  setColorScheme()
-  const rootEl = document.documentElement
-  setCSSProperties(rootEl)
-  setHeaderState()
-  getSectionTops()
-  navStore.sections = contentRef.value.children
+  window.addEventListener('load', () => {
+    setColorScheme()
+    const rootEl = document.documentElement
+    setCSSProperties(rootEl)
+    setHeaderState()
+    getSectionTops()
+    navStore.sections = contentRef.value.children
+  })
 })
 </script>
 

@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useNavStore } from '@store/navigation.js'
 import { useHeaderStore } from '@store/header.js'
 import Button from '@component/globals/Button.vue'
@@ -143,10 +143,10 @@ const scrollSpy = () => {
 }
 
 onMounted(() => {
-  navStore.links = Array.from(navLinksRef.value.children)
-  navStore.links[0].firstElementChild.style.color = '#9EA7B3'
-  window.addEventListener('scroll', scrollSpy)
   window.addEventListener('load', () => {
+    navStore.links = Array.from(navLinksRef.value.children)
+    navStore.links[0].firstElementChild.style.color = '#9EA7B3'
+    window.addEventListener('scroll', scrollSpy)
     setShuttlePosition()
     navStore.links[0].firstElementChild.style.color = ''
   })

@@ -50,7 +50,7 @@ watch(() => props.toastData.show, (newVal) => {
   $width: 45rem;
   $height: 15rem;
 
-  position: absolute;
+  position: fixed;
   top: calc(100vh / 2 - ($height / 2));
   left: calc(100vw / 2 - ($width / 2));
 

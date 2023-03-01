@@ -28,10 +28,14 @@
       <p>page.scroll(next)</p>
     </div>
   </div>
+  <Teleport to="body">
+    <Toast :toastData="toastData" />
+  </Teleport>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
+import Toast from '@component/globals/Toast.vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
 const headerStore = useHeaderStore()
@@ -39,6 +43,10 @@ const navStore = useNavStore()
 
 const emailLinkRef = ref(null)
 const floaterNavRef = ref(null)
+const toastData = reactive({
+  message: '',
+  show: false
+})
 
 const getEmailLinkWidth = computed(() => {
   return emailLinkRef.value.offsetWidth
@@ -46,14 +54,25 @@ const getEmailLinkWidth = computed(() => {
 
 const handleNavigation = (e) => {
   if ( e.currentTarget.classList.contains('page-prev') ) {
-    if ( navStore.prevSection < 0 || navStore.prevSection === null ) return
+    if ( navStore.prevSection < 0 || navStore.prevSection === null ) {
+      toastData.message = 'You are at the top of the page. There are no more sections above this one.'
+      toastData.show = true
+      return false
+    }
     const top = navStore.navItems[navStore.prevSection].top
     window.scrollTo(0, top)
+    return true
   }
   if ( e.currentTarget.classList.contains('page-next') ) {
-    if ( navStore.nextSection > navStore.navItems.length - 1 ) return
+    if ( navStore.nextSection > navStore.navItems.length - 1 ) {
+      toastData.message = 'You are at the bottom of the page. There are no more sections below this one.'
+      toastData.show = true
+      return false
+    }
     const top = navStore.navItems[navStore.nextSection].top
     window.scrollTo(0, top)
+
+    return true
   }
 }
 

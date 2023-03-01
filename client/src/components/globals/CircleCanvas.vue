@@ -19,11 +19,6 @@ import ControlPanel from '@component/globals/ControlPanel.vue'
 
 const circleStore = useCirclesStore()
 const headerStore = useHeaderStore()
-const {
-  isCollapsed,
-  headerVhMax,
-  headerVhMin
-} = headerStore
 const darkModeStore = useDarkModeStore()
 const {
   setCircleData,
@@ -48,7 +43,7 @@ watch(() => headerStore.headerVhMax, (val) => {
     minCirclePopulation: 8,
     maxCirclePopulation: 12,
     initialVelocity: 0.125,
-    offset: headerVhMax,
+    offset: headerStore.headerVhMax,
   })
 
   drawToCanvas()
@@ -59,7 +54,6 @@ watch(() => headerStore.isCollapsed, (val) => {
     canvasRef.value.height = window.innerHeight - (window.innerHeight * headerStore.headerVhMin / 100)
     canvasRef.value.style.top = `${headerStore.headerVhMin}vh`
   } else {
-    console.log('expanded')
     canvasRef.value.height = window.innerHeight - (window.innerHeight * headerStore.headerVhMax / 100)
     canvasRef.value.style.top = `${headerStore.headerVhMax}vh`
   }
