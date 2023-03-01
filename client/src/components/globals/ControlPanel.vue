@@ -27,7 +27,7 @@
             class="bg-clr-400 dark:bg-clr-400 hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >velocity(decrease)</button>
           <button
-            @click="scatterCircles"
+            @click="scatterCanvas"
             class="bg-clr-600 dark:bg-clr-800 hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >scatter()</button>
           <button
@@ -35,9 +35,9 @@
             class="bg-clr-blue hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
           >canvas.clear()</button>
           <button
-            @click="handleSuspend"
+            @click="handleStop"
             class="bg-clr-blue hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
-          >canvase.stop()</button>
+          >canvas.stop()</button>
           <button
             @click="handleRedraw"
             class="bg-clr-blue hover:-translate-y-1 hover:brightness-105 active:translate-y-0 active:brightness-90"
@@ -78,37 +78,52 @@ const controlsStore = useControlsStore()
 const circlesStore = useCirclesStore()
 const {
   changeVelocity,
+  scatterCanvas,
   clearCanvas,
-  toggleSuspend,
+  stopCanvas,
   redrawCanvas,
-  scatterCircles
 } = circlesStore
 const controlPanelRef = ref(null)
 const panelBodyRef = ref(null)
 const panelBodyWidth = ref(0)
-const suspend = ref(false)
+const isStopped = ref(false)
 const toastData = reactive({
   message: 'Some string of text',
   show: false,
 })
 
 const handleClear = () => {
-  clearCanvas()
-  if ( suspend.value === true ) suspend.value = false
+  const isCleared = clearCanvas()
+
+  if ( !isCleared ) {
+    toastData.message = 'The canvas has already been cleared. Click the "canvas.redraw()" button to redraw the canvas.'
+    toastData.show = true
+    return
+  }
+
+  isStopped.value = false
 }
 
-const handleSuspend = () => {
-  suspend.value = !suspend.value
-  toggleSuspend(suspend.value)
+const handleStop = () => {
+  const isCleared = stopCanvas(isStopped.value)
+
+  if ( isCleared ) {
+    toastData.message = 'The canvas must be redrawn before the animation can be stopped. Click the "canvas.redraw()" button to redraw the canvas.'
+    toastData.show = true
+    return
+  }
+
+  isStopped.value = !isStopped.value
 }
 
 const handleRedraw = () => {
-  const redraw = redrawCanvas()
-  if ( !redraw ) {
+  const isCleared = redrawCanvas()
+  if ( !isCleared ) {
     toastData.message = 'The canvas must be cleared before it can be redrawn. Click the "canvas.clear()" button to clear the canvas.'
     toastData.show = true
+    return
   }
-  if ( suspend.value === true ) suspend.value = false
+  isStopped.value = false
 }
 
 watch(() => headerStore.isCollapsed, (val) => {

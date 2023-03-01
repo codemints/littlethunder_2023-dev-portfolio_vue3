@@ -69,9 +69,8 @@ export const useCirclesStore = defineStore('circles', {
         animationFrame: -1,
         offset: null,
         circleArray: [],
-        suspended: undefined,
-        stopped: undefined,
-        previousFunction:undefined,
+        isStopped: false,
+        isCleared: false,
       }
     }
   },
@@ -102,7 +101,6 @@ export const useCirclesStore = defineStore('circles', {
         this.circleData.maxCircleSize
         )
     },
-
     populateCirclesArray(minQuantity, maxQuantity, minSize, maxSize) {
       const population = this.getRandomNumber(minQuantity, maxQuantity)
 
@@ -120,7 +118,6 @@ export const useCirclesStore = defineStore('circles', {
         return circles
       }, [])
     },
-
     drawToCanvas() {
       this.circleData.ctx.clearRect(0, 0, this.circleData.canvas.width, this.circleData.canvas.height)
       this.circleData.circleArray.forEach((circle) => {
@@ -128,7 +125,6 @@ export const useCirclesStore = defineStore('circles', {
       })
       this.circleData.animationFrame = requestAnimationFrame(this.drawToCanvas)
     },
-
     spawnNewCircle(e) {
       const x = e.offsetX
       const y = (e.offsetY - this.circleData.offset) + window.scrollY
@@ -141,7 +137,6 @@ export const useCirclesStore = defineStore('circles', {
         this.circleData.canvas
         ))
     },
-
     changeVelocity(e) {
       e.target.dataset.function === 'increase'
       ? this.circleData.currentVelocity += 0.375
@@ -157,8 +152,7 @@ export const useCirclesStore = defineStore('circles', {
         }
       })
     },
-
-    scatterCircles() {
+    scatterCanvas() {
       this.circleData.circleArray.forEach((circle, index, array) => {
         circle.dx *= 0.25
         circle.dy *= 0.25
@@ -175,48 +169,43 @@ export const useCirclesStore = defineStore('circles', {
       })
 
     },
-
     clearCanvas() {
-      this.circleData.suspended = true
-      this.circleData.stopped = false
+      if ( this.circleData.isCleared ) return false
 
       cancelAnimationFrame(this.circleData.animationFrame)
-
+      
       this.circleData.ctx.clearRect(0, 0, this.circleData.canvas.width, this.circleData.canvas.height)
       
       this.circleData.currentVelocity = this.circleData.initialVelocity
-
+      
       this.circleData.circleArray = this.populateCirclesArray(
         this.circleData.minCirclePopulation,
         this.circleData.maxCirclePopulation,
         this.circleData.minCircleSize,
         this.circleData.maxCircleSize
       )
-      
-      this.circleData.previousFunction = 'clear'
+        
+      this.circleData.isStopped = false
+      this.circleData.isCleared = true
+
+      return true
     },
 
-    toggleSuspend(state) {
-      if ( this.circleData.previousFunction === 'clear' ) return false
+    stopCanvas(state) {
+      if ( this.circleData.isCleared ) return true
+
       if ( state ) {
-        console.log(state)
-        cancelAnimationFrame(this.circleData.animationFrame)
-        this.circleData.suspended = true
-        this.circleData.stopped = true
-        this.circleData.previousFunction = 'toggle'
-      } else {
         requestAnimationFrame(this.drawToCanvas)
-        this.circleData.suspended = false
-        this.circleData.previousFunction = 'toggle'
+        this.circleData.isStopped = false
+      } else {
+        cancelAnimationFrame(this.circleData.animationFrame)
+        this.circleData.isStopped = true
       }
     },
 
     redrawCanvas() {
-      if (
-        this.circleData.suspended === false ||
-        this.circleData.suspended === undefined ||
-        this.circleData.stopped === true
-      ) return false
+      console.log(this.circleData.isCleared)
+      if ( !this.circleData.isCleared ) return false
 
       this.circleData.circleArray = this.populateCirclesArray(
         this.circleData.minCirclePopulation,
@@ -229,8 +218,11 @@ export const useCirclesStore = defineStore('circles', {
       this.updateCircleVelocity()
 
       this.circleData.animationFrame = requestAnimationFrame(this.drawToCanvas)
-      this.circleData.suspended = false
-      this.circleData.previousFunction = 'redraw'
+
+      this.circleData.isStopped = false
+      this.circleData.isCleared = false
+
+      return true
     },
 
     updateCircleVelocity() {
