@@ -126,6 +126,7 @@ export const useCirclesStore = defineStore('circles', {
       this.circleData.animationFrame = requestAnimationFrame(this.drawToCanvas)
     },
     spawnNewCircle(e) {
+      if ( this.circleData.isStopped || this.circleData.isCleared ) return
       const x = e.offsetX
       const y = (e.offsetY - this.circleData.offset) + window.scrollY
       const rad = this.getRandomNumber(this.circleData.minCircleSize, this.circleData.maxCircleSize)
@@ -138,6 +139,7 @@ export const useCirclesStore = defineStore('circles', {
         ))
     },
     changeVelocity(e) {
+      if ( this.circleData.isStopped || this.circleData.isCleared ) return
       e.target.dataset.function === 'increase'
       ? this.circleData.currentVelocity += 0.375
       : this.circleData.currentVelocity -= 0.375
@@ -153,6 +155,7 @@ export const useCirclesStore = defineStore('circles', {
       })
     },
     scatterCanvas() {
+      if ( this.circleData.isStopped || this.circleData.isCleared ) return
       this.circleData.circleArray.forEach((circle, index, array) => {
         circle.dx *= 0.25
         circle.dy *= 0.25
