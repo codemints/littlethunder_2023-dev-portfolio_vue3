@@ -55,7 +55,7 @@ const getEmailLinkWidth = computed(() => {
 const handleNavigation = (e) => {
   if ( e.currentTarget.classList.contains('page-prev') ) {
     if ( navStore.prevSection < 0 || navStore.prevSection === null ) {
-      toastData.message = 'You are at the top of the page. There are no more sections above this one.'
+      toastData.message = 'You are at the top of the page. There are no sections above this one.'
       toastData.show = true
       return false
     }
@@ -65,7 +65,7 @@ const handleNavigation = (e) => {
   }
   if ( e.currentTarget.classList.contains('page-next') ) {
     if ( navStore.nextSection > navStore.navItems.length - 1 ) {
-      toastData.message = 'You are at the bottom of the page. There are no more sections below this one.'
+      toastData.message = 'You\'ve reached the bottom of the page. The only thing left is the footer.'
       toastData.show = true
       return false
     }

@@ -40,8 +40,8 @@ watch(() => headerStore.headerVhMax, (val) => {
     ctx: canvasRef.value.getContext('2d'),
     minCircleSize: 10,
     maxCircleSize: 120,
-    minCirclePopulation: 8,
-    maxCirclePopulation: 12,
+    minCirclePopulation: 9,
+    maxCirclePopulation: 14,
     initialVelocity: 0.125,
     offset: headerStore.headerVhMax,
   })

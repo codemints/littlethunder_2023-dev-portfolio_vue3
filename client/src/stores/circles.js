@@ -11,9 +11,9 @@ class Circle {
     this.r = r
     this.c = c
     this.dx = (Math.random() * velocity) + 1
-    this.dx *= Math.floor(Math.random() * 2) === 1 ? 1 : -1
+    this.dx *= Math.floor(Math.random() * 2) === 1 ? 0.4 : -0.4
     this.dy = (Math.random() * velocity) + 1
-    this.dy *= Math.floor(Math.random() * 2) === 1 ? 1 : -1
+    this.dy *= Math.floor(Math.random() * 2) === 1 ? 0.4 : -0.4
     this.ctx = ctx
     this.canvas = canvas
   }
@@ -23,10 +23,10 @@ class Circle {
     this.ctx.fillStyle = this.c
     this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false)
     this.ctx.fill()
-    this.ctx.shadowOffsetX = 3
-    this.ctx.shadowOffsetY = 3
+    this.ctx.shadowOffsetX = 2
+    this.ctx.shadowOffsetY = 2
     this.ctx.shadowColor = 'rgba(0, 0, 0, 0.075)'
-    this.ctx.shadowBlur = 15
+    this.ctx.shadowBlur = 5
   }
 
   animateCircle() {
