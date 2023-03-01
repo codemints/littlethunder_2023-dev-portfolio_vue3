@@ -1,9 +1,4 @@
 <template>
-  <div class="measurements">
-    <h4 class="font-body text-clr-blue" style="font-size: 1.2rem">Window size: x:{{ win.x }}, y:{{ win.y }}</h4>
-    <h4 class="font-body text-clr-blue" style="font-size: 1.2rem">Mouse position: x:{{ mouse.x }}, y:{{ mouse.y }}</h4>
-    <h4 class="font-body text-clr-blue" style="font-size: 1.2rem">Color scheme: {{ useLocalStorage('colorScheme').storedValue }}</h4>
-  </div>
   <Floaters />
   <Header ref="headerRef" />
   <main ref="contentRef" class="page-content bg-white dark:bg-clr-800">
@@ -19,13 +14,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
 import { useColorScheme } from '@compose/colorscheme.js'
-import { useWindow } from '@compose/window.js'
-import { useMouse } from '@compose/mouse.js'
 import { useLocalStorage } from '@compose/storage.js'
+import { useDarkModeStore } from '@store/darkmode.js'
 
 import Floaters from '@component/page/Floaters.vue'
 import Header from '@component/header/Header.vue'
@@ -40,12 +34,11 @@ import Cursor from '@component/globals/Cursor.vue'
 
 const headerStore = useHeaderStore()
 const navStore = useNavStore()
-const win = useWindow()
-const mouse = useMouse()
-const storage = useLocalStorage('colorScheme')
 const headerRef = ref(null)
 const contentRef = ref(null)
 const { setColorScheme } = useColorScheme()
+
+const darkModeStore = useDarkModeStore()
 
 const calculateHeights = () => {
   const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight

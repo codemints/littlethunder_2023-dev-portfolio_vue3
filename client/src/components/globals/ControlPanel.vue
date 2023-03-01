@@ -59,11 +59,16 @@
         class="fa-sharp fa-solid fa-arrows-to-line"
       ></i>
     </div>
+
+    <Teleport to="body">
+      <Toast :toastData="toastData" />
+    </Teleport>
   </aside>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
+import Toast from '@component/globals/Toast.vue'
 import { useHeaderStore } from '@store/header.js'
 import { useControlsStore } from '@store/controls.js'
 import { useCirclesStore } from '@store/circles.js'
@@ -82,6 +87,10 @@ const controlPanelRef = ref(null)
 const panelBodyRef = ref(null)
 const panelBodyWidth = ref(0)
 const suspend = ref(false)
+const toastData = reactive({
+  message: 'Some string of text',
+  show: false,
+})
 
 const handleClear = () => {
   clearCanvas()
@@ -94,7 +103,11 @@ const handleSuspend = () => {
 }
 
 const handleRedraw = () => {
-  redrawCanvas()
+  const redraw = redrawCanvas()
+  if ( !redraw ) {
+    toastData.message = 'The canvas must be cleared before it can be redrawn. Click the "canvas.clear()" button to clear the canvas.'
+    toastData.show = true
+  }
   if ( suspend.value === true ) suspend.value = false
 }
 

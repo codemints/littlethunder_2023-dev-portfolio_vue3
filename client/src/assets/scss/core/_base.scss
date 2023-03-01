@@ -12,6 +12,9 @@ html {
 
   body {
     background-color: white;
+    &.toast--active {
+      overflow: hidden;
+    }
   }
 }
 body {

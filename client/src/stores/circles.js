@@ -77,7 +77,7 @@ export const useCirclesStore = defineStore('circles', {
   },
   actions: {
     getRandomNumber(min, max) {
-      return Math.floor(Math.random() * max) + min
+      return Math.floor(Math.random() * (max - min + 1) + min)
     },
     setRandomPostion(lengthOrWidth, r) {
       return Math.random() * (this.circleData.canvas[lengthOrWidth] - r * 2) + r
@@ -159,11 +159,21 @@ export const useCirclesStore = defineStore('circles', {
     },
 
     scatterCircles() {
-      this.circleData.circleArray.forEach(circle => {
-        const num = this.getRandomNumber(-1.25, 3)
-        circle.dx += num
-        circle.dy -= num
+      this.circleData.circleArray.forEach((circle, index, array) => {
+        circle.dx *= 0.25
+        circle.dy *= 0.25
+        const direction = this.getRandomNumber(-25,25)
+        const dxOperator = Math.random() < 0.5 ? -1 : 1
+        const dyOperator = Math.random() < 0.5 ? -1 : 1
+
+        dxOperator > 0
+          ? circle.dx += direction
+          : circle.dx -= direction
+        dyOperator < 0
+          ? circle.dy -= direction
+          : circle.dy += direction
       })
+
     },
 
     clearCanvas() {
