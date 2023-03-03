@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@glidejs/glide": "^3.6.0",
+    "@egjs/vue3-flicking": "^4.10.6",
     "@googlemaps/js-api-loader": "^1.15.1",
     "@vueuse/core": "^9.13.0",
     "animate.css": "^4.1.1",
