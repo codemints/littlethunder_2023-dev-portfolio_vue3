@@ -19,11 +19,9 @@ watch(() => darkModeStore.isDark, (val) => {
   const zoom = map.getZoom()
   const style = val ? darkMap : lightMap
 
-  map = new google.maps.Map(mapRef.value, {
-    center: { lat, lng },
-    zoom,
-    styles: style,
-  })
+  map.setOptions({ styles: style })
+  map.setCenter({ lat, lng })
+  map.setZoom(zoom)
 })
 
 onMounted(() => {
