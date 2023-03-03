@@ -1,0 +1,42 @@
+query {
+  user(login: "codemints") {
+    company
+    location
+    email
+    websiteUrl
+    twitterUsername
+    contributionsCollection(from: "2022-02-27T00:00:00Z") {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
+      }
+    }
+  }
+  repository(owner:"codemints", name: "littlethunder_2023-dev-portfolio_vue3") {
+    languages(last:100) {
+      edges{
+        node {
+          name
+        }
+        size
+      }
+    }
+    refs(first: 100, refPrefix: "refs/heads/", orderBy: {field: TAG_COMMIT_DATE, direction: DESC}) {
+      nodes {
+        name
+        target {
+          ... on Commit {
+            history {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }
+}
