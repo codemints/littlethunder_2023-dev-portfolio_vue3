@@ -3,14 +3,16 @@
 html {
   font-size: $base-font-size;
   scroll-behavior: smooth;
-
+  
+  
   &.dark {
     .body {
-      background-color: $clr-800
+      background-color: $clr-800;
     }
   }
-
+  
   body {
+    background-color: $clr-800;
     background-color: white;
     &.toast--active {
       overflow: hidden;
