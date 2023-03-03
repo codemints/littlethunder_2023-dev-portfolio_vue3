@@ -3,12 +3,28 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useDarkModeStore } from '@store/darkmode.js'
 import { Loader } from '@googlemaps/js-api-loader'
 import mapStylesArray from '@lib/map-styles.js'
 
+const darkModeStore = useDarkModeStore()
+const { darkMap, lightMap } = mapStylesArray
 const mapRef = ref(null)
-let map = null
+let map = ref(null)
+
+watch(() => darkModeStore.isDark, (val) => {
+  const lat = map.getCenter().lat()
+  const lng = map.getCenter().lng()
+  const zoom = map.getZoom()
+  const style = val ? darkMap : lightMap
+
+  map = new google.maps.Map(mapRef.value, {
+    center: { lat, lng },
+    zoom,
+    styles: style,
+  })
+})
 
 onMounted(() => {
   const loader = new Loader({
@@ -19,8 +35,8 @@ onMounted(() => {
   loader.load().then(() => {
     map = new google.maps.Map(mapRef.value, {
       center: { lat: 40.5853, lng: -105.0844 },
-      zoom: 13,
-      styles: mapStylesArray,
+      zoom: 14,
+      styles: darkModeStore.isDark ? darkMap : lightMap,
     })
   })
 })
