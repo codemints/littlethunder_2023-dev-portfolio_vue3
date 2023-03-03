@@ -38,8 +38,8 @@ watch(() => headerStore.headerVhMax, (val) => {
   setCircleData({
     canvas: canvasRef.value,
     ctx: canvasRef.value.getContext('2d'),
-    minCircleSize: 10,
-    maxCircleSize: 120,
+    minCircleSize: 8,
+    maxCircleSize: 175,
     minCirclePopulation: 9,
     maxCirclePopulation: 14,
     initialVelocity: 0.125,
