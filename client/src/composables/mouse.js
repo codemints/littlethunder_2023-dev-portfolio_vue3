@@ -6,7 +6,7 @@ export const useMouse = () => {
 
   const update = (e) => {
     x.value = e.pageX
-    y.value = e.pageY
+    y.value = e.pageY - window.pageYOffset
   }
 
   onMounted(() => {

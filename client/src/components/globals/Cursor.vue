@@ -9,12 +9,23 @@
 import { ref, onMounted, watch } from 'vue'
 import { useCursor } from '@compose/cursor.js'
 
-const { cursorData } = useCursor()
+const outerCursor = useCursor()
+const innerCursor = useCursor()
 const cursorOuterRef = ref(null)
 const cursorInnerRef = ref(null)
 
 onMounted(() => {
-  console.log(cursorData)
+  outerCursor.setCursorData({
+    liveCursor: cursorOuterRef.value,
+    drag: 1,
+  })
+  outerCursor.animateCursor()
+
+  innerCursor.setCursorData({
+    liveCursor: cursorInnerRef.value,
+    drag: 0.1,
+  })
+  innerCursor.animateCursor()
 })
 </script>
 
@@ -24,6 +35,8 @@ onMounted(() => {
 .cursor__container {
   $innerSize: 0.75rem;
   $outerSize: 2.8rem;
+  --posX: 0;
+  --posY: 0;
 
   position: fixed;
   top: 0;
@@ -33,6 +46,8 @@ onMounted(() => {
 
   .cursor__outer {
     position: absolute;
+    left: var(--posX);
+    top: var(--posY);
     width: $outerSize;
     height: $outerSize;
     margin-top: calc( $outerSize / 2 * -1);
@@ -40,17 +55,17 @@ onMounted(() => {
     border-radius: 50%;
     border-width: 0.15rem;
     border-style: solid;
-    transform: translate(0, 0);
   }
 
   .cursor__inner {
     position: absolute;
+    left: var(--posX);
+    top: var(--posY);
     width: $innerSize;
     height: $innerSize;
     margin-top: calc( $innerSize/ 2 * -1);
     margin-left: calc( $innerSize/ 2 * -1);
     border-radius: 50%;
-    transform: translate(0, 0);
   }
 }
 </style>
