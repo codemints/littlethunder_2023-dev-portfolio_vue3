@@ -3,8 +3,7 @@ import { useDarkModeStore } from '@store/darkmode.js'
 import { useMouse } from '@compose/mouse.js'
 
 export const useCursor = () => {
-  const mouse = useMouse()
-  const { x, y } = mouse
+  const { x, y } = useMouse()
 
   const root = document.documentElement
   const body = document.body

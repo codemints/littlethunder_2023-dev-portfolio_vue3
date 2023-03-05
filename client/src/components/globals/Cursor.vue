@@ -13,11 +13,8 @@ const { cursorData } = useCursor()
 const cursorOuterRef = ref(null)
 const cursorInnerRef = ref(null)
 
-watch(() => [cursorData.x, cursorData.y], ([newX, newY]) => {
-  console.log(newX, newY)
-})
-
 onMounted(() => {
+  console.log(cursorData)
 })
 </script>
 
