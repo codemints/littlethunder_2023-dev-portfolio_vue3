@@ -17,13 +17,13 @@ const cursorInnerRef = ref(null)
 onMounted(() => {
   outerCursor.setCursorData({
     liveCursor: cursorOuterRef.value,
-    drag: 1,
+    drag: 0.25,
   })
   outerCursor.animateCursor()
 
   innerCursor.setCursorData({
     liveCursor: cursorInnerRef.value,
-    drag: 0.1,
+    drag: 1,
   })
   innerCursor.animateCursor()
 })

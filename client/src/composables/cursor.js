@@ -1,5 +1,4 @@
-import { ref, reactive, watch, computed } from 'vue'
-import { useDarkModeStore } from '@store/darkmode.js'
+import { reactive, watch } from 'vue'
 import { useMouse } from '@compose/mouse.js'
 
 export const useCursor = () => {
