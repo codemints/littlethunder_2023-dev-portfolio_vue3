@@ -6,15 +6,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useCursor } from '@compose/cursor.js'
 
 const { cursorData } = useCursor()
 const cursorOuterRef = ref(null)
 const cursorInnerRef = ref(null)
 
+watch(() => [cursorData.x, cursorData.y], ([newX, newY]) => {
+  console.log(newX, newY)
+})
+
 onMounted(() => {
-  console.log(cursorData)
 })
 </script>
 
