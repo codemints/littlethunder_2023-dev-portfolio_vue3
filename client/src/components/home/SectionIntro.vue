@@ -32,6 +32,7 @@
       <Button
         ref="introButtonRef"
         @buttonClicked=""
+        @buttonHovered="animateCursor"
         href="#section__contact"
         id="hero__button"
         text="Let's Work Together"
@@ -64,6 +65,10 @@ const introTitleRef = ref(null)
 const introHeadingRef = ref(null)
 const introSubTitleRef = ref(null)
 const introButtonRef = ref(null)
+
+const animateCursor = (payload) => {
+  const button = introButtonRef.value.thisButton
+}
 
 const getHeadingChars = computed(() => {
   return Array.from(introHeadingRef.value.children)

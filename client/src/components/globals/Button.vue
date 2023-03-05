@@ -2,8 +2,8 @@
   <a
     class="block px-10 py-5"
     @click="$emit('buttonClicked')"
-    @mouseover="isHovered = true"
-    @mouseout="isHovered = false"
+    @mouseover="handleHover"
+    @mouseout="handleHover"
     :href="hrefAttribute"
     :download="downloadAttribute"
     :class="classNames"
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, computed, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useButtonsStore } from '@store/buttons.js'
 const { addButton } = useButtonsStore()
 
@@ -60,8 +60,15 @@ const props = defineProps({
   },
 })
 
+const emits = defineEmits(['buttonClicked', 'buttonHovered'])
+
 const thisButton = ref(null)
 const isHovered = ref(false)
+
+const handleHover = (event) => {
+  isHovered.value = !isHovered.value
+  emits('buttonHovered', event)
+}
 
 const getStyles = computed(() => {
   return Object.entries(props.cssProps).map(([key, value]) => {
@@ -79,6 +86,10 @@ const hrefAttribute = computed(() => {
 
 onMounted(() => {
   addButton(thisButton.value, props.borderColor)
+})
+
+defineExpose({
+  thisButton
 })
 </script>
 

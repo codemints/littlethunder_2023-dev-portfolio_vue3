@@ -1,28 +1,18 @@
 <template>
-  <div ref="cursorContainerRef" class="cursor__container">
+  <div class="cursor__container">
     <div ref=cursorOuterRef class="cursor cursor__outer border-clr-blue dark:border-clr-orange"></div>
     <div ref=cursorInnerRef class="cursor cursor__inner bg-clr-blue dark:bg-clr-orange"></div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
-import { useMouse } from '@compose/mouse.js'
+import { ref, onMounted } from 'vue'
+import { useCursor } from '@compose/cursor.js'
 
-const { x, y } = useMouse()
-const cursorContainerRef = ref(null)
 const cursorOuterRef = ref(null)
 const cursorInnerRef = ref(null)
-const cursors = [cursorOuterRef, cursorInnerRef]
 
-const updatePosition = (newX, newY) => {
-    cursors.forEach(cursor => {
-      cursor.value.style.transform = `translate(${newX}px, ${newY}px)`
-    })
-}
-
-watch([x, y], ([newX, newY]) => {
-  updatePosition(newX, newY)
+onMounted(() => {
 })
 </script>
 

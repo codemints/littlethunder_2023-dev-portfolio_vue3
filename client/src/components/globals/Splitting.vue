@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 const props = defineProps({
   textContent: {
     type: String,

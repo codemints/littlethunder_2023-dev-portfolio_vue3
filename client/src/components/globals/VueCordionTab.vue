@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useAccordionStore } from '@store/accordion.js'
 
 const accordionStore = useAccordionStore()

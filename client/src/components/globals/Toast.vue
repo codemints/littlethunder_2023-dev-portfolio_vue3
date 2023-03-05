@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { defineProps, onMounted, watch } from 'vue'
+import { onMounted, watch } from 'vue'
 const props = defineProps({
   toastData: {
     type: Object,

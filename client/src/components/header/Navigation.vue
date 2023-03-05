@@ -21,6 +21,7 @@
         <li
           v-for="(item, index) in navStore.navItems"
           :key="item.name"
+          :ref="el => linksArray[index] = el"
           class="nav-links__item"
         >
           <a
@@ -73,6 +74,7 @@ const resumeUrl = '@/assets/docs/resume.pdf'
 
 const navLinksRef = ref(null)
 const navShuttleRef = ref(null)
+const linksArray = ref([])
 
 const handleResize = () => {
   headerStore.isCollapsed = !headerStore.isCollapsed

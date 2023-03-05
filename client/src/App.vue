@@ -18,8 +18,6 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
 import { useColorScheme } from '@compose/colorscheme.js'
-import { useLocalStorage } from '@compose/storage.js'
-import { useDarkModeStore } from '@store/darkmode.js'
 
 import Floaters from '@component/page/Floaters.vue'
 import Header from '@component/header/Header.vue'
@@ -37,8 +35,6 @@ const navStore = useNavStore()
 const headerRef = ref(null)
 const contentRef = ref(null)
 const { setColorScheme } = useColorScheme()
-
-const darkModeStore = useDarkModeStore()
 
 const calculateHeights = () => {
   const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
