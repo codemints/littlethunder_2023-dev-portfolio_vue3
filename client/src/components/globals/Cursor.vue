@@ -9,10 +9,12 @@
 import { ref, onMounted } from 'vue'
 import { useCursor } from '@compose/cursor.js'
 
+const { cursorData } = useCursor()
 const cursorOuterRef = ref(null)
 const cursorInnerRef = ref(null)
 
 onMounted(() => {
+  console.log(cursorData)
 })
 </script>
 

@@ -1,31 +1,27 @@
-import { ref, reactive, watch, computed, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, watch, computed } from 'vue'
 import { useDarkModeStore } from '@store/darkmode.js'
 import { useMouse } from '@compose/mouse.js'
 
 export const useCursor = () => {
+  const mouse = useMouse()
+  const { x, y } = mouse
+
   const root = document.documentElement
   const body = document.body
-  const cursorData = reactive({
 
+  const cursorData = reactive({
+    cursor: undefined,
+    mouseX: x.value,
+    mouseY: y.value,
   })
 
-  const setData = (config) => {
+  const setCursorData = (config) => {
     for(const [key, val] of Object.entries(config)) {
       cursorData[key] = val
     }
   }
-}
-export const useCursorStore = defineStore('cursor', {
-  state: () => {
-    return {
-      cursors: [],
-      body: document.body,
-      root: document.documentElement,
-    }
-  },
-  actions: {
-    setState(property, value) {
-      this[property] = value
-    },
+
+  return {
+    cursorData,
   }
-})
+}
