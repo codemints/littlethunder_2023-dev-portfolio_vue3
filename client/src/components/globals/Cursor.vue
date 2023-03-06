@@ -52,7 +52,7 @@ onMounted(() => {
     border-style: solid;
     transition-property:
     width,
-    height,;
+    height;
     transition-duration: 0.2s;
     transition-timing-function: cubic-bezier(.39,.575,.565,1);
     
