@@ -105,9 +105,11 @@ onMounted(() => {
   
   window.addEventListener('load', () => {
     setColorScheme()
-    const rootEl = document.documentElement
-    setCSSProperties(rootEl)
-    setHeaderState()
+    if ( !mobileStore.isMobile ) {
+      const rootEl = document.documentElement
+      setCSSProperties(rootEl)
+      setHeaderState()
+    }
     getSectionTops()
     navStore.sections = contentRef.value.children
   })

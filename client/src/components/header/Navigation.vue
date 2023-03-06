@@ -59,13 +59,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useNavStore } from '@store/navigation.js'
 import { useHeaderStore } from '@store/header.js'
+import { useMobileStore } from '@store/mobile.js'
 import Button from '@component/globals/Button.vue'
 
 const navStore = useNavStore()
 const headerStore = useHeaderStore()
+const mobileStore = useMobileStore()
 
 const resumeUrl = '@/assets/docs/resume.pdf'
 
@@ -143,13 +145,13 @@ const scrollSpy = () => {
 }
 
 onMounted(() => {
-  window.addEventListener('load', () => {
-    navStore.links = Array.from(navLinksRef.value.children)
-    navStore.links[0].firstElementChild.style.color = '#9EA7B3'
-    window.addEventListener('scroll', scrollSpy)
-    setShuttlePosition()
-    navStore.links[0].firstElementChild.style.color = ''
-  })
+  // window.addEventListener('load', () => {
+  //   navStore.links = Array.from(navLinksRef.value.children)
+  //   navStore.links[0].firstElementChild.style.color = '#9EA7B3'
+  //   window.addEventListener('scroll', scrollSpy)
+  //   setShuttlePosition()
+  //   navStore.links[0].firstElementChild.style.color = ''
+  // })
 })
 
 onUnmounted(() => {

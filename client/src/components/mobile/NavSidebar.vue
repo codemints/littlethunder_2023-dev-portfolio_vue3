@@ -9,7 +9,7 @@
         v-for="(item, index) in navStore.navItems"
         :key="item.name"
         :ref="el => linkListItems[index] = el"
-        @touchstart="handleClick(index)"
+        @touchstart="handleClick(item, index)"
         class="linklist-item"
       >
         <a
@@ -43,13 +43,17 @@ const darkModeStore = useDarkModeStore()
 const linkListItems = ref([])
 const mobileNav = ref(null)
 
-const handleClick = (index) => {
+const handleClick = (item, index) => {
+  scroll(0, item.top)
   linkListItems.value[index].classList.add('is-active')
   linkListItems.value.forEach((item, i) => {
     if (i !== index) {
       item.classList.remove('is-active')
     }
   })
+  if ( mobileStore.isOpen ) {
+    mobileStore.toggleOpen()
+  }
 }
 
 const setColorProps = () => {
