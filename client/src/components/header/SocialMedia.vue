@@ -6,8 +6,12 @@
       target="_blank"
       rel="noopener noreferrer">
         <i
-        class="fa-brands header-icon"
-        :class="[`fa-${link.icon}`, Colors.socialIcons]"
+        :class="{
+          [`fa-${link.icon}`]: true,
+          'text-clr-blue': mobileStore.isMobile,
+          'text-clr-200': !mobileStore.isMobile,
+        }"
+        class="fa-brands header-icon hover:text-clr-blue"
         ></i>
       </a>
     </li>
@@ -15,9 +19,10 @@
 </template>
 
 <script setup>
-  import { socialLinks } from '../../composables/links.js'
-  import { themeColors as Colors } from '../../composables/colors.js'
+  import { socialLinks } from '@compose/links.js'
+  import { useMobileStore } from '@store/mobile.js'
 
+  const mobileStore = useMobileStore()
 </script>
 
 <style lang="scss" scoped>

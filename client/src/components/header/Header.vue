@@ -75,6 +75,7 @@ onUnmounted(() => {
 .header__main {
   position: fixed;
   width: 100vw;
+  // box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.35);
   z-index: 100;
 
   .header__main-content {

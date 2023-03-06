@@ -1,6 +1,7 @@
 <template>
-  <Floaters />
-  <Header ref="headerRef" />
+  <Floaters v-if="!mobileStore.isMobile"/>
+  <MobileHeader v-if="mobileStore.isMobile"/>
+  <Header v-else ref="headerRef" />
   <main ref="contentRef" class="page-content bg-white dark:bg-clr-800">
     <SectionIntro class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50" />
     <SectionAbout class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
@@ -10,7 +11,7 @@
     <SectionContact class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50" />
   </main>
   <Footer />
-  <Cursor />
+  <Cursor v-if="!mobileStore.isMobile"/>
 </template>
 
 <script setup>
@@ -18,9 +19,12 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
 import { useColorScheme } from '@compose/colorscheme.js'
+import { useWindow } from '@compose/window.js'
+import { useMobileStore } from '@store/mobile.js'
 
 import Floaters from '@component/page/Floaters.vue'
 import Header from '@component/header/Header.vue'
+import MobileHeader from '@component/mobile/MobileHeader.vue'
 import SectionIntro from '@component/home/SectionIntro.vue'
 import SectionAbout from '@component/home/SectionAbout.vue'
 import SectionExpertise from '@component/home/SectionExpertise.vue'
@@ -35,6 +39,9 @@ const navStore = useNavStore()
 const headerRef = ref(null)
 const contentRef = ref(null)
 const { setColorScheme } = useColorScheme()
+const { x } = useWindow()
+const mobileStore = useMobileStore()
+const { setIsMobile } = mobileStore
 
 const calculateHeights = () => {
   const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
@@ -89,12 +96,20 @@ const convertHeightToVh = computed(() => {
   }
 })
 
+watch(() => x.value, (newX) => {
+  newX < 768 ? setIsMobile(true) : setIsMobile(false)
+})
+
 onMounted(() => {
+  x.value < 768 ? setIsMobile(true) : setIsMobile(false)
+  
   window.addEventListener('load', () => {
     setColorScheme()
     const rootEl = document.documentElement
-    setCSSProperties(rootEl)
-    setHeaderState()
+    if ( !mobileStore.isMobile ) {
+      setCSSProperties(rootEl)
+      setHeaderState()
+    }
     getSectionTops()
     navStore.sections = contentRef.value.children
   })
@@ -102,11 +117,4 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.measurements {
-  position: fixed;
-  top: 50%;
-  right: 5rem;
-  transform: translateY(-50%);
-  z-index: 9999;
-}
 </style>

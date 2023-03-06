@@ -1,30 +1,47 @@
 <template>
   <div class="switcher-container">
-    <p :class="Colors.themeSwitcher.false">isDark(false)</p>
+    <p
+      v-if="x > 767"
+      :class="Colors.themeSwitcher.false">isDark(false)
+    </p>
     <div
-      class="switcher-toggle__wrapper bg-clr-100 dark:bg-clr-800"
       @click="handleDarkMode"
+      class="switcher-toggle__wrapper dark:bg-clr-800"
+      :class="{
+        'bg-clr-100': !mobileStore.isMobile,
+        'bg-white': mobileStore.isMobile
+      }"
     >
-      <div
-        class="switcher-toggle switcher-static bg-clr-200 dark:bg-clr-400"></div>
-      <div
-        class="switcher-toggle switcher-static bg-clr-200 dark:bg-clr-400"></div>
+      <div class="switcher-toggle switcher-static bg-clr-200 dark:bg-clr-400"></div>
+      <div class="switcher-toggle switcher-static bg-clr-200 dark:bg-clr-400"></div>
       <div
         class="switcher-toggle switcher-toggle__main bg-clr-orange dark:bg-clr-blue"
         :class="{ 'dark-mode' : darkModeStore.isDark }"></div>
       <div
-        class="switcher-toggle switcher-toggle__overlap bg-clr-100 dark:bg-clr-800"
-        :class="{ 'dark-mode' : darkModeStore.isDark }"></div>
+        class="switcher-toggle switcher-toggle__overlap dark:bg-clr-800"
+        :class="{
+          'dark-mode' : darkModeStore.isDark,
+          'bg-clr-100' : !mobileStore.isMobile,
+          'bg-white' : mobileStore.isMobile
+        }"
+      ></div>
     </div>
-    <p :class="Colors.themeSwitcher.true">isDark(true)</p>
+    <p
+      v-if="x > 767"
+      :class="Colors.themeSwitcher.true">isDark(true)
+    </p>
   </div>
 </template>
 
 <script setup>
 import { themeColors as Colors } from '../../composables/colors.js'
 import { useDarkModeStore } from '@store/darkmode.js'
+import { useWindow } from '@compose/window.js'
+import { useMobileStore } from '@store/mobile.js'
 
 const darkModeStore = useDarkModeStore()
+const { x } = useWindow()
+const mobileStore = useMobileStore()
 
 const handleDarkMode = () => {
   const rootEl = document.documentElement

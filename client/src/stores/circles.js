@@ -23,9 +23,9 @@ class Circle {
     this.ctx.fillStyle = this.c
     this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false)
     this.ctx.fill()
-    this.ctx.shadowOffsetX = 2
-    this.ctx.shadowOffsetY = 2
-    this.ctx.shadowColor = 'rgba(0, 0, 0, 0.075)'
+    this.ctx.shadowOffsetX = 3
+    this.ctx.shadowOffsetY = 3
+    this.ctx.shadowColor = 'rgba(0, 0, 0, 0.125)'
     this.ctx.shadowBlur = 5
   }
 

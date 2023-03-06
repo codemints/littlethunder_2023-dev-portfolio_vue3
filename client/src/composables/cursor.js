@@ -62,15 +62,15 @@ export const useCursor = () => {
   const morphCursor = (item) => {
     cancelAnimationFrame(cursorData.animationFrame)
     const cursor = cursorData.liveCursor
-    const buttonRadius = getComputedStyle(item.button).borderRadius
+    const buttonRadius = window.getComputedStyle(item.button).borderRadius
     const buttonRect = item.button.getBoundingClientRect()
     const buttonWidth = buttonRect.width
     const buttonHeight = buttonRect.height
     const buttonX = buttonRect.x
     const buttonY = buttonRect.y
 
-    cursorData.width = getComputedStyle(cursor).getPropertyValue('--outerW')
-    cursorData.height = getComputedStyle(cursor).getPropertyValue('--outerH')
+    cursorData.width = window.getComputedStyle(cursor).getPropertyValue('--outerW')
+    cursorData.height = window.getComputedStyle(cursor).getPropertyValue('--outerH')
 
     cursor.classList.add('is-morphed')
     setProperties(cursor, {
