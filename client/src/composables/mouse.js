@@ -5,8 +5,8 @@ export const useMouse = () => {
   const y = ref(0)
 
   const update = (e) => {
-    x.value = e.pageX
-    y.value = e.pageY - window.pageYOffset
+    x.value = e.clientX || e.pageX
+    y.value = e.clientY || e.pageY
   }
 
   onMounted(() => {

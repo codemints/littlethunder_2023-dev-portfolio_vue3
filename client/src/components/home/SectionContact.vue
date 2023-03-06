@@ -12,14 +12,13 @@
             id="contact__button"
             text="Let's Work Together"
             hovText="Contact Me Today"
-            :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600', 'font-hf', 'uppercase', 'text-center']"
+            :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-800', 'text-white', 'hover:text-clr-400', 'dark:hover:text-white', 'font-hf', 'uppercase', 'text-center']"
             :cssProps="{
-              fontSize: '1.5rem',
-              letterSpacing: '0.1rem',
-              width: '30rem',
-              marginTop: '5rem',
+              'font-size': '1.5rem',
+              'letter-spacing': '0.1rem',
+              'width': '30rem',
+              'margin-top': '5rem',
             }"
-            borderColor="clrOrange"
           />
         </div>
       </div>

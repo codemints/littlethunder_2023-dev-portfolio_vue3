@@ -49,13 +49,10 @@
         hovText="resumé"
         :classNames="[ 'bg-clr-blue', 'hover:bg-clr-600', 'text-white', 'hover:text-white', 'font-hf', 'uppercase']"
         :cssProps="{
-          fontSize: '1.5rem',
-          letterSpacing: '0.1rem',
-          paddingInline: '1.2rem',
-          paddingBlock: '0.6rem',
-          transition: 'all 0.2s ease-in-out',
+          'font-size': '1.5rem',
+          'letter-spacing': '0.1rem',
+          'transition': 'all 0.2s ease-in-out',
         }"
-        borderColor="clrBlue"
       />
     </div>
   </div>
@@ -95,6 +92,7 @@ const setShuttlePosition = () => {
 }
 
 const handleShuttle = (e) => {
+  if ( document.readyState !== 'complete' ) return
   const shuttle = navShuttleRef.value
   const items = navStore.navItems
   const links = navLinksRef.value.children

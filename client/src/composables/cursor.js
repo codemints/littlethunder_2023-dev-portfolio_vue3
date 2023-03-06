@@ -1,23 +1,26 @@
-import { reactive, watch } from 'vue'
+import { reactive, watch, onMounted, onUnmounted } from 'vue'
 import { useMouse } from '@compose/mouse.js'
+import { useButtonsStore } from '@store/buttons.js'
 
 export const useCursor = () => {
   const { x, y } = useMouse()
-
-  const root = document.documentElement
+  const buttonsStore = useButtonsStore()
+  
   const body = document.body
 
   const cursorData = reactive({
-    liveCursor: undefined,
-    deadCursor: undefined,
+    liveCursor: null,
+    deadCursor: null,
+    width: null,
+    height: null,
     offset: body.offsetLeft,
     drag: null,
     mouseX: x.value,
     mouseY: y.value,
-    cursorX: undefined,
-    cursorY: undefined,
-    dx: undefined,
-    dy: undefined,
+    cursorX: null,
+    cursorY: null,
+    dx: null,
+    dy: null,
     animationFrame: null,
   })
 
@@ -45,6 +48,53 @@ export const useCursor = () => {
     })
   }
 
+  const initMorph = () => {
+    buttonsStore.buttons.forEach(item => {
+      item.button.addEventListener('mouseenter', () => {
+        morphCursor(item)
+      })
+      item.button.addEventListener('mouseleave', () => {
+        unmorphCursor()
+      })
+    })
+  }
+
+  const morphCursor = (item) => {
+    cancelAnimationFrame(cursorData.animationFrame)
+    const cursor = cursorData.liveCursor
+    const buttonRadius = getComputedStyle(item.button).borderRadius
+    const buttonRect = item.button.getBoundingClientRect()
+    const buttonWidth = buttonRect.width
+    const buttonHeight = buttonRect.height
+    const buttonX = buttonRect.x
+    const buttonY = buttonRect.y
+
+    cursorData.width = getComputedStyle(cursor).getPropertyValue('--outerW')
+    cursorData.height = getComputedStyle(cursor).getPropertyValue('--outerH')
+
+    cursor.classList.add('is-morphed')
+    setProperties(cursor, {
+      '--outerW': `${buttonWidth}px`,
+      '--outerH': `${buttonHeight}px`,
+      '--posX': `${(buttonX) + buttonWidth / 2}px`,
+      '--posY': `${(buttonY) + buttonHeight / 2}px`,
+    })
+    cursor.style.borderRadius = buttonRadius
+    cursorData.deadCursor.style.opacity = 0
+  }
+
+  const unmorphCursor = () => {
+    cursorData.animationFrame = requestAnimationFrame(animateCursor)
+    const cursor = cursorData.liveCursor
+    cursor.classList.remove('is-morphed')
+    setProperties(cursor, {
+      '--outerW': ``,
+      '--outerH': ``,
+    })
+    cursor.style.borderRadius = ''
+    cursorData.deadCursor.style.opacity = ''
+  }
+
   const setProperties = (el, props) => {
     for ( const [key, val] of Object.entries(props) ) {
       el.style.setProperty(key, val)
@@ -63,8 +113,10 @@ export const useCursor = () => {
   })
 
   return {
-    cursorData,
     animateCursor,
     setCursorData,
+    initMorph,
+    morphCursor,
+    unmorphCursor,
   }
 }

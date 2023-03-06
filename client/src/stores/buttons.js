@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import siteColors from '@lib/site-colors.js'
+import { useHeaderStore } from '@store/header.js'
 
 export const useButtonsStore = defineStore('buttons', {
   state: () => {
@@ -14,13 +14,17 @@ export const useButtonsStore = defineStore('buttons', {
     }
   },
   actions: {
-    addButton(element, color) {
+    addButton(HTMLElement, buttonOffset) {
       this.buttons.push({
-        id: `button--${this.buttonCount + 1}`,
-        button: element,
-        borderColor: siteColors[color],
+        button: HTMLElement,
+        order: this.buttonCount + 1,
+        id: HTMLElement.id
       })
       this.buttonCount++
+    },
+    updateButton(id, property, value) {
+      const button = this.buttons.find(button => button.id === id)
+      button[property] = value
     }
   }
 })

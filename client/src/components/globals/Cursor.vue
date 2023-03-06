@@ -1,12 +1,10 @@
 <template>
-  <div class="cursor__container">
-    <div ref=cursorOuterRef class="cursor cursor__outer border-clr-blue dark:border-clr-orange"></div>
-    <div ref=cursorInnerRef class="cursor cursor__inner bg-clr-blue dark:bg-clr-orange"></div>
-  </div>
+    <div ref=cursorOuterRef class="cursor cursor__outer border-clr-400 dark:border-clr-200"></div>
+    <div ref=cursorInnerRef class="cursor cursor__inner bg-clr-orange dark:bg-clr-blue"></div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useCursor } from '@compose/cursor.js'
 
 const outerCursor = useCursor()
@@ -17,9 +15,11 @@ const cursorInnerRef = ref(null)
 onMounted(() => {
   outerCursor.setCursorData({
     liveCursor: cursorOuterRef.value,
+    deadCursor: cursorInnerRef.value,
     drag: 0.25,
   })
   outerCursor.animateCursor()
+  outerCursor.initMorph()
 
   innerCursor.setCursorData({
     liveCursor: cursorInnerRef.value,
@@ -31,41 +31,52 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @use '@style/abstracts/variables' as *;
-
-.cursor__container {
-  $innerSize: 0.75rem;
-  $outerSize: 2.8rem;
-  --posX: 0;
-  --posY: 0;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  pointer-events: none;
-
-  .cursor__outer {
-    position: absolute;
-    left: var(--posX);
-    top: var(--posY);
-    width: $outerSize;
-    height: $outerSize;
-    margin-top: calc( $outerSize / 2 * -1);
-    margin-left: calc( $outerSize / 2 * -1);
+  
+  .cursor {
+    position: fixed;
     border-radius: 50%;
-    border-width: 0.15rem;
+    pointer-events: none;
+    z-index: 10000;
+  }
+  
+  .cursor__outer {
+    --posX: 0;
+    --posY: 0;
+    --outerW: 2.8rem;
+    --outerH: 2.8rem;
+    left: calc(var(--posX) - (var(--outerW) / 2));
+    top: calc(var(--posY) - (var(--outerH) / 2));
+    width: var(--outerW);
+    height: var(--outerH);
+    border-width: 0.2rem;
     border-style: solid;
+    transition-property:
+    width,
+    height,;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(.39,.575,.565,1);
+    
+    &.is-morphed {
+      border-color: $clr-blue;
+      border-width: 0.35rem;
+    }
+  }
+  
+  .cursor__inner {
+    --posX: 0;
+    --posY: 0;
+    --innerW: 0.75rem;
+    --innerH: 0.75rem;
+    left: calc(var(--posX) - (var(--innerW) / 2));
+    top: calc(var(--posY) - (var(--innerH) / 2));
+    width: var(--innerW);
+    height: var(--innerH);
   }
 
-  .cursor__inner {
-    position: absolute;
-    left: var(--posX);
-    top: var(--posY);
-    width: $innerSize;
-    height: $innerSize;
-    margin-top: calc( $innerSize/ 2 * -1);
-    margin-left: calc( $innerSize/ 2 * -1);
-    border-radius: 50%;
+.dark {
+  .is-morphed {
+    border-color: $clr-orange !important;
+    border-width: 0.35rem;
   }
 }
 </style>

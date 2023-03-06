@@ -85,7 +85,7 @@ const hrefAttribute = computed(() => {
 })
 
 onMounted(() => {
-  addButton(thisButton.value, props.borderColor)
+  addButton(thisButton.value)
 })
 
 defineExpose({

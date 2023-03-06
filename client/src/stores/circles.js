@@ -156,7 +156,8 @@ export const useCirclesStore = defineStore('circles', {
     },
     scatterCanvas() {
       if ( this.circleData.isStopped || this.circleData.isCleared ) return
-      this.circleData.circleArray.forEach((circle, index, array) => {
+
+      this.circleData.circleArray.forEach(circle => {
         circle.dx *= 0.25
         circle.dy *= 0.25
         const direction = this.getRandomNumber(-25,25)
@@ -170,7 +171,6 @@ export const useCirclesStore = defineStore('circles', {
           ? circle.dy -= direction
           : circle.dy += direction
       })
-
     },
     clearCanvas() {
       if ( this.circleData.isCleared ) return false

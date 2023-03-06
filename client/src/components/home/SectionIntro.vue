@@ -32,18 +32,17 @@
       <Button
         ref="introButtonRef"
         @buttonClicked=""
-        @buttonHovered="animateCursor"
+        @buttonHovered=""
         href="#section__contact"
         id="hero__button"
         text="Let's Work Together"
         hovText="Contact Me Today"
-        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-200', 'text-white', 'hover:text-clr-400', 'dark:hover:text-clr-600', 'font-hf', 'uppercase']"
+        :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-800', 'text-white', 'hover:text-clr-400', 'dark:hover:text-white', 'font-hf', 'uppercase']"
         :cssProps="{
           fontSize: '1.5rem',
           letterSpacing: '0.1rem',
           width: '30rem',
         }"
-        borderColor="clrOrange"
       />
     </div>
     <CircleCanvas />
@@ -51,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import Splitting from '@component/globals/Splitting.vue'
 import Button from '@component/globals/Button.vue'
 import CircleCanvas from '@component/globals/CircleCanvas.vue'
@@ -65,10 +64,6 @@ const introTitleRef = ref(null)
 const introHeadingRef = ref(null)
 const introSubTitleRef = ref(null)
 const introButtonRef = ref(null)
-
-const animateCursor = (payload) => {
-  const button = introButtonRef.value.thisButton
-}
 
 const getHeadingChars = computed(() => {
   return Array.from(introHeadingRef.value.children)
