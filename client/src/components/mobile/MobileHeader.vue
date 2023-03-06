@@ -47,11 +47,14 @@ const mobileStore = useMobileStore()
 .header__mobile {
   $pX: 2rem;
 
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-inline: $pX;
   padding-block: 1.8rem;
+  z-index: 9999999;
 
   .nav__sidebar {
     position: absolute;
