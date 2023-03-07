@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useMobileStore } from '@store/mobile.js'
 
 const mobileStore = useMobileStore()
@@ -31,6 +31,10 @@ const handleExpand = () => {
   toggleOpen()
   button.value.setAttribute('aria-expanded', mobileStore.isOpen)
 }
+
+watch(() => mobileStore.isOpen, (val) => {
+  button.value.setAttribute('aria-expanded', val)
+})
 
 </script>
 

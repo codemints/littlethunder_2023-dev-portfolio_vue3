@@ -30,13 +30,15 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-import SocialMedia from '@component/header/SocialMedia.vue'
 import { useNavStore } from '@store/navigation.js'
 import { useDarkModeStore } from '@store/darkmode.js'
+import { useMobileStore } from '@store/mobile.js'
+import SocialMedia from '@component/header/SocialMedia.vue'
 import siteColors from '@lib/site-colors.js'
 
 const navStore = useNavStore()
 const darkModeStore = useDarkModeStore()
+const mobileStore = useMobileStore()
 
 const linkListItems = ref([])
 const mobileNav = ref(null)
@@ -56,6 +58,8 @@ const scrollSpy = () => {
       item.isActive = false
     }
   })
+
+  mobileStore.isOpen ? mobileStore.toggleOpen() : null
 }
 
 const setColorProps = () => {
