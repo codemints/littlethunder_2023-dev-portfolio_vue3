@@ -75,6 +75,7 @@
                   v-for="(slide, index) in slider.panels"
                   @click="(e) => changeSlide(e, index)"
                   :key="index"
+                  :ref="el => paginationItems[index] = el"
                   :class="`slider-pagination--item-${index + 1}`"
                   class="slider-pagination--item bg-clr-100 dark:bg-clr-400"
                   data-slide="pagination"
@@ -96,7 +97,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, onUpdated, watch, watchEffect } from 'vue'
 import { useMobileStore } from '@store/mobile.js'
 import SectionTitle from '@component/globals/SectionTitle.vue'
 import SliderPanel from '@component/globals/SliderPanel.vue'
@@ -108,7 +109,9 @@ import { useDarkModeStore } from '@store/darkmode.js'
 const mobileStore = useMobileStore()
 const darkModeStore = useDarkModeStore()
 const sliderContainer = ref(null)
+const paginationItems = ref([])
 const slider = ref(null)
+const useIndex = ref(0)
 const isReady = ref(false)
 const plugins = [
   // new AutoPlay({ duration: 2000, direction: "NEXT", stopOnHover: false }),
@@ -118,17 +121,29 @@ const plugins = [
 ];
 
 const changeSlide = (e, index) => {
-  const dataSlide = e.currentTarget.dataset.slide
-  if ( dataSlide === 'prev' ) slider.value.prev()
-  if ( dataSlide === 'next' ) slider.value.next()
-  if ( dataSlide === 'pagination' ) slider.value.moveTo(index, 1000)
+  const { slide } = e.currentTarget.dataset;
+  const arrows = slide !== 'pagination';
+  const pages = paginationItems.value;
 
-  // slider.moveTo(index, 1000)
-  // e.target.dataset.slide === 'prev' ? slider.value.prev() : slider.value.next()
-  // const panels = slider.value.panels
-  // const panelIndex = slider.value.currentPanel
-  // const panelElement = slider.value.currentPanel._elProvider.element
-  // panelElement.style.backgroundColor = 'pink'
+  slider.value.stopAnimation();
+
+  if (arrows) {
+    if (slide === 'prev') {
+      slider.value.prev();
+      useIndex.value = useIndex.value === 0 ? pages.length - 1 : useIndex.value - 1;
+    } else {
+      slider.value.next();
+      useIndex.value = useIndex.value === pages.length - 1 ? 0 : useIndex.value + 1;
+    }
+  } else {
+    slider.value.moveTo(index, 1000);
+    useIndex.value = index;
+  }
+
+  paginationItems.value.forEach((item, i) => {
+    const isActive = i === useIndex.value;
+    item.classList.toggle('is-active', isActive);
+  });
 }
 
 const propData = {
@@ -162,13 +177,23 @@ const setCustomProp = () => {
   )
 }
 
-watch(() => darkModeStore.isDark, () => {
+watchEffect(() => {
   setCustomProp()
+  useIndex.value = slider.value.defaultIndex
+  if( paginationItems.value.length > 0 ) {
+    const index = slider.value.currentPanel._index
+    paginationItems.value[index].classList.add('is-active')
+  }
+}, {
+  flush: 'post',
+  reactive: [darkModeStore.isDark]
 })
 
 onMounted(() => {
   setCustomProp()
-  window.addEventListener('load', () => isReady.value = true)
+  window.addEventListener('load', () => {
+    isReady.value = true
+  })
 })
 </script>
 
@@ -233,7 +258,7 @@ onMounted(() => {
         border-radius: 50%;
         transition: all 0.3s ease-in-out;
 
-        &:hover {
+        &:hover, &.is-active {
           scale: 1.2;
           background-color: var(--active-color);
         }
