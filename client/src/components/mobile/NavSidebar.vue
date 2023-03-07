@@ -9,8 +9,8 @@
         v-for="(item, index) in navStore.navItems"
         :key="item.name"
         :ref="el => linkListItems[index] = el"
-        @touchstart="handleClick(item, index)"
         class="linklist-item"
+        :class="{'is-active': item.isActive}"
       >
         <a
           :href="`#${item.scrollTo}`"
@@ -32,28 +32,30 @@
 import { ref, onMounted, watch } from 'vue'
 import SocialMedia from '@component/header/SocialMedia.vue'
 import { useNavStore } from '@store/navigation.js'
-import { useMobileStore } from '@store/mobile.js'
 import { useDarkModeStore } from '@store/darkmode.js'
 import siteColors from '@lib/site-colors.js'
 
 const navStore = useNavStore()
-const mobileStore = useMobileStore()
 const darkModeStore = useDarkModeStore()
 
 const linkListItems = ref([])
 const mobileNav = ref(null)
 
-const handleClick = (item, index) => {
-  scroll(0, item.top)
-  linkListItems.value[index].classList.add('is-active')
-  linkListItems.value.forEach((item, i) => {
-    if (i !== index) {
-      item.classList.remove('is-active')
+const scrollSpy = () => {
+  navStore.navItems.forEach((item, index) => {
+    const section = navStore.sections[index]
+    const sectionTop = item.top
+    const sectionHeight = section.clientHeight
+
+    if (window.pageYOffset >= sectionTop - 100 && window.pageYOffset < sectionTop + sectionHeight - 100) {
+      item.isActive = true
+      navStore.currentSection = index
+      navStore.prevSection = index - 1
+      navStore.nextSection = index + 1
+    } else {
+      item.isActive = false
     }
   })
-  if ( mobileStore.isOpen ) {
-    mobileStore.toggleOpen()
-  }
 }
 
 const setColorProps = () => {
@@ -75,8 +77,12 @@ const setColorProps = () => {
   }
 }
 
-watch(() => darkModeStore.isDark, (val) => {
+watch(() => darkModeStore.isDark, () => {
   setColorProps()
+})
+
+watch(() => navStore.navItems[0].top, () => {
+  window.addEventListener('scroll', scrollSpy)
 })
 
 onMounted(() => {

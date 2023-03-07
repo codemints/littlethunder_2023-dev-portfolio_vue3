@@ -62,12 +62,10 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import { useNavStore } from '@store/navigation.js'
 import { useHeaderStore } from '@store/header.js'
-import { useMobileStore } from '@store/mobile.js'
 import Button from '@component/globals/Button.vue'
 
 const navStore = useNavStore()
 const headerStore = useHeaderStore()
-const mobileStore = useMobileStore()
 
 const resumeUrl = '@/assets/docs/resume.pdf'
 
