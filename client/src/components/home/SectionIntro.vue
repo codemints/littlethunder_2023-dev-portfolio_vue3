@@ -67,7 +67,7 @@ const introButtonRef = ref(null)
 
 const getHeadingChars = computed(() => {
   return Array.from(introHeadingRef.value.children)
-  .reduce((acc, curr, index) => {
+  .reduce((acc, curr) => {
     const chars =
       Array.from(curr.children)
       .filter(char => char.classList.contains('char'))
@@ -103,12 +103,12 @@ onMounted(() => {
 
 #section__intro {
   position: relative;
-  z-index: 0;
+  z-index: 1;
 
   .intro-title {
     max-height: var(--title-wrapper-height);
     padding: 2rem;
-    margin-top: 5rem;
+    margin-top: 7.5rem;
     overflow: visible;
     opacity: 0;
     transition: max-height 0.2s ease-in-out;
@@ -119,7 +119,7 @@ onMounted(() => {
 
     &.is-hidden {
       max-height: 0;
-      opacity: 0;
+      opacity: 0 !important;
       overflow: hidden;
     }
 

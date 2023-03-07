@@ -9,6 +9,8 @@ export const useHeaderStore = defineStore('header', {
       sectionVh: 0,
       windowVh: 0,
       headerElement: null,
+      mobileHeaderElement: null,
+      mobileHeaderVh: 0,
     }
   },
 })

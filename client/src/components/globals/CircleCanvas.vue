@@ -10,11 +10,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { useCirclesStore } from '@store/circles.js'
 import { useHeaderStore } from '@store/header.js'
 import { useDarkModeStore } from '@store/darkMode.js'
 import { useControlsStore } from '@store/controls.js'
+import { useMobileStore } from '@store/mobile.js'
 import ControlPanel from '@component/globals/ControlPanel.vue'
 
 const circleStore = useCirclesStore()
@@ -27,8 +28,15 @@ const {
   spawnNewCircle,
 } = circleStore
 const controlsStore = useControlsStore()
+const mobileStore = useMobileStore()
 
 const canvasRef = ref(null)
+const circleData = reactive({
+  minCircleSize: mobileStore.isMobile ? 2 : 8,
+  maxCircleSize: mobileStore.isMobile ? 70 : 175,
+  minCirclePopulation: mobileStore.isMobile ? 5 : 9,
+  maxCirclePopulation: mobileStore.isMobile ? 10 : 14,
+})
 
 watch(() => headerStore.headerVhMax, (val) => {
   canvasRef.value.height = window.innerHeight - (window.innerHeight * val / 100)
@@ -38,10 +46,10 @@ watch(() => headerStore.headerVhMax, (val) => {
   setCircleData({
     canvas: canvasRef.value,
     ctx: canvasRef.value.getContext('2d'),
-    minCircleSize: 8,
-    maxCircleSize: 175,
-    minCirclePopulation: 9,
-    maxCirclePopulation: 14,
+    minCircleSize: circleData.minCircleSize,
+    maxCircleSize: circleData.maxCircleSize,
+    minCirclePopulation: circleData.minCirclePopulation,
+    maxCirclePopulation: circleData.maxCirclePopulation,
     initialVelocity: 0.125,
     offset: headerStore.headerVhMax,
   })
@@ -61,9 +69,6 @@ watch(() => headerStore.isCollapsed, (val) => {
 
 watch(() => darkModeStore.isDark, (val) => {
   updateCircleColor()
-})
-
-onMounted(() => {
 })
 </script>
 

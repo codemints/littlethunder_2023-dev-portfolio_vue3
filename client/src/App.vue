@@ -1,7 +1,7 @@
 <template>
   <Floaters v-if="!mobileStore.isMobile"/>
-  <MobileHeader v-if="mobileStore.isMobile"/>
-  <!-- <Header v-else ref="headerRef" /> -->
+  <MobileHeader v-if="mobileStore.isMobile" ref="mobileHeaderRef"/>
+  <Header v-else ref="headerRef" />
   <main ref="contentRef" class="page-content bg-white dark:bg-clr-800">
     <SectionIntro class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50" />
     <SectionAbout class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
@@ -15,13 +15,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUpdated, watch } from 'vue'
+import { ref, computed, onBeforeMount, onMounted, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
 import { useColorScheme } from '@compose/colorscheme.js'
 import { useWindow } from '@compose/window.js'
 import { useMobileStore } from '@store/mobile.js'
-import { useReadyStore } from '@store/ready.js'
 
 import Floaters from '@component/page/Floaters.vue'
 import Header from '@component/header/Header.vue'
@@ -38,16 +37,23 @@ import Cursor from '@component/globals/Cursor.vue'
 const headerStore = useHeaderStore()
 const navStore = useNavStore()
 const headerRef = ref(null)
+const mobileHeaderRef = ref(null)
 const contentRef = ref(null)
 const { setColorScheme } = useColorScheme()
 const { x } = useWindow()
 const mobileStore = useMobileStore()
 const { setIsMobile } = mobileStore
-const readyStore = useReadyStore()
 
 const calculateHeights = () => {
-  const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
-  const headerHeight = headerRef.value.$el.offsetHeight
+  let headerInnerHeight
+  let headerHeight
+  if ( mobileStore.isMobile ) {
+    headerInnerHeight = null
+    headerHeight = mobileHeaderRef.value.$el.offsetHeight
+  } else {
+    headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
+    headerHeight = headerRef.value.$el.offsetHeight
+  }
   const windowHeight = window.innerHeight
   const sectionHeight = windowHeight - headerHeight
 
@@ -71,7 +77,9 @@ const setHeaderState = () => {
   headerStore.headerVhMax = headerVh
   headerStore.sectionVh = sectionVh
   headerStore.windowVh = windowVh
-  headerStore.headerElement = headerRef.value.$el
+  mobileStore.isMobile
+    ? headerStore.headerElement = mobileHeaderRef.value.$el
+    : headerStore.headerElement = headerRef.value.$el
 }
 
 const getSectionTops = () => {
@@ -85,7 +93,12 @@ const getSectionTops = () => {
 
 const convertHeightToVh = computed(() => {
   const { headerInnerHeight, headerHeight, windowHeight, sectionHeight } = calculateHeights()
-  const headerInnerVh = 100*headerInnerHeight/windowHeight
+  let headerInnerVh
+
+  mobileStore.isMobile
+    ? headerInnerVh = null
+    : headerInnerVh = 100*headerInnerHeight/windowHeight
+  
   const headerVh = 100*headerHeight/windowHeight
   const windowVh = 100*windowHeight/windowHeight
   const sectionVh = 100*sectionHeight/windowHeight
@@ -102,22 +115,19 @@ watch(() => x.value, (newX) => {
   newX < 768 ? setIsMobile(true) : setIsMobile(false)
 })
 
-onMounted(() => {
+onBeforeMount(() => {
   x.value < 768 ? setIsMobile(true) : setIsMobile(false)
-  readyStore.setIsReady(true)
+})
 
-  if ( readyStore.isReady ) {
-    window.addEventListener('load', () => {
-      setColorScheme()
-      if ( !mobileStore.isMobile ) {
-        const rootEl = document.documentElement
-        setCSSProperties(rootEl)
-        setHeaderState()
-      }
-      getSectionTops()
-      navStore.sections = contentRef.value.children
-    })
-  }
+onMounted(() => {
+  window.addEventListener('load', () => {
+    setColorScheme()
+    const rootEl = document.documentElement
+    setCSSProperties(rootEl)
+    setHeaderState()
+    getSectionTops()
+    navStore.sections = contentRef.value.children
+  })
 })
 </script>
 

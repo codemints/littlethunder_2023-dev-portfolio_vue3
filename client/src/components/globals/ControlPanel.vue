@@ -9,7 +9,7 @@
       <div class="control-panel--content-inner">
         <div class="content-body text-center">
           <h4 class="text-clr-400 dark:text-white">Canvas Controls</h4>
-          <p class="text-clr-400 dark:text-clr-200">manipulate the canvas animation. click around. have some fun.</p>
+          <p class="text-clr-400 dark:text-clr-200">manipulate the canvas animation. <span v-if="!mobileStore.isMobile">click around. have some fun.</span></p>
         </div>
         <div class="content-controls">
           <button
@@ -49,7 +49,7 @@
       @click="controlsStore.togglePanelOpen"
       class="control-panel--tab bg-clr-blue dark:bg-clr-orange text-white hover:translate-x-3 hover:brightness-105"
     >
-      <h4>{{ controlsStore.panelOpen ? 'Close' : 'Open' }} Control Panel</h4>
+      <h4 v-if="!mobileStore.isMobile">{{ controlsStore.panelOpen ? 'Close' : 'Open' }} Control Panel</h4>
       <i
         v-if="!controlsStore.panelOpen"
         class="fa-sharp fa-solid fa-arrows-from-line"
@@ -72,10 +72,12 @@ import Toast from '@component/globals/Toast.vue'
 import { useHeaderStore } from '@store/header.js'
 import { useControlsStore } from '@store/controls.js'
 import { useCirclesStore } from '@store/circles.js'
+import { useMobileStore } from '@store/mobile.js'
 
 const headerStore = useHeaderStore()
 const controlsStore = useControlsStore()
 const circlesStore = useCirclesStore()
+const mobileStore = useMobileStore()
 const {
   changeVelocity,
   scatterCanvas,
@@ -154,7 +156,7 @@ onMounted(() => {
   position:absolute;
   left: 0;
   top: var(--headerVh);
-  max-width: 35rem;
+  max-width: 25rem;
   height: calc(100vh - var(--headerVh));
   z-index: 100;
   display: flex;
@@ -168,12 +170,16 @@ onMounted(() => {
   
   &--content {
     display: flex;
-    max-width: 30rem;
+    max-width: 28rem;
     overflow: hidden;
     align-items: center;
     height: 100%;
     box-shadow: 0.3rem 0 0.5rem rgba(0, 0, 0, 0.3);
     transition: max-width 0.15s linear;
+
+    @media (min-width: 768px) {
+      max-width: 35rem;
+    }
 
     &.is-closed {
       max-width: 0;
@@ -184,7 +190,11 @@ onMounted(() => {
     }
 
     &-inner {
-      padding: 2.4rem;
+      padding: 0.75rem;
+
+      @media (min-width: 768px) {
+        padding: 2.4rem;
+      }
 
       h4 {
         font-size: 2.4rem;
@@ -219,7 +229,14 @@ onMounted(() => {
     padding-inline: 0.75rem;
     padding-block: 1.25rem;
     box-shadow: 0.3rem 0 0.5rem rgba(0, 0, 0, 0.3);
+    align-self: flex-start;
+    margin-top: 2rem;
     cursor: pointer;
+
+    @media (min-width: 768px) {
+      align-self: center;
+      margin-top: 0;
+    }
 
     h4 {
       font-size: 1.2rem;

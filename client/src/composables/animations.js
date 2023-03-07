@@ -13,7 +13,7 @@ export const useAnimateIntro = (elements, animateClassNames) => {
   const tl = gsap.timeline({
     onStart() {
       title.parentElement.style.opacity = 1
-    }
+    },
   })
 
   tl.from(title, {

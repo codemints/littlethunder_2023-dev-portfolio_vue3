@@ -4,7 +4,10 @@
       <div class="section-col section-col--12">
         <div class="section-content">
           <SectionTitle title="My Work" />
-          <div class="content-wrapper panel-wrapper">
+          <div
+            v-if="mobileStore.isMobile"
+            class="content-wrapper panel-wrapper"
+          >
             <SliderPanel
               title="GitHub DevFinder"
               img="./src/assets/img/project_03.jpg"
@@ -40,8 +43,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useMobileStore } from '@store/mobile.js'
 import SectionTitle from '@component/globals/SectionTitle.vue'
 import SliderPanel from '@component/globals/SliderPanel.vue'
+
+const mobileStore = useMobileStore()
 
 const propData = {
   skills: {
