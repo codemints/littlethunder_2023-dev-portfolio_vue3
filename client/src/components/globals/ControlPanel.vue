@@ -162,13 +162,17 @@ onMounted(() => {
   display: flex;
   align-items: center;
   transition: top 0.3s ease-in-out, height 0.3s ease-in-out;
+
+  @media (min-width: 768px) {
+    max-width: 48rem;
+  }
   
-  &--bar {
+  .control-panel--bar {
     width: 0.5rem;
     height: 100%;
   }
   
-  &--content {
+  .control-panel--content {
     display: flex;
     max-width: 28rem;
     overflow: hidden;
