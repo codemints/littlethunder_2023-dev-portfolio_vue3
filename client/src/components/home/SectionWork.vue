@@ -192,16 +192,24 @@ onMounted(() => {
 .slider-container {
   --active-color: '';
   position: relative;
-  max-width: 96rem;
+  max-width: 84vw;
   height: auto;
   margin-top: 3.5rem;
+
+  @media (min-width: 768px) {
+    max-width: 96rem;
+  }
 
   .slides {
 
     .slider-panel {
-      width: 60%;
+      width: 100%;
       margin-right: 7.5rem;
       cursor: grab;
+
+      @media (min-width: 768px) {
+        width: 60%;
+      }
 
       &:active {
         cursor: grabbing;
@@ -232,12 +240,12 @@ onMounted(() => {
       }
 
       h3 {
-        font-size: 3.6rem;
+        font-size: clamp(2.8rem, 2vw, 3.6rem);
         line-height: 1;
       }
 
       i {
-        font-size: 2.4rem;
+        font-size: clamp(1.8rem, 2vw, 2.4rem);
 
         &:last-of-type {
           margin-left: 1rem;
@@ -249,11 +257,12 @@ onMounted(() => {
         ul {
           display: flex;
           justify-content: center;
+          flex-wrap: wrap;
           align-items: center;
           gap: 1rem;
 
           li {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 2vw, 1.4rem);
           }
         }
       }
