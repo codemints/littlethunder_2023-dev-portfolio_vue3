@@ -4,57 +4,60 @@
       <div class="section-col section-col--12">
         <div class="section-content">
           <SectionTitle title="My Work" />
-          <div
-            v-if="mobileStore.isMobile"
-            class="content-wrapper panel-wrapper"
-          >
-            <SliderPanel
-              title="GitHub DevFinder"
-              img="./src/assets/img/project_03.jpg"
-              :links="propData.links.devFinder"
-              :skills="propData.skills.devFinder"
-            >
-              <p class="text-clr-400 dark:text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </SliderPanel>
-            
-            <SliderPanel
-              title="PokeDex"
-              img="./src/assets/img/project_02.jpg"
-              :links="propData.links.pokeDex"
-              :skills="propData.skills.pokeDex"
-            >
-              <p class="text-clr-400 dark:text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </SliderPanel>
-            
-            <SliderPanel
-              title="VueDrop"
-              img="./src/assets/img/project_01.jpg"
-              :links="propData.links.vueDrop"
-              :skills="propData.skills.vueDrop"
-            >
-              <p class="text-clr-400 dark:text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </SliderPanel>
-          </div>
             <div ref="sliderContainer" class="slider-container">
-              <div class="slides">
+              <div
+                @mouseover="(e) => buttonsStore.toggleCursors(true)"
+                @mouseout="(e) => buttonsStore.toggleCursors(false)"
+                class="slides"
+              >
                 <Flicking
                   ref="slider"
                   :options="{
                     align: 'center',
                     circular: true,
-                    defaultIndex: 1,
+                    defaultIndex: center,
                     gap: 50,
+                    horizontal: true,
+                    noPanelStyleOverride: true,
                   }"
                   :plugins="plugins"
+                  @changed=""
                 >
-                  <div class="slider-panel slider-panel-1">
-                    <h1>Div 1</h1>
-                  </div>
-                  <div class="slider-panel slider-panel-2">
-                    <h1>Div 2</h1>
-                  </div>
-                  <div class="slider-panel slider-panel-3">
-                    <h1>Div 3</h1>
+                  <div
+                    v-for="(slide, index) in experienceData"
+                    :key="slide.title"
+                    :ref="el => panelItems[index] = el"
+                    class="slider-panel"
+                  >
+                    <div class="panel-title">
+                      <h4 class="text-clr-orange dark:text-clr-blue">Featured Project</h4>
+                      <div class="panel-details">
+                        <div>
+                          <h3 class="text-clr-400 dark:text-white">{{ slide.title }}</h3>
+                        </div>
+                        <div>
+                          <a :href="slide.repo" target="_blank">
+                            <i class="fa-brands fa-github text-clr-400 hover:text-clr-200 dark:text-clr-200 dark:hover:text-clr-400"></i>
+                          </a>
+                          <a :href="slide.site" target="_blank">
+                            <i class="fa-sharp fa-solid fa-arrow-up-right-from-square text-clr-orange hover:text-clr-blue dark:text-clr-blue dark:hover:text-clr-400"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <img :src="slide.image" :alt="slide.title" draggable="false" class="border-clr-100 dark:border-clr-400 border-solid border-4"/>
+                    <div class="panel-content bg-clr-100 dark:bg-clr-400">
+                      <p class="text-clr-400 dark:text-clr-200 text-center">{{ slide.description }}</p>
+                    </div>
+                    <div class="panel-skills">
+                      <ul>
+                        <li
+                          v-for="(skill, index) in slide.skills"
+                          :key="skill"
+                          class="text-clr-blue dark:text-clr-orange"
+                        >{{ skill }}</li>
+                      </ul>
+                    </div>
                   </div>
                 </Flicking>
               </div>
@@ -64,7 +67,7 @@
                 class="slider-controls"
               >
                 <div
-                  @click="(e) => changeSlide(e)"
+                  @click="slider.prev()"
                   class="slider-arrow slider-arrow-prev"
                   data-slide="prev"
                 >
@@ -82,7 +85,7 @@
                   ></button>
                 </div>
                 <div
-                  @click="(e) => changeSlide(e)"
+                  @click="slider.next()"
                   class="slider-arrow slider-arrow-next"
                   data-slide="next"
                 >
@@ -97,22 +100,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUpdated, watch, watchEffect } from 'vue'
-import { useMobileStore } from '@store/mobile.js'
+import { ref, onMounted, watchEffect, computed } from 'vue'
 import SectionTitle from '@component/globals/SectionTitle.vue'
-import SliderPanel from '@component/globals/SliderPanel.vue'
+import siteColors from '@lib/site-colors.js'
+import experienceData from '@lib/experience.js'
+import { useDarkModeStore } from '@store/darkmode.js'
+import { useButtonsStore } from '@store/buttons.js'
+
 import Flicking from "@egjs/vue3-flicking";
 import { AutoPlay, Sync, Pagination, Arrow, Perspective } from "@egjs/flicking-plugins";
-import siteColors from '@lib/site-colors.js'
-import { useDarkModeStore } from '@store/darkmode.js'
-
-const mobileStore = useMobileStore()
-const darkModeStore = useDarkModeStore()
-const sliderContainer = ref(null)
-const paginationItems = ref([])
-const slider = ref(null)
-const useIndex = ref(0)
-const isReady = ref(false)
 const plugins = [
   // new AutoPlay({ duration: 2000, direction: "NEXT", stopOnHover: false }),
   // new Arrow({ parentEl: controls }),
@@ -120,7 +116,18 @@ const plugins = [
   // new Perspective({ rotate: 0.45, perspective: 1000 }),
 ];
 
+const darkModeStore = useDarkModeStore()
+const buttonsStore = useButtonsStore()
+const sliderContainer = ref(null)
+const paginationItems = ref([])
+const panelItems = ref([])
+const slider = ref(null)
+const useIndex = ref(0)
+const isReady = ref(false)
+const center = ref(0)
+
 const changeSlide = (e, index) => {
+  console.log(e)
   const { slide } = e.currentTarget.dataset;
   const arrows = slide !== 'pagination';
   const pages = paginationItems.value;
@@ -129,7 +136,6 @@ const changeSlide = (e, index) => {
 
   if (arrows) {
     if (slide === 'prev') {
-      slider.value.prev();
       useIndex.value = useIndex.value === 0 ? pages.length - 1 : useIndex.value - 1;
     } else {
       slider.value.next();
@@ -146,28 +152,6 @@ const changeSlide = (e, index) => {
   });
 }
 
-const propData = {
-  skills: {
-    devFinder: ['HTML', 'CSS', 'Vue3', 'Vite', 'Netlify', 'GitHub API', 'Axios'],
-    vueDrop: ['HTML', 'Sass', 'Vue3', 'Vite', 'Netlify', 'Custom Drag & Drop'],
-    pokeDex: ['HTML', 'Tailwind', 'React', 'Vite', 'Netlify', 'PokeAPI'],
-  },
-  links: {
-    devFinder: {
-      site: 'https://vue3-github-usersearch.netlify.app/',
-      repo: 'https://github.com/codemints/vue3-github-search',
-    },
-    vueDrop: {
-      site: 'https://vuedrop.netlify.app/',
-      repo: 'https://github.com/codemints/vuedrop',
-    },
-    pokeDex: {
-      site: 'https://codemints-pokedex.netlify.app/',
-      repo: 'https://github.com/codemints/pokedex',
-    },
-  }
-}
-
 const setCustomProp = () => {
   sliderContainer.value.style.setProperty(
     '--active-color',
@@ -176,6 +160,10 @@ const setCustomProp = () => {
       : siteColors.clrBlue
   )
 }
+
+const getCenterIndex = computed(() => {
+  return Math.floor(slider.value.panels.length / 2 + 1);
+});
 
 watchEffect(() => {
   setCustomProp()
@@ -191,6 +179,7 @@ watchEffect(() => {
 
 onMounted(() => {
   setCustomProp()
+  center.value = getCenterIndex.value
   window.addEventListener('load', () => {
     isReady.value = true
   })
@@ -198,40 +187,86 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.panel-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-flow: row wrap;
-  gap: 5rem 2rem;
-}
-.slider-panel {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 400px;
-  width: 60%;
-  color: white;
-  background-color: goldenrod;
-  margin-right: 2rem;
-}
+@use '@style/abstracts/variables' as *;
 
 .slider-container {
   --active-color: '';
   position: relative;
+  max-width: 96rem;
+  height: auto;
+  margin-top: 3.5rem;
 
   .slides {
 
+    .slider-panel {
+      width: 60%;
+      margin-right: 7.5rem;
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+
+      .panel-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .panel-content {
+        padding: 2.4rem;
+
+        p {
+          font-size: 1.5rem;
+        }
+      }
+
+      img {
+        margin-inline: auto;
+        margin-top: 2.4rem;
+      }
+
+      h4 {
+        font-family: $body;
+        font-size: 1.4rem;
+      }
+
+      h3 {
+        font-size: 3.6rem;
+        line-height: 1;
+      }
+
+      i {
+        font-size: 2.4rem;
+
+        &:last-of-type {
+          margin-left: 1rem;
+        }
+      }
+
+      .panel-skills {
+        margin-top: 1.8rem;
+        ul {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+
+          li {
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
   }
 
   .slider-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: absolute;
     width: 100%;
     padding-inline: 2.4rem;
-    margin-top: 1.8rem;
+    margin-top: 4.8rem;
 
     .slider-arrow {
       font-size: 3.6rem;

@@ -60,7 +60,6 @@ const props = defineProps({
 <style lang="scss" scoped>
 @use '@style/abstracts/variables' as *;
 .slider-panel {
-  max-width: 48rem;
   
   .panel-details {
     display: flex;

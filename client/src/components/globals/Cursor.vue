@@ -6,13 +6,17 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useCursor } from '@compose/cursor.js'
+import { useButtonsStore } from '@store/buttons.js'
 
 const outerCursor = useCursor()
 const innerCursor = useCursor()
+const buttonsStore = useButtonsStore()
 const cursorOuterRef = ref(null)
 const cursorInnerRef = ref(null)
 
 onMounted(() => {
+  buttonsStore.cursorOuter = cursorOuterRef.value
+  buttonsStore.cursorInner = cursorInnerRef.value
   outerCursor.setCursorData({
     liveCursor: cursorOuterRef.value,
     deadCursor: cursorInnerRef.value,
@@ -37,6 +41,10 @@ onMounted(() => {
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
+
+    &.is-hidden {
+      opacity: 0;
+    }
   }
   
   .cursor__outer {
