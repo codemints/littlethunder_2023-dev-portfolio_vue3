@@ -7,7 +7,7 @@ export const useAccordionStore = defineStore('accordion', {
       activePanel: null,
       panelData: [
         {
-          position: 'Frontend Developer & Designer',
+          position: 'Developer & Designer',
           company: 'MadWire',
           date: '2019 to Present',
           location: 'Fort Collins, CO',
@@ -19,7 +19,7 @@ export const useAccordionStore = defineStore('accordion', {
           panelHeight: null,
         },
         {
-          position: 'Web Developer & Graphic Designer',
+          position: 'Developer & Designer',
           company: 'Boomerang Marketing',
           date: '2018 to 2019',
           location: 'Aurora, CO',
@@ -31,7 +31,7 @@ export const useAccordionStore = defineStore('accordion', {
           panelHeight: null,
         },
         {
-          position: 'Web Developer & Graphic Designer',
+          position: 'Developer & Designer',
           company: 'Ludwig Photography',
           date: '2015 to 2018',
           location: 'Laramie, WY',

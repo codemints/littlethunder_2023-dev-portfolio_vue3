@@ -75,6 +75,7 @@ const propData = {
 .panel-wrapper {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  flex-flow: row wrap;
+  gap: 5rem 2rem;
 }
 </style>
