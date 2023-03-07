@@ -107,10 +107,15 @@ onMounted(() => {
 
   .intro-title {
     max-height: var(--title-wrapper-height);
-    margin-top: 15rem;
+    padding: 2rem;
+    margin-top: 5rem;
     overflow: visible;
     opacity: 0;
     transition: max-height 0.2s ease-in-out;
+
+    @media (min-width: 768px) {
+      margin-top: 15rem;
+    }
 
     &.is-hidden {
       max-height: 0;

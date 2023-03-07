@@ -1,6 +1,6 @@
 <template>
   <section id="section__contact" class="page-section">
-    <div class="section-row section-row--fullwidth">
+    <div class="section-row section-row--fullwidth flex-wrap">
       <div class="section-col section-col--6 section-col--center">
         <div class="section-content">
           <SectionTitle title="Contact Me" />

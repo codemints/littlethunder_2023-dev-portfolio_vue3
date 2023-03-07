@@ -96,10 +96,12 @@ const propData = {
   .skillcard-container {
     display: flex;
     flex-flow: row wrap;
+    column-gap: 0;
+    row-gap: 2rem;
 
     > div {
       flex: 1 1 33%;
-      min-width: 35rem;
+      min-width: 28rem;
     }
   }
 }

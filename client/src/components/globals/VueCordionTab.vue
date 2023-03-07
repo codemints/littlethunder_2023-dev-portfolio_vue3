@@ -104,11 +104,14 @@ onMounted(() => {
       cursor: pointer;
 
       h3 {
-        font-size: 1.8rem;
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
         text-transform: uppercase;
-        line-height: 1;
         margin: 0;
         padding: 0;
+
+        @media (min-width: 768px) {
+          line-height: 1;
+        }
       }
 
       .date {

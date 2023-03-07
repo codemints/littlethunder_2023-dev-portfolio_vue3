@@ -58,8 +58,10 @@ const props = defineProps({
   padding-inline: 3.2rem;
   padding-block: 2rem;
 
-  &:not(:last-child) {
-    border-right-width: 0;
+  @media (min-width: 768px) {
+    &:not(:last-child) {
+      border-right-width: 0;
+    }
   }
 
   .skillcard-header {
