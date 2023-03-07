@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import { themeColors as Colors } from '../../composables/colors.js'
 import { useDarkModeStore } from '@store/darkmode.js'
 import { useWindow } from '@compose/window.js'

@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Splitting from '@component/globals/Splitting.vue'
 import Button from '@component/globals/Button.vue'
 import CircleCanvas from '@component/globals/CircleCanvas.vue'
@@ -119,11 +119,16 @@ onMounted(() => {
     }
 
     h1 {
+      font-size: clamp(5.6rem, 4vw, 9.6rem);
       cursor: pointer;
     }
 
+    h2 {
+      font-size: clamp(3.6rem, 2.7vw, 4.8rem);
+    }
+
     h3 {
-      font-size: 2.4rem;
+      font-size: clamp(1.8rem, 1.8vw, 2.4rem);
     }
   }
 

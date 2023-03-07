@@ -6,10 +6,16 @@ main {
 
 .page-section {
   min-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   counter-increment: section;
+
+  p {
+    font-size: clamp(13px, 0.875em, 15px);
+  }
 
   &:nth-child(odd) {
     .section-title {
@@ -33,6 +39,8 @@ main {
   max-width: 114rem;
   width: 100%;
   height: 100%;
+  padding-block: 2rem;
+  padding-inline: 1rem;
   margin-inline: auto;
 
   &.section-row--fullwidth {

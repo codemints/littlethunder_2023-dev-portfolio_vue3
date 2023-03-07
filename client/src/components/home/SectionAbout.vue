@@ -1,6 +1,6 @@
 <template>
   <section id="section__about" class="page-section">
-    <div class="section-row">
+    <div class="section-row flex-wrap-reverse">
       <div class="section-col section-col--6">
         <div class="section-content">
           <SectionTitle title="About Me" />
@@ -26,7 +26,7 @@ const darkModeStore = useDarkModeStore()
 
 <style lang="scss" scoped>
 img {
-  width: 40rem;
+  width: clamp(24rem, 20vw, 40rem);
   margin-inline: auto;
 }
 </style>

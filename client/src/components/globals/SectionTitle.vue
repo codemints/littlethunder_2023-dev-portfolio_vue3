@@ -9,6 +9,7 @@ const props = defineProps(['title'])
 <style lang="scss" scoped>
 @use '@style/abstracts/variables' as *;
 h2 {
+  font-size: clamp(3.6rem, 2.7vw, 4.8rem);
   position: relative;
 
   &::before {
@@ -18,7 +19,7 @@ h2 {
     right: 0;
     color: $clr-orange;
     font-family: $body;
-    font-size: 3.2rem;
+    font-size: clamp(24px, 2vw, 32px);
   }
 }
 </style>

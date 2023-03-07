@@ -3,8 +3,8 @@ import { defineStore } from 'pinia'
 export const useMobileStore = defineStore('mobile', {
   state: () => {
     return {
-      isMobile: false,
-      isOpen: false,
+      isMobile: undefined,
+      isOpen: undefined,
     }
   },
   actions: {
@@ -13,6 +13,9 @@ export const useMobileStore = defineStore('mobile', {
     },
     setIsMobile(bool) {
       this.isMobile = bool
+    },
+    getIsMobile() {
+      return this.isMobile;
     }
   }
 })

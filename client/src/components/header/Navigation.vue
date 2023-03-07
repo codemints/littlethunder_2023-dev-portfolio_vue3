@@ -140,18 +140,17 @@ const scrollSpy = () => {
     } else {
       item.isActive = false
     }
-
   })
 }
 
 onMounted(() => {
-  // window.addEventListener('load', () => {
-  //   navStore.links = Array.from(navLinksRef.value.children)
-  //   navStore.links[0].firstElementChild.style.color = '#9EA7B3'
-  //   window.addEventListener('scroll', scrollSpy)
-  //   setShuttlePosition()
-  //   navStore.links[0].firstElementChild.style.color = ''
-  // })
+  window.addEventListener('load', () => {
+    navStore.links = Array.from(navLinksRef.value.children)
+    navStore.links[0].firstElementChild.style.color = '#9EA7B3'
+    window.addEventListener('scroll', scrollSpy)
+    setShuttlePosition()
+    navStore.links[0].firstElementChild.style.color = ''
+  })
 })
 
 onUnmounted(() => {

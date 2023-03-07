@@ -80,21 +80,22 @@ footer {
         justify-content: center;
         gap: 1rem;
       }
-
+      
       p {
         font-size: 1.2rem;}
-
-      i {
-        font-size: 1.8rem;
+        
+        i {
+          font-size: 1.8rem;
+        }
       }
-    }
-
-    .footer-icons__container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      margin-top: 3.2rem;
+      
+      .footer-icons__container {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem 3rem;
+        margin-top: 3.2rem;
 
       img {
         width: auto;

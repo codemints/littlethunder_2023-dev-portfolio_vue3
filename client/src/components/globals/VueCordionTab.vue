@@ -8,11 +8,16 @@
       class="vuecordion-title bg-clr-blue"
     >
       <h3 class="title text-white">{{ panelData.position }} @ <span class="text-clr-400">{{ panelData.company }}</span></h3>
-      <h3 class="date text-white">{{  panelData.date }}</h3>
+      <h3
+        v-if="!mobileStore.isMobile"
+        class="date text-white">{{  panelData.date }}
+      </h3>
       <i
+        v-if="panelData.isOpen"
         class="fa-sharp fa-solid fa-minus text-clr-400"
       ></i>
       <i
+        v-else
         class="fa-sharp fa-solid fa-plus text-clr-400"
       ></i>
     </div>
@@ -43,9 +48,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useAccordionStore } from '@store/accordion.js'
+import { useMobileStore } from '@store/mobile.js'
 
 const accordionStore = useAccordionStore()
 const { setPanelHeight, setActivePanel } = accordionStore
+const mobileStore = useMobileStore()
 const panel = ref(null)
 const panelBody = ref(null)
 const panelBodyHeight = ref(null)
@@ -144,14 +151,14 @@ onMounted(() => {
         justify-content: center;
         align-items: center;
         flex-flow: row wrap;
-        gap: 1rem;
+        gap: 0.5rem 1rem;
+        margin-top: 2rem;
         
         > div {
           flex: 1 0 auto;
           padding-inline: 1.2rem;
           padding-block: 0.6rem;
           border-radius: 100rem;
-          margin-top: 2rem;
           
           p {
             font-size: 1.2rem;

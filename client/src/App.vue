@@ -1,7 +1,7 @@
 <template>
   <Floaters v-if="!mobileStore.isMobile"/>
   <MobileHeader v-if="mobileStore.isMobile"/>
-  <Header v-else ref="headerRef" />
+  <!-- <Header v-else ref="headerRef" /> -->
   <main ref="contentRef" class="page-content bg-white dark:bg-clr-800">
     <SectionIntro class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50" />
     <SectionAbout class="bg-gradient-to-b from-white to-clr-100/25 dark:from-clr-800 dark:to-clr-600/50"/>
@@ -15,12 +15,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUpdated, watch } from 'vue'
 import { useHeaderStore } from '@store/header.js'
 import { useNavStore } from '@store/navigation.js'
 import { useColorScheme } from '@compose/colorscheme.js'
 import { useWindow } from '@compose/window.js'
 import { useMobileStore } from '@store/mobile.js'
+import { useReadyStore } from '@store/ready.js'
 
 import Floaters from '@component/page/Floaters.vue'
 import Header from '@component/header/Header.vue'
@@ -42,6 +43,7 @@ const { setColorScheme } = useColorScheme()
 const { x } = useWindow()
 const mobileStore = useMobileStore()
 const { setIsMobile } = mobileStore
+const readyStore = useReadyStore()
 
 const calculateHeights = () => {
   const headerInnerHeight = headerRef.value.$el.querySelector('.header__main-content').offsetHeight
@@ -102,17 +104,20 @@ watch(() => x.value, (newX) => {
 
 onMounted(() => {
   x.value < 768 ? setIsMobile(true) : setIsMobile(false)
-  
-  window.addEventListener('load', () => {
-    setColorScheme()
-    if ( !mobileStore.isMobile ) {
-      const rootEl = document.documentElement
-      setCSSProperties(rootEl)
-      setHeaderState()
-    }
-    getSectionTops()
-    navStore.sections = contentRef.value.children
-  })
+  readyStore.setIsReady(true)
+
+  if ( readyStore.isReady ) {
+    window.addEventListener('load', () => {
+      setColorScheme()
+      if ( !mobileStore.isMobile ) {
+        const rootEl = document.documentElement
+        setCSSProperties(rootEl)
+        setHeaderState()
+      }
+      getSectionTops()
+      navStore.sections = contentRef.value.children
+    })
+  }
 })
 </script>
 
