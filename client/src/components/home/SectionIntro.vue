@@ -95,7 +95,7 @@ onMounted(() => {
 
   setTimeout(() => {
     useAnimateIntro(animateElements, animateClassNames)
-  }, 250)
+  }, 1250)
 })
 </script>
 
