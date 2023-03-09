@@ -7,7 +7,7 @@
           <h3 class="text-clr-blue">Available For Hire</h3>
           <p class="text-clr-400 dark:text-clr-200">Interesting in having me as part of your team? Send me an email @ lunaco5280@gmail.com. Thank you for visiting my portfolio. I hope you enjoyed it.</p>
           <Button
-            @buttonClicked="handleClick"
+            @buttonClicked="handleContact"
             href="mailto:lunaco5280@gmail.com"
             id="contact__button"
             text="Let's Work Together"
@@ -37,8 +37,8 @@ import SectionTitle from '@component/globals/SectionTitle.vue'
 import Button from '@component/globals/Button.vue'
 import Map from '@component/globals/Map.vue'
 
-const handleClick = () => {
-  console.log('I have been clicked')
+const handleContact = (e) => {
+  window.location.href = e.target.href
 }
 </script>
 
