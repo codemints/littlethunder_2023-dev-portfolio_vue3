@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed } from 'vue'
 const props = defineProps({
   textContent: {
     type: String,
@@ -93,13 +93,6 @@ const textContentData = computed(() => {
     
     return data
   }, [])
-})
-
-watch(charArray, (val) => {
-  console.log(val)
-})
-
-onMounted(() => {
 })
 </script>
 

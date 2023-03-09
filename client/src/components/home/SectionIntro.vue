@@ -39,9 +39,9 @@
         hovText="Contact Me Today"
         :classNames="[ 'bg-clr-orange', 'hover:bg-clr-100', 'dark:hover:bg-clr-800', 'text-white', 'hover:text-clr-400', 'dark:hover:text-white', 'font-hf', 'uppercase']"
         :cssProps="{
-          fontSize: '1.5rem',
-          letterSpacing: '0.1rem',
-          width: '30rem',
+          'font-size': '1.5rem',
+          'letter-spacing': '0.1rem',
+          'width': '30rem',
         }"
       />
     </div>

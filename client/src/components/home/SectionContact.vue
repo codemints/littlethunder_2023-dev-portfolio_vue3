@@ -5,10 +5,10 @@
         <div class="section-content">
           <SectionTitle title="Contact Me" />
           <h3 class="text-clr-blue">Available For Hire</h3>
-          <p class="text-clr-400 dark:text-clr-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a. Ut placerat orci nulla pellentesque dignissim enim.</p>
+          <p class="text-clr-400 dark:text-clr-200">Interesting in having me as part of your team? Send me an email @ lunaco5280@gmail.com. Thank you for visiting my portfolio. I hope you enjoyed it.</p>
           <Button
             @buttonClicked="handleClick"
-            href="#section__contact"
+            href="mailto:lunaco5280@gmail.com"
             id="contact__button"
             text="Let's Work Together"
             hovText="Contact Me Today"

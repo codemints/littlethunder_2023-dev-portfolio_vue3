@@ -4,7 +4,7 @@ const experienceData = [
     site: 'https://vue3-github-usersearch.netlify.app/',
     repo: 'https://github.com/codemints/vue3-github-search',
     image: './src/assets/img/project_03.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    description: 'A simple profile lookup tool for looking up GitHub users. Built with Vue3, Vite, Netlify, and the GitHub API.',
     skills: ['HTML', 'CSS', 'Vue3', 'Vite', 'Netlify', 'GitHub API', 'Axios'],
   },
   {
@@ -12,7 +12,7 @@ const experienceData = [
     site: 'https://vuedrop.netlify.app/',
     repo: 'https://github.com/codemints/vuedrop',
     image: './src/assets/img/project_01.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    description: 'A todo style app built with Vue3, Sass, and HTML that implements custom drag and drop functionality.',
     skills: ['HTML', 'Sass', 'Vue3', 'Vite', 'Netlify', 'Custom Drag & Drop'],
   },
   {
@@ -20,7 +20,7 @@ const experienceData = [
     site: 'https://codemints-pokedex.netlify.app/',
     repo: 'https://github.com/codemints/pokedex',
     image: './src/assets/img/project_02.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    description: 'A Pokemon lookup tool built in React that uses the PokeAPI to fetch your favorite Pokemon.',
     skills: ['HTML', 'Tailwind', 'React', 'Vite', 'Netlify', 'PokeAPI'],
   },
   {
@@ -28,7 +28,7 @@ const experienceData = [
     site: 'https://github.com/codemints/reactify',
     repo: 'https://github.com/codemints/reactify',
     image: './src/assets/img/project_04.jpg',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    description: 'A project that uses OAuth and the Spotify API to authenticate users and fetch their Spotify data.',
     skills: ['Express', 'Axios', 'React', 'Vite', 'Heroku', 'Spotify API', 'MusixMatch API', 'OAuth',],
   },
 ]

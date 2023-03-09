@@ -13,8 +13,12 @@ main {
   justify-content: center;
   counter-increment: section;
 
-  p {
-    font-size: clamp(13px, 0.875em, 15px);
+  p, li {
+    font-size: clamp(1.3rem, 2vw, 1.4rem);
+  }
+
+  p, ul {
+    margin-top: 1.24rem;
   }
 
   &:nth-child(odd) {

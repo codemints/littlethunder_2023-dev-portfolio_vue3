@@ -4,7 +4,37 @@
       <div class="section-col section-col--6">
         <div class="section-content">
           <SectionTitle title="About Me" />
-          <p class="text-clr-400 dark:text-clr-200">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo nulla facilisi nullam vehicula ipsum a. Ut placerat orci nulla pellentesque dignissim enim. Vitae nunc sed velit dignissim sodales ut eu sem integer. Dictum fusce ut placerat orci. Ut pharetra sit amet aliquam id diam maecenas ultricies. Ut sem nulla pharetra diam sit amet nisl suscipit. Id volutpat lacus laoreet non curabitur gravida. Turpis egestas pretium aenean pharetra. In nibh mauris cursus mattis. Quis varius quam quisque id diam vel quam elementum. Mattis nunc sed blandit libero volutpat sed cras. Dictumst quisque sagittis purus sit.</p>
+          <h4 class="text-clr-orange dark:text-clr-blue">Hi, I'm Daniel. Thanks for visiting.</h4>
+          <p class="text-clr-400 dark:text-clr-200">I like making magic in the browser. My journey started off in graphic design, but somewhere along the way, I got bit by the Javascript bug.</p>
+          <p class="text-clr-400 dark:text-clr-200">Over the past 10 years I've experimented with many languages, including PHP, C++, and Python, but JavaScript of choice. My current work focuses on the Vue and React libraries — using them to build rich, functional, and beautiful online experiences. Recently I have started using Node.js to improve the frontend experience — implementing REST and GraphQL APIs.</p>
+          <p class="text-clr-400 dark:text-clr-200">I've loved the journey up to this point — and there is still so much to learn — but I am naturally curious and confident in my ability. I am perpetually looking for ways to level up — one problem at a time.</p>
+          <p class="text-clr-400 dark:text-clr-200">Outside of coding, I enjoy hiking, camping, mountain biking, skateboarding, and road trips. Below are some technologies I've been using in my work recently.</p>
+          <ul>
+            <li class="text-clr-200">
+              <i class="fa-sharp fa-solid fa-caret-right text-clr-blue dark:text-clr-orange"></i>
+              JavaScript (ES6+)
+            </li>
+            <li class="text-clr-200">
+              <i class="fa-sharp fa-solid fa-caret-right text-clr-blue dark:text-clr-orange"></i>
+              Vue
+            </li>
+            <li class="text-clr-200">
+              <i class="fa-sharp fa-solid fa-caret-right text-clr-blue dark:text-clr-orange"></i>
+              Pinia
+            </li>
+            <li class="text-clr-200">
+              <i class="fa-sharp fa-solid fa-caret-right text-clr-blue dark:text-clr-orange"></i>
+              React
+            </li>
+            <li class="text-clr-200">
+              <i class="fa-sharp fa-solid fa-caret-right text-clr-blue dark:text-clr-orange"></i>
+              Node.js
+            </li>
+            <li class="text-clr-200">
+              <i class="fa-sharp fa-solid fa-caret-right text-clr-blue dark:text-clr-orange"></i>
+              WordPress
+            </li>
+          </ul>
         </div>
       </div>
       <div class="section-col section-col--6">
@@ -25,8 +55,25 @@ const darkModeStore = useDarkModeStore()
 </script>
 
 <style lang="scss" scoped>
-img {
-  width: clamp(24rem, 20vw, 40rem);
-  margin-inline: auto;
+.section-content {
+  h4 {
+    font-size: 2.4rem;
+  }
+  ul {
+    column-count: 3;
+    margin-top: 2rem;
+    li {
+      &:not(:first-of-type) {
+        margin-top: 1rem;
+      }
+    }
+  }
+  i {
+    font-size: 1.4rem;
+  }
+  img {
+    width: clamp(24rem, 20vw, 40rem);
+    margin-inline: auto;
+  }
 }
 </style>

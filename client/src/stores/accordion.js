@@ -11,7 +11,7 @@ export const useAccordionStore = defineStore('accordion', {
           company: 'MadWire',
           date: '2019 to Present',
           location: 'Fort Collins, CO',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          description: 'Collaborate with a multi-disciplinary team to develope frontend solutions for a variety of clients, maintain existing codebase, and modernize legacy codebase to improve functionality and efficiency.',
           skills: [
             'JavaScript', 'PHP', 'HTML', 'CSS', 'WordPress', 'Shopify', 'Photoshop', 'Illustrator', 'InDesign', 'Figma',
           ],
@@ -23,7 +23,7 @@ export const useAccordionStore = defineStore('accordion', {
           company: 'Boomerang Marketing',
           date: '2018 to 2019',
           location: 'Aurora, CO',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          description: 'Manage print, digital, and web design projects for a diverse range of clients to solidify brand identity, improve brand awareness, and improve user experience.',
           skills: [
             'JavaScript', 'PHP', 'HTML', 'CSS', 'WordPress', 'Photoshop', 'Illustrator', 'InDesign'
           ],
@@ -35,7 +35,7 @@ export const useAccordionStore = defineStore('accordion', {
           company: 'Ludwig Photography',
           date: '2015 to 2018',
           location: 'Laramie, WY',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+          description: 'Collaborate with a small photography studio team to create a brand voice across web, digital, and print medias.',
           skills: [
             'JavaScript', 'PHP', 'HTML', 'CSS', 'WordPress', 'Shopify', 'Photoshop', 'Illustrator', 'Lightroom'
           ],

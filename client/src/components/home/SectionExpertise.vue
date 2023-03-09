@@ -12,7 +12,7 @@
               :tools="propData.tools.design"
               icon="fa-sharp fa-solid fa-pen-nib"
               >
-                <p class="text-clr-400 dark:text-clr-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="text-clr-400 dark:text-clr-100">I love the balance good design gives to communication.</p>
               </SkillCard>
               <SkillCard
               title="Frontend Dev"
@@ -20,7 +20,7 @@
               :tools="propData.tools.dev"
               icon="fa-sharp fa-solid fa-code"
               >
-                <p class="text-clr-400 dark:text-clr-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="text-clr-400 dark:text-clr-100">Putting the pieces together to create function beauty in the browser.</p>
               </SkillCard>
               <SkillCard
               title="Photography"
@@ -28,7 +28,7 @@
               :tools="propData.tools.photo"
               icon="fa-sharp fa-solid fa-aperture"
               >
-                <p class="text-clr-400 dark:text-clr-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="text-clr-400 dark:text-clr-100">I am constantly drawn to the interaction between light and shadow.</p>
               </SkillCard>
             </div>
           </div>
@@ -91,6 +91,7 @@ const propData = {
 </script>
 
 <style lang="scss" scoped>
+@use '@style/abstracts/' as *;
 .skillcard-wrapper {
   
   .skillcard-container {
@@ -102,6 +103,10 @@ const propData = {
     > div {
       flex: 1 1 33%;
       min-width: 28rem;
+      p {
+        font-family: $heading;
+        font-size: 1.6rem;
+      }
     }
   }
 }
