@@ -33,7 +33,7 @@
         ref="introButtonRef"
         @buttonClicked=""
         @buttonHovered=""
-        href="#section__contact"
+        linkTo="#section__contact"
         id="hero__button"
         text="Let's Work Together"
         hovText="Contact Me Today"

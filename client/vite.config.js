@@ -10,6 +10,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@component': path.resolve(__dirname, './src/components'),
       '@compose': path.resolve(__dirname, './src/composables'),
+      '@doc': path.resolve(__dirname, './src/assets/docs'),
       '@font': path.resolve(__dirname, './src/assets/fonts'),
       '@ico': path.resolve(__dirname, './src/assets/icons/fontawesome/scss'),
       '@img': path.resolve(__dirname, './src/assets/img'), 

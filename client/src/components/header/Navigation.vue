@@ -42,7 +42,8 @@
       <Button
         ref="contactButtonRef"
         @buttonClicked=""
-        :href="resumeUrl"
+        :linkTo="resumeUrl"
+        target="_blank"
         download="dLittleThunder_resume.pdf"
         id="resume__button"
         text="resumé"
@@ -67,7 +68,7 @@ import Button from '@component/globals/Button.vue'
 const navStore = useNavStore()
 const headerStore = useHeaderStore()
 
-const resumeUrl = './assets/docs/dlittlethunder_resume-2023.pdf'
+const resumeUrl = './src/assets/docs/dlittlethunder_resume-2023.pdf'
 
 const navLinksRef = ref(null)
 const navShuttleRef = ref(null)

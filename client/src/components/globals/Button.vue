@@ -1,10 +1,11 @@
 <template>
   <a
     class="block px-10 py-5"
-    @click="$emit('buttonClicked')"
+    @click="$emit('buttonClicked', $event)"
     @mouseover="handleHover"
     @mouseout="handleHover"
     :href="hrefAttribute"
+    :target="target"
     :download="downloadAttribute"
     :class="classNames"
     :style="getStyles"
@@ -38,7 +39,11 @@ const props = defineProps({
     type: String,
     required: false
   },
-  href: {
+  linkTo: {
+    type: String,
+    required: false
+  },
+  target: {
     type: String,
     required: false
   },
@@ -81,7 +86,7 @@ const downloadAttribute = computed(() => {
 })
 
 const hrefAttribute = computed(() => {
-  return props.href ? props.href : null
+  return props.linkTo ? props.linkTo : null
 })
 
 onMounted(() => {
@@ -95,10 +100,11 @@ defineExpose({
 
 <style lang="scss" scoped>
 @use '@style/abstracts/variables' as *;
-  button {
+  a {
     font-family: $heading;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
   }
 </style>

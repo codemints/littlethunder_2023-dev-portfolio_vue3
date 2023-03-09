@@ -5,10 +5,11 @@
         <div class="section-content">
           <SectionTitle title="Contact Me" />
           <h3 class="text-clr-blue">Available For Hire</h3>
-          <p class="text-clr-400 dark:text-clr-200">Interesting in having me as part of your team? Send me an email @ lunaco5280@gmail.com. Thank you for visiting my portfolio. I hope you enjoyed it.</p>
+          <p class="text-clr-400 dark:text-clr-200">Interesting in having me as part of your team? Send me an email at <a href="mailto:hello@codemints.io" class="underline text-clr-blue hover:text-clr-100 dark:text-clr-orange dark:hover:text-clr-400">hello@codemints.io</a>. Thank you for visiting my portfolio. I hope you enjoyed it.</p>
           <Button
             @buttonClicked="handleContact"
-            href="mailto:lunaco5280@gmail.com"
+            linkTo="mailto:hello@codemints.io"
+            target="_blank"
             id="contact__button"
             text="Let's Work Together"
             hovText="Contact Me Today"
@@ -38,7 +39,7 @@ import Button from '@component/globals/Button.vue'
 import Map from '@component/globals/Map.vue'
 
 const handleContact = (e) => {
-  window.location.href = e.target.href
+  console.log(e.target)
 }
 </script>
 

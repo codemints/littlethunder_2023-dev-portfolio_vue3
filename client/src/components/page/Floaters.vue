@@ -5,7 +5,7 @@
     class="floater__email-link"
   >
     <div class="bg-clr-200"></div>
-    <a href="mailto:hello@codemints.io" class="text-clr-200 hover:text-clr-blue">hello@codemints.io</a>
+    <a href="mailto:hello@codemints.io" class="text-clr-blue hover:text-clr-orange dark:text-clr-orange dark:hover:text-clr-blue">hello@codemints.io</a>
   </div>
   <div
     ref="floaterNavRef"
@@ -134,7 +134,7 @@ $padding: 5rem;
   }
 
   a {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     line-height: 1;
   }
 }
