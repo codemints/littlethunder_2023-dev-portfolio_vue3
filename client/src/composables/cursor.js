@@ -50,7 +50,7 @@ export const useCursor = () => {
 
   const initMorph = () => {
     buttonsStore.buttons.forEach(item => {
-      item.button.addEventListener('mouseenter', () => {
+      item.button.addEventListener('mouseover', () => {
         morphCursor(item)
       })
       item.button.addEventListener('mouseleave', () => {

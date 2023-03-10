@@ -52,21 +52,23 @@ onMounted(() => {
     --posY: 0;
     --outerW: 2.8rem;
     --outerH: 2.8rem;
-    left: calc(var(--posX) - (var(--outerW) / 2));
-    top: calc(var(--posY) - (var(--outerH) / 2));
+    left: 0;
+    top: 0;
     width: var(--outerW);
     height: var(--outerH);
     border-width: 0.2rem;
     border-style: solid;
-    transition-property:
-    width,
-    height;
-    transition-duration: 0.2s;
-    transition-timing-function: cubic-bezier(.39,.575,.565,1);
+    transform: translate(calc(var(--posX) - (var(--outerW) / 2)), calc(var(--posY) - (var(--outerH) / 2)));
+    
+    will-change: transform;
     
     &.is-morphed {
       border-color: $clr-blue;
       border-width: 0.35rem;
+      transition: 
+      width 0.2s cubic-bezier(.39, .575, .565, 1),
+      height 0.2s cubic-bezier(.39, .575, .565, 1),
+      transform 0.2s cubic-bezier(.39, .575, .565, 1);
     }
   }
   
