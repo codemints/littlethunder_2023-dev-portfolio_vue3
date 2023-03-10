@@ -68,6 +68,7 @@ onMounted(() => {
       transition: 
       width 0.2s cubic-bezier(.39, .575, .565, 1),
       height 0.2s cubic-bezier(.39, .575, .565, 1),
+      border-color 0.5s cubic-bezier(.39, .575, .565, 1),
       transform 0.2s cubic-bezier(.39, .575, .565, 1);
     }
   }
