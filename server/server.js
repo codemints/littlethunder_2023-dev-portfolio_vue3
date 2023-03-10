@@ -7,7 +7,7 @@ const app = express();
 
 app.use(cors());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 const GOOGLE_MAPS_SECRET = process.env.GOOGLE_MAPS_SECRET;
 const GITHUB_SECRET = process.env.GITHUB_SECRET;
 const SPOTIFY_ID = process.env.SPOTIFY_ID;
@@ -24,8 +24,16 @@ const generateRandomString = length => {
     .reduce(text => text + possible.charAt(Math.floor(Math.random() * possible.length)), '')
 }
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.get('/map-data', async (req, res) => {
+  try {
+    const url = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_SECRET}&v=weekly`;
+    const { data } = await axios.get(url);
+
+    res.send(data);
+  } catch(err) {
+    console.log(err);
+    res.status(500).send('An error occurred while fetching the user data');
+  }
 })
 
 app.get('/callback', async (req, res) => {

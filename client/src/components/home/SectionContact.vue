@@ -26,7 +26,6 @@
       <div class="section-col section-col--6 map-col">
         <div class="section-content">
           <Map />
-          <!-- <img src="@img/map-placeholder.png" alt=""> -->
         </div>
       </div>
     </div>

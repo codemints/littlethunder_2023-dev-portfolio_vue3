@@ -4,6 +4,7 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
+import axios from 'axios'
 import { useDarkModeStore } from '@store/darkmode.js'
 import { Loader } from '@googlemaps/js-api-loader'
 import mapStylesArray from '@lib/map-styles.js'
@@ -29,7 +30,6 @@ onMounted(() => {
     apiKey: 'AIzaSyDlccH4pNX4LR8MPn0KbbczdKDU__2YFHQ',
     version: 'weekly',
   })
-
   loader.load().then(() => {
     map = new google.maps.Map(mapRef.value, {
       center: { lat: 40.5853, lng: -105.0844 },

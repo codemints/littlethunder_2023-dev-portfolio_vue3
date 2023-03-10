@@ -1,0 +1,17 @@
+{
+  "name": "codemints.io",
+  "version": "1.0.0",
+  "description": "frontend dev portfolio website of Daniel LittleThunder",
+  "main": "index.js",
+  "repository": "https://github.com/codemints/littlethunder_2023-dev-portfolio_vue3.git",
+  "author": "Daniel J. LittleThunder <hello@codemints.io>",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "server": "cd server && yarn start",
+    "client": "cd client && yarn dev"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

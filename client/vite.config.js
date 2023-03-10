@@ -19,4 +19,12 @@ export default defineConfig({
       '@style': path.resolve(__dirname, './src/assets/scss'),
     },
   },
+  devServer: {
+    proxy: {
+      '/map-data': 'http://localhost:8888',
+      changeOrigin: true,
+      secure: false,
+      pathRewrite: (path) => path.replace(/^\/api/, ""),
+    }
+  }
 })
