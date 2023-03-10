@@ -116,12 +116,12 @@ watch(() => x.value, (newX) => {
 })
 
 onBeforeMount(() => {
+  setColorScheme()
   x.value < 768 ? setIsMobile(true) : setIsMobile(false)
 })
 
 onMounted(() => {
   window.addEventListener('load', () => {
-    setColorScheme()
     const rootEl = document.documentElement
     setCSSProperties(rootEl)
     setHeaderState()

@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
+      '~': path.resolve(__dirname, './'),
       '@': path.resolve(__dirname, './src'),
       '@component': path.resolve(__dirname, './src/components'),
       '@compose': path.resolve(__dirname, './src/composables'),
@@ -19,12 +20,4 @@ export default defineConfig({
       '@style': path.resolve(__dirname, './src/assets/scss'),
     },
   },
-  devServer: {
-    proxy: {
-      '/map-data': 'http://localhost:8888',
-      changeOrigin: true,
-      secure: false,
-      pathRewrite: (path) => path.replace(/^\/api/, ""),
-    }
-  }
 })
