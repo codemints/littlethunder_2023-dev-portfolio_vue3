@@ -21,13 +21,14 @@
                     noPanelStyleOverride: true,
                   }"
                   :plugins="plugins"
-                  @changed=""
+                  @changed="changeSlide"
                 >
                   <div
                     v-for="(slide, index) in experienceData"
                     :key="slide.title"
                     :ref="el => panelItems[index] = el"
                     class="slider-panel"
+                    :class="`slider-panel--${index + 1}`"
                   >
                     <div class="panel-title">
                       <h4 class="text-clr-orange dark:text-clr-blue">Featured Project</h4>
@@ -76,7 +77,7 @@
                 <div class="slider-pagination">
                   <button
                   v-for="(slide, index) in slider.panels"
-                  @click="(e) => changeSlide(e, index)"
+                  @click="() => paginationClick(index)"
                   :key="index"
                   :ref="el => paginationItems[index] = el"
                   :class="`slider-pagination--item-${index + 1}`"
@@ -126,30 +127,16 @@ const useIndex = ref(0)
 const isReady = ref(false)
 const center = ref(0)
 
-const changeSlide = (e, index) => {
-  console.log(e)
-  const { slide } = e.currentTarget.dataset;
-  const arrows = slide !== 'pagination';
-  const pages = paginationItems.value;
+const paginationClick = (index) => {
+  slider.value.moveTo(index, 1000)
+}
 
-  slider.value.stopAnimation();
-
-  if (arrows) {
-    if (slide === 'prev') {
-      useIndex.value = useIndex.value === 0 ? pages.length - 1 : useIndex.value - 1;
-    } else {
-      slider.value.next();
-      useIndex.value = useIndex.value === pages.length - 1 ? 0 : useIndex.value + 1;
-    }
-  } else {
-    slider.value.moveTo(index, 1000);
-    useIndex.value = index;
-  }
-
+const changeSlide = (e) => {
   paginationItems.value.forEach((item, i) => {
-    const isActive = i === useIndex.value;
-    item.classList.toggle('is-active', isActive);
-  });
+    i === e.index
+      ? item.classList.add('is-active')
+      : item.classList.remove('is-active')
+  })
 }
 
 const setCustomProp = () => {
@@ -162,7 +149,7 @@ const setCustomProp = () => {
 }
 
 const getCenterIndex = computed(() => {
-  return Math.floor(slider.value.panels.length / 2 + 1);
+  return Math.floor((slider.value.panels.length / 2) + 1);
 });
 
 watchEffect(() => {
@@ -300,7 +287,7 @@ onMounted(() => {
         height: 1.25rem;
         width: 1.25rem;
         border-radius: 50%;
-        transition: all 0.3s ease-in-out;
+        transition: all 0.1s ease-in-out;
 
         &:hover, &.is-active {
           scale: 1.2;
