@@ -25,7 +25,8 @@
       </div>
       <div class="section-col section-col--6 map-col">
         <div class="section-content">
-          <Map />
+          <!-- <Map /> -->
+          <Form />
         </div>
       </div>
     </div>
@@ -36,6 +37,7 @@
 import SectionTitle from '@component/globals/SectionTitle.vue'
 import Button from '@component/globals/Button.vue'
 import Map from '@component/globals/Map.vue'
+import Form from '@component/globals/Form.vue'
 
 const handleContact = (e) => {
   console.log(e.target)
