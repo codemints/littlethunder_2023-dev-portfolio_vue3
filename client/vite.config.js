@@ -20,4 +20,13 @@ export default defineConfig({
       '@style': path.resolve(__dirname, './src/assets/scss'),
     },
   },
+  server: {
+    proxy: {
+      '/api/google_map': {
+        target: 'http://localhost:8888',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  },
 })
