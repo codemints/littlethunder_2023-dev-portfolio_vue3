@@ -45,6 +45,7 @@ const notifyEmail = async (columns) => {
     company,
     email,
     phone,
+    website,
     concern,
     description,
     message
@@ -70,6 +71,7 @@ const notifyEmail = async (columns) => {
       <p>${company || 'No company name submitted'}</p>
       <p>${email}</p>
       <p>${phone}</p>
+      <p>${website || 'No website submitted'}</p>
       <p>${concern || 'No concern submitted'}</p>
       <p>${description || 'No description submitted'}</p>
       <p>${message || 'No message submitted'}</p>

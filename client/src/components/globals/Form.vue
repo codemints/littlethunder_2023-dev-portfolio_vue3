@@ -19,7 +19,7 @@
           type="text"
           name="name"
           id="submit-name"
-          placeholder="first and last name"
+          placeholder="e.g. John Doe"
           validation="required"
           validation-visibility="dirty"
           label="Name"
@@ -36,7 +36,7 @@
           name="company"
           id="submit-company"
           class="group-col-4"
-          placeholder="your company"
+          placeholder="e.g. Company, Inc."
           validation-visibility="dirty"
           label="Company"
           :classes="{
@@ -54,7 +54,7 @@
           name="email"
           id="submit-email"
           class="group-col-6"
-          placeholder="example@example.com"
+          placeholder="e.g. user@company.com"
           validation="required | email"
           validation-visibility="dirty"
           label="Email"
@@ -68,12 +68,12 @@
 
         <FormKit
           v-model="phoneInput"
-          @change="formatPhone"
+          @blur="formatPhone"
           type="text"
           name="phone"
           id="submit-phone"
           class="group-col-6"
-          placeholder="xxx-xxx-xxxx"
+          placeholder="e.g. (123) 456-7890"
           validation="required | matches:/^[\d ()-]*$/"
           validation-visibility="dirty"
           autocomplete="off"
@@ -92,8 +92,8 @@
         name="website"
         id="submit-website"
         class="group-col-6"
-        placeholder="https://example.com"
-        validation="email"
+        placeholder="e.g. https://company.com"
+        validation="url"
         validation-visibility="dirty"
         label="Website"
         :classes="{
@@ -108,7 +108,8 @@
         type="radio"
         name="concern"
         id="submit-concern"
-        label="What does this email concern?"
+        help="What type of project or postion is this for?"
+        label="What is the purpose of this contact?"
         :options="['Full-time', 'Part-time', 'Contract', 'Freelance', 'Other']"
         :classes="{
           legend: 'text-clr-400 dark:text-white',
@@ -122,6 +123,7 @@
         type="textarea"
         name="description"
         id="submit-description"
+        placeholder="e.g. I'm looking for a frontend engineer to collaborate on an app."
         validation="required"
         label="Please give a brief description"
         :classes="{
@@ -135,6 +137,7 @@
         type="textarea"
         name="message"
         id="submit-message"
+        placeholder="Please provide any additional information you feel is relevant."
         label="Message"
         :classes="{
           inner: 'bg-clr-100 dark:bg-clr-400',
@@ -153,7 +156,6 @@
     </FormKit>
     <h3 v-if="formSubmitted" class="form-submission-message text-clr-400 dark:text-white">Thank you! I look forward to speaking with you soon!</h3>
     <p v-if="formError" class="form-error text-clr-blue dark:text-clr-orange">{{ formError }}</p>
-    <p class="text-clr-orange">{{ phoneInput }}</p>
   </div>
 </template>
 
@@ -170,14 +172,14 @@ const phoneInput = ref(null)
 
 const formatPhone = (e) => {
   const pattern = /^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/
-  const allowed = /^[\d ()-]$/
-  const input = e.target
-  const key = e.key
-  const currentValue = phoneInput.value
-  const formated = currentValue.replace(pattern, '($1) $2-$3')
-  phoneInput.value = formated
-  const node = getNode(input.id)
-  console.log(node.context.messages)
+  const currentValue = e.target.value
+  const formatted = currentValue.replace(pattern, '($1) $2-$3')
+  phoneInput.value = formatted
+
+  // const allowed = /^[\d ()-]*$/
+  // const input = e.target
+  // const key = e.key
+  // const node = getNode(input.id)
 }
 
 const verifyUser = () => {
@@ -203,6 +205,7 @@ const verifyUser = () => {
 const handleSubmit = async (fields) => {
   formData.value=fields
   reset('contact-form')
+  console.log(fields, formData.value)
 
   if ( !formData.value.name || !formData.value.email || !formData.value.phone ) {
     formError.value = 'Some fields are missing. Please fill out all fields and try again.'
@@ -306,6 +309,11 @@ onMounted(() => {
           }
         }
       }
+    }
+
+    .formkit-help {
+      color: $clr-200;
+      font-size: 1.4rem;
     }
 
     .formkit-fieldset {
