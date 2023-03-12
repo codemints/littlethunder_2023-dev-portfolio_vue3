@@ -13,52 +13,75 @@
       :form-class="formSubmitted ? 'is-hidden' : ''"
       #default="{ value }">
 
-      <FormKit
-        type="text"
-        name="name"
-        id="submit-name"
-        placeholder="first and last name"
-        validation="required"
-        validation-visibility="dirty"
-        label="Name"
-        :classes="{
-          inner: 'bg-clr-100 dark:bg-clr-400',
-          input: 'bg-transparent text-clr-400 dark:text-white',
-          label: 'text-clr-400 dark:text-white',
-          message: 'text-clr-blue dark:text-clrorangee'
-        }" />
+      <div class="form-control-group">
+        <FormKit
+          type="text"
+          name="name"
+          id="submit-name"
+          placeholder="first and last name"
+          validation="required"
+          validation-visibility="dirty"
+          label="Name"
+          :classes="{
+            outer: 'group-col group-col-9',
+            inner: 'bg-clr-100 dark:bg-clr-400',
+            input: 'bg-transparent text-clr-400 dark:text-white',
+            label: 'text-clr-400 dark:text-white',
+            message: 'text-clr-blue dark:text-clrorangee'
+          }" />
+  
+        <FormKit
+          type="text"
+          name="company"
+          id="submit-company"
+          class="group-col-4"
+          placeholder="your company"
+          validation-visibility="dirty"
+          label="Company"
+          :classes="{
+            outer: 'group-col group-col-3',
+            inner: 'bg-clr-100 dark:bg-clr-400',
+            input: 'bg-transparent text-clr-400 dark:text-white',
+            label: 'text-clr-400 dark:text-white',
+            message: 'text-clr-blue dark:text-clrorangee'
+          }" />
+      </div>
 
-      <div class="form-control-group form-control-group--6">
+      <div class="form-control-group">
         <FormKit
         type="text"
         name="email"
         id="submit-email"
+        class="group-col-6"
         placeholder="example@example.com"
-        validation="required|email"
+        validation="required | email"
         validation-visibility="dirty"
         label="Email"
         :classes="{
+          outer: 'group-col group-col-6',
           inner: 'bg-clr-100 dark:bg-clr-400',
           input: 'bg-transparent text-clr-400 dark:text-white',
           label: 'text-clr-400 dark:text-white',
           message: 'text-clr-blue dark:text-clrorangee'
         }" />
 
-      <FormKit
-        type="text"
-        name="phone"
-        id="submit-phone"
-        placeholder="(xxx) xxx-xxxx"
-        validation="required | number | length:10"
-        validation-visibility="dirty"
-        autocomplete="off"
-        label="Phone"
-        :classes="{
-          inner: 'bg-clr-100 dark:bg-clr-400',
-          input: 'bg-transparent text-clr-400 dark:text-white',
-          label: 'text-clr-400 dark:text-white',
-          message: 'text-clr-blue dark:text-clrorangee'
-        }" />
+        <FormKit
+          type="text"
+          name="phone"
+          id="submit-phone"
+          class="group-col-6"
+          placeholder="(xxx) xxx-xxxx"
+          validation="required | number | length:10"
+          validation-visibility="dirty"
+          autocomplete="off"
+          label="Phone"
+          :classes="{
+            outer: 'group-col group-col-6',
+            inner: 'bg-clr-100 dark:bg-clr-400',
+            input: 'bg-transparent text-clr-400 dark:text-white',
+            label: 'text-clr-400 dark:text-white',
+            message: 'text-clr-blue dark:text-clrorangee'
+          }" />
       </div>
 
       <FormKit
@@ -77,8 +100,8 @@
       <FormKit
         v-if="value.concern === 'Other'"
         type="textarea"
-        name="explain"
-        id="submit-explain"
+        name="description"
+        id="submit-description"
         validation="required"
         label="Please give a brief description"
         :classes="{
@@ -101,15 +124,39 @@
         }" />
     </FormKit>
     <h3 v-if="formSubmitted" class="form-submission-message text-clr-400 dark:text-white">Thank you! I look forward to speaking with you soon!</h3>
+    <p v-if="formError" class="form-error text-clr-blue dark:text-clr-orange">{{ formError }}</p>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-const formSubmitted = ref(false)
+import { reset } from '@formkit/core'
+import axios from 'axios';
 
-const handleSubmit = (fields) => {
-  formSubmitted.value = true
+const formSubmitted = ref(false)
+const formError = ref(null)
+const formData = ref(null)
+
+const handleSubmit = async (fields) => {
+  formData.value=fields
+  reset('contact-form')
+
+  if ( !formData.value.name || !formData.value.email || !formData.value.phone ) {
+    formError.value = 'Some fields are missing. Please fill out all fields and try again.'
+    return
+  }
+
+  try {
+    const res = await axios.post('/api/form_submission', fields)
+    
+    if (res.status === 200) {
+      formSubmitted.value = true
+      formError.value = null
+      formData.value = null
+    }
+  } catch (err) {
+    console.log('There has been an error submitting the form', err)
+  }
 }
 
 onMounted(() => {
@@ -121,20 +168,34 @@ onMounted(() => {
 @use '@style/abstracts/variables' as *;
 
 .form-wrapper--contact {
-  padding: 5rem;
+  padding: clamp(2rem, 5vw, 5rem);
 
   .is-hidden {
     display: none;
   }
 
   .form-control-group {
+    $colGap: 2rem;
+
     display: flex;
     flex-flow: row wrap;
-    gap: 0 2rem;
+    column-gap: $colGap;
+    width: 100%;
 
-    > div {
-      flex: 1 0 50%;
+    > .group-col {
+    }
+    
+    .group-col-3 {
+      flex: 1 0 calc(25% - $colGap);
+    }
+    
+    .group-col-6 {
+      flex: 1 0 calc(50% - $colGap);
       min-width: 20rem;
+    }
+
+    .group-col-9 {
+      flex: 1 0 calc(75% - $colGap);
     }
   }
 
@@ -190,8 +251,13 @@ onMounted(() => {
 
       .formkit-options {
         display: flex;
+        justify-content: center;
         flex-flow: row wrap;
         gap: 2rem;
+
+        @media (min-width: 768px) {
+          justify-content: flex-start;
+        }
 
         .formkit-option {
 
