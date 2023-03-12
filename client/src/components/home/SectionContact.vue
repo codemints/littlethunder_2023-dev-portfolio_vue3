@@ -47,10 +47,6 @@ const buttonsStore = useButtonsStore()
         max-width: 80rem;
       }
     }
-
-    .section-content {
-      // margin-inline: auto;
-    }
   }
 }
 
