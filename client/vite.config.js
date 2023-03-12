@@ -27,7 +27,7 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
-      '/api/supabase_client': {
+      '/api/form_submission': {
         target: 'http://localhost:8888',
         changeOrigin: true,
         secure: false,
