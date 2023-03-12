@@ -171,15 +171,16 @@ const contactForm = ref(null)
 const phoneInput = ref(null)
 
 const formatPhone = (e) => {
+  const input = e.target
   const pattern = /^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/
-  const currentValue = e.target.value
+  const currentValue = input.value
   const formatted = currentValue.replace(pattern, '($1) $2-$3')
   phoneInput.value = formatted
 
-  // const allowed = /^[\d ()-]*$/
-  // const input = e.target
-  // const key = e.key
   // const node = getNode(input.id)
+  // console.log(node)
+  // const allowed = /^[\d ()-]*$/
+  // const key = e.key
 }
 
 const verifyUser = () => {
@@ -203,9 +204,11 @@ const verifyUser = () => {
 }
 
 const handleSubmit = async (fields) => {
+  const node = getNode('submit-phone')
+  node.props.validation = null
+  
   formData.value=fields
   reset('contact-form')
-  console.log(fields, formData.value)
 
   if ( !formData.value.name || !formData.value.email || !formData.value.phone ) {
     formError.value = 'Some fields are missing. Please fill out all fields and try again.'
