@@ -170,6 +170,12 @@ const formData = ref(null)
 const contactForm = ref(null)
 const phoneInput = ref(null)
 
+const NODE_ENV = import.meta.env.NODE_ENV
+const server = 
+  NODE_ENV !== 'production'
+    ? 'http://localhost:8888'
+    : 'https://codemints-server.onrender.com'
+
 const formatPhone = (e) => {
   const input = e.target
   const pattern = /^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/
@@ -187,7 +193,7 @@ const verifyUser = () => {
   grecaptcha.ready(() => {
     grecaptcha.execute(import.meta.env.VITE_RECAPTCHA_SITE_KEY, {action: 'submit'}).then(async (token) => {
       if (token) {
-        await axios.post('/api/recaptcha', { token })
+        await axios.post(`${server}/api/recaptcha`, { token })
         .then(res => {
           if ( res.data.success && res.status === 200 ) {
             contactForm.value.node.submit()
@@ -206,7 +212,7 @@ const verifyUser = () => {
 const handleSubmit = async (fields) => {
   const node = getNode('submit-phone')
   node.props.validation = null
-  
+
   formData.value=fields
   reset('contact-form')
 
@@ -216,7 +222,7 @@ const handleSubmit = async (fields) => {
   }
 
   try {
-    const res = await axios.post('/api/form_submission', fields)
+    const res = await axios.post(`${server}/api/form_submission`, fields)
     
     if (res.status === 200) {
       formSubmitted.value = true
