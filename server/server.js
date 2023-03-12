@@ -86,6 +86,72 @@ const notifyEmail = async (columns) => {
   });
 };
 
+
+//HELLO WORLD
+const html = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Hello from Codemints</title>
+    <style>
+      body, html {
+        background-color: #333333;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+      }
+      
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: white;
+        min-height: 100vh;
+        min-width: 100vw;
+      }
+
+      body * {
+        box-sizing: border-box;
+      }
+
+      div {
+        text-align: center;
+        padding: 0;
+        margin: 0;
+      }
+
+      h1, p {
+        font-family: 'Montserrat', sans-serif;
+      }
+      h1 {
+        font-size: 60px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      p {
+        font-size: 20px;
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Hello World</h1>
+      <p>Your server is up and running!</p>
+    </div>
+    </body>
+</html>
+`
+app.get('/', (req, res) => {
+  res.type('html').send(html);
+})
+
 //GOOGLE MAPS API
 app.get('/api/google_map', (req, res) => {
   const params = new URLSearchParams({
