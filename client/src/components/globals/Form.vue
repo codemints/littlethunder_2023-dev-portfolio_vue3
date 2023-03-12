@@ -68,13 +68,13 @@
 
         <FormKit
           v-model="phoneInput"
-          @onchange="formatPhone"
+          @keydown="formatPhone"
           type="text"
           name="phone"
           id="submit-phone"
           class="group-col-6"
-          placeholder="(xxx) xxx-xxxx"
-          validation="required | length:14"
+          placeholder="xxxxxxxxxx (no dashes or spaces)"
+          validation="required | number"
           validation-visibility="dirty"
           autocomplete="off"
           label="Phone"
@@ -167,6 +167,9 @@ const formError = ref(null)
 const formData = ref(null)
 const contactForm = ref(null)
 const phoneInput = ref(null)
+
+const formatPhone = (e) => {
+}
 
 const verifyUser = () => {
   grecaptcha.ready(() => {
