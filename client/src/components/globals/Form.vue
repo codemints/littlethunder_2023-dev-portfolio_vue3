@@ -26,7 +26,7 @@
           :classes="{
             outer: 'group-col group-col-9',
             inner: 'bg-clr-100 dark:bg-clr-400',
-            input: 'bg-transparent text-clr-400 dark:text-white',
+            input: 'bg-transparent text-clr-400 dark:text-white focus:border-solid focus:border-l focus:border-r-2 focus:border-t focus:border-b-2 focus:border-clr-orange dark:focus:border-clr-blue',
             label: 'text-clr-400 dark:text-white is-required',
             message: 'text-clr-orange dark:text-clr-blue'
           }" />
@@ -42,7 +42,7 @@
           :classes="{
             outer: 'group-col group-col-3',
             inner: 'bg-clr-100 dark:bg-clr-400',
-            input: 'bg-transparent text-clr-400 dark:text-white',
+            input: 'bg-transparent text-clr-400 dark:text-white focus:border-solid focus:border-l focus:border-r-2 focus:border-t focus:border-b-2 focus:border-clr-orange dark:focus:border-clr-blue',
             label: 'text-clr-400 dark:text-white',
             message: 'text-clr-orange dark:text-clr-blue'
           }" />
@@ -61,7 +61,7 @@
           :classes="{
             outer: 'group-col group-col-6',
             inner: 'bg-clr-100 dark:bg-clr-400',
-            input: 'bg-transparent text-clr-400 dark:text-white',
+            input: 'bg-transparent text-clr-400 dark:text-white focus:border-solid focus:border-l focus:border-r-2 focus:border-t focus:border-b-2 focus:border-clr-orange dark:focus:border-clr-blue',
             label: 'text-clr-400 dark:text-white is-required',
             message: 'text-clr-orange dark:text-clr-blue'
           }" />
@@ -81,7 +81,7 @@
           :classes="{
             outer: 'group-col group-col-6',
             inner: 'bg-clr-100 dark:bg-clr-400',
-            input: 'bg-transparent text-clr-400 dark:text-white',
+            input: 'bg-transparent text-clr-400 dark:text-white focus:border-solid focus:border-l focus:border-r-2 focus:border-t focus:border-b-2 focus:border-clr-orange dark:focus:border-clr-blue',
             label: 'text-clr-400 dark:text-white is-required',
             message: 'text-clr-orange dark:text-clr-blue'
           }" />
@@ -99,7 +99,7 @@
         :classes="{
           outer: 'group-col group-col-6',
           inner: 'bg-clr-100 dark:bg-clr-400',
-          input: 'bg-transparent text-clr-400 dark:text-white',
+          input: 'bg-transparent text-clr-400 dark:text-white focus:border-solid focus:border-l focus:border-r-2 focus:border-t focus:border-b-2 focus:border-clr-orange dark:focus:border-clr-blue',
           label: 'text-clr-400 dark:text-white',
           message: 'text-clr-orange dark:text-clr-blue'
         }" />
@@ -128,7 +128,7 @@
         label="Please give a brief description"
         :classes="{
           inner: 'bg-clr-100 dark:bg-clr-400',
-          input: 'bg-transparent text-clr-400 dark:text-white',
+          input: 'bg-transparent text-clr-400 dark:text-white focus:border-solid focus:border-l focus:border-r-2 focus:border-t focus:border-b-2 focus:border-clr-orange dark:focus:border-clr-blue',
           label: 'text-clr-400 dark:text-white',
           message: 'text-clr-orange dark:text-clr-blue'
         }" />
@@ -141,7 +141,7 @@
         label="Message"
         :classes="{
           inner: 'bg-clr-100 dark:bg-clr-400',
-          input: 'bg-transparent text-clr-400 dark:text-white',
+          input: 'bg-transparent text-clr-400 dark:text-white focus:border-solid focus:border-l focus:border-r-2 focus:border-t focus:border-b-2 focus:border-clr-orange dark:focus:border-clr-blue',
           label: 'text-clr-400 dark:text-white',
           message: 'text-clr-orange dark:text-clr-blue'
         }" />
@@ -157,6 +157,8 @@
     <h3 v-if="formSubmitted" class="form-submission-message text-clr-400 dark:text-white">Thank you! I look forward to speaking with you soon!</h3>
     <p v-if="formError" class="form-error text-clr-blue dark:text-clr-orange">{{ formError }}</p>
   </div>
+
+  
 </template>
 
 <script setup>
@@ -170,7 +172,7 @@ const formData = ref(null)
 const contactForm = ref(null)
 const phoneInput = ref(null)
 
-const NODE_ENV = import.meta.env.NODE_ENV
+const NODE_ENV = import.meta.env.VITE_NODE_ENV
 const server = 
   NODE_ENV !== 'production'
     ? 'http://localhost:8888'
@@ -210,6 +212,8 @@ const verifyUser = () => {
 }
 
 const handleSubmit = async (fields) => {
+  console.log(fields)
+  return
   const node = getNode('submit-phone')
   node.props.validation = null
 
@@ -280,6 +284,11 @@ onMounted(() => {
 
 
 #contact-form {
+  input::placeholder,
+  textarea::placeholder {
+    font-family: $body;
+    font-size: 1.4rem;
+  }
   
   .formkit-outer {
     margin-top: 2rem;
@@ -290,14 +299,15 @@ onMounted(() => {
         margin-top: 0.75rem;
 
         .formkit-input {
-          font-size: 1.6rem;
+          font-family: $body;
+          font-size: 1.5rem;
           width: 100%;
           min-height: 4.8rem;
           padding: 1rem;
 
           &:focus {
             outline: none;
-            border: transparent;
+            // border: transparent;
           }
 
           &:is(textarea) {
@@ -322,7 +332,8 @@ onMounted(() => {
 
     .formkit-help {
       color: $clr-200;
-      font-size: 1.4rem;
+      font-family: $body;
+      font-size: 1.2rem;
     }
 
     .formkit-fieldset {
