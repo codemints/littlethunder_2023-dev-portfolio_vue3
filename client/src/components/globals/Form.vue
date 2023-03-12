@@ -68,13 +68,13 @@
 
         <FormKit
           v-model="phoneInput"
-          @keydown="formatPhone"
+          @change="formatPhone"
           type="text"
           name="phone"
           id="submit-phone"
           class="group-col-6"
-          placeholder="xxxxxxxxxx (no dashes or spaces)"
-          validation="required | number"
+          placeholder="xxx-xxx-xxxx"
+          validation="required | matches:/^[\d ()-]*$/"
           validation-visibility="dirty"
           autocomplete="off"
           label="Phone"
@@ -93,7 +93,7 @@
         id="submit-website"
         class="group-col-6"
         placeholder="https://example.com"
-        validation="required | email"
+        validation="email"
         validation-visibility="dirty"
         label="Website"
         :classes="{
@@ -159,7 +159,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { reset } from '@formkit/core'
+import { reset, getNode } from '@formkit/core'
 import axios from 'axios';
 
 const formSubmitted = ref(false)
@@ -169,6 +169,15 @@ const contactForm = ref(null)
 const phoneInput = ref(null)
 
 const formatPhone = (e) => {
+  const pattern = /^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/
+  const allowed = /^[\d ()-]$/
+  const input = e.target
+  const key = e.key
+  const currentValue = phoneInput.value
+  const formated = currentValue.replace(pattern, '($1) $2-$3')
+  phoneInput.value = formated
+  const node = getNode(input.id)
+  console.log(node.context.messages)
 }
 
 const verifyUser = () => {
