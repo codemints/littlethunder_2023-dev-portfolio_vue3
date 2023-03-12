@@ -212,8 +212,6 @@ const verifyUser = () => {
 }
 
 const handleSubmit = async (fields) => {
-  console.log(fields)
-  return
   const node = getNode('submit-phone')
   node.props.validation = null
 

@@ -175,7 +175,7 @@ app.get('/api/google_map', (req, res) => {
 
 //FORMKIT API
 app.post('/api/form_submission', async (req, res) => {
-  const { name, email, phone, company, message, concern, description, website } = req.body;
+  const { name, email, phone } = req.body;
 
   if (!name || !email || !phone) {
     res.status(400).send('Missing required payload.');
@@ -185,7 +185,7 @@ app.post('/api/form_submission', async (req, res) => {
   try {
     const { data, error } = await supabase
     .from('form_submissions')
-    .insert([name, email, phone, company, message, concern, description, website])
+    .insert([req.body])
     .select();
 
     if (error) {
